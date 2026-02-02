@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 
+export default function FllSummerCampPage() {
   const handleYTClick = () => {
     window.open(
       "https://youtu.be/nitDt76IX3k",
