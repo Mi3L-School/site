@@ -1,6 +1,6 @@
 "use client";
 
-import { use } from "react";
+import { use, JSX } from "react";
 import ProgressBar from "../components/ProgressBar";
 import NextChapter from "../components/NextChapter";
 import CodeBlock from "../components/CodeBlock";
@@ -1392,7 +1392,10 @@ void update_odometry() {
             how you can install them to add to your project. We used Lemlib as we
             found it had many features that were useful in making autonomous routes.
           </p>
-          <Activity question="Start by following the tutorials on Lemlib and test out the Odometry system on there. Once that system works, begin by making autonomous routes for your competitions." />
+          <Activity 
+            question="Start by following the tutorials on Lemlib and test out the Odometry system on there. Once that system works, begin by making autonomous routes for your competitions." 
+            answer="// answers will vary"
+          />
         </>
       ),
     },

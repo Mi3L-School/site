@@ -35,7 +35,7 @@ export default function Donation() {
               }}
               src="https://www.zeffy.com/embed/donation-form/f2b29422-9f3a-4b3b-8b4f-91d98adb7d54"
               allow="payment"
-              allowtransparency="true"
+              allowTransparency
             />
           </div>
         </div>
