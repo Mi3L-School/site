@@ -1,26 +1,47 @@
+import Link from "next/link";
+
 export default function Volunteer() {
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-8 text-gray-900">
-            Volunteer with Us
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden p-8 md:p-12 border border-gray-100">
+          <Link 
+            href="/jobs"
+            className="text-gray-500 hover:text-gray-900 transition-colors flex items-center gap-2 mb-8"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Back to Jobs
+          </Link>
+          
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-12 text-gray-900 tracking-tight">
+            Volunteer with <span className="text-orange-600">Us</span>
           </h1>
           
-          <div className="mb-8 flex justify-center">
-            <div className="relative w-full max-w-xl rounded-lg overflow-hidden">
+          <div className="mb-12 flex justify-center">
+            <div className="relative w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-gray-50">
               <img
                 src="/images/volunteer.jpg"
-                alt="Volunteer"
-                className="w-full h-auto rounded-lg"
+                alt="Volunteer Flyer"
+                className="w-full h-auto"
               />
             </div>
           </div>
 
-          <div className="space-y-6">
-            <p className="text-lg text-gray-700 leading-relaxed">
-              We welcome volunteers to join our mission! If you are interested in helping out, please contact us at:
-            </p>
+          <div className="space-y-10">
+            <div className="text-center">
+              <p className="text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto">
+                We welcome volunteers to join our mission! If you are interested in making an impact, we'd love to hear from you.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <button 
+                className="px-8 py-4 bg-gray-400 text-white font-bold rounded-xl cursor-not-allowed shadow-lg text-center"
+                disabled
+              >
+                Application Opening Soon
+              </button>
+            </div>
 
             <div className="bg-gray-50 rounded-lg p-6 space-y-4">
               <div className="flex items-center gap-3">

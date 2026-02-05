@@ -23,14 +23,11 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isCoursesDropdownOpen, setCoursesDropdownOpen] = useState(false);
   const [isAchievementsDropdownOpen, setAchievementsDropdownOpen] = useState(false);
-  const [isJobDropdownOpen, setJobDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const coursesRef = useRef<HTMLDivElement>(null);
   const achievementsRef = useRef<HTMLDivElement>(null);
-  const jobRef = useRef<HTMLDivElement>(null);
   const coursesTimeoutRef = useRef<number | null>(null);
   const achievementsTimeoutRef = useRef<number | null>(null);
-  const jobTimeoutRef = useRef<number | null>(null);
 
   const user = null;
 
@@ -42,9 +39,7 @@ export default function Navbar() {
       if (achievementsRef.current && !achievementsRef.current.contains(event.target as Node)) {
         setAchievementsDropdownOpen(false);
       }
-      if (jobRef.current && !jobRef.current.contains(event.target as Node)) {
-        setJobDropdownOpen(false);
-      }
+
     };
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -96,14 +91,6 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden md:flex items-center gap-1">
-            <Link
-              href="https://2055vrc.live/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
-            >
-              Blog
-            </Link>
 
             <div
               ref={achievementsRef}
@@ -285,47 +272,16 @@ export default function Navbar() {
               Donate
             </Link>
 
-            <div
-              ref={jobRef}
-              onMouseEnter={() => handleMouseEnter(setJobDropdownOpen, jobTimeoutRef)}
-              onMouseLeave={() => handleMouseLeave(setJobDropdownOpen, jobTimeoutRef)}
-              className="relative"
+            <Link
+              href="/jobs"
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                pathname === "/jobs"
+                  ? "text-white bg-gray-800"
+                  : "text-gray-300 hover:text-white hover:bg-gray-800"
+              }`}
             >
-              <button className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors flex items-center gap-1">
-                Job
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-              {isJobDropdownOpen && (
-                <div
-                  className="absolute top-full left-0 mt-1 w-48 bg-gray-800 border border-gray-700 rounded-lg shadow-lg py-1"
-                  onMouseEnter={() =>
-                    handleMouseEnter(setJobDropdownOpen, jobTimeoutRef)
-                  }
-                  onMouseLeave={() =>
-                    handleMouseLeave(setJobDropdownOpen, jobTimeoutRef)
-                  }
-                >
-                  <Link
-                    href="/volunteer"
-                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-                  >
-                    Volunteer
-                  </Link>
-                </div>
-              )}
-            </div>
+              Jobs
+            </Link>
 
             {user ? (
               <Link
@@ -379,14 +335,6 @@ export default function Navbar() {
         <div className="md:hidden border-t border-gray-800 bg-gray-900">
           <div className="px-4 py-4 space-y-1">
             <Link
-              href="https://2055vrc.live/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block px-4 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
-            >
-              Blog
-            </Link>
-            <Link
               href="/about"
               className="block px-4 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
             >
@@ -417,10 +365,10 @@ export default function Navbar() {
               Donate
             </Link>
             <Link
-              href="/volunteer"
+              href="/jobs"
               className="block px-4 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
             >
-              Volunteer
+              Jobs
             </Link>
             {user ? (
               <Link
