@@ -1,191 +1,443 @@
 import Image from "next/image";
 import Link from "next/link";
-
-const events = [
-  {
-    label: "2025 Science Fair Preparation Course Registration Open!",
-    link: "/programs/ScienceFair",
-  },
-  {
-    label: "Virtual Skills Summer Camp Registration Open!",
-    link: "/programs/virtualskills",
-  },
-];
+import { Users, BookOpen, Calendar, Bot, Code, Box, Calculator, Type, Globe, Trophy, Map, Library, GraduationCap, Building2, ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
-      <div id="home" className="relative">
-        <div className="w-full bg-orange-500 text-white py-3 px-4 md:py-4 md:px-6 shadow-sm">
-          <div className="flex items-center gap-4 overflow-hidden">
-            <span className="font-semibold text-sm md:text-lg whitespace-nowrap">
-              Latest Events:
-            </span>
-            <div className="flex-1 overflow-hidden">
-              <div className="animate-marquee whitespace-nowrap inline-flex gap-16">
-                {events.map((event, idx) => (
-                  <Link
-                    key={idx}
-                    href={event.link}
-                    className="underline font-medium text-sm md:text-lg hover:text-orange-100 transition-colors"
-                  >
-                    {event.label}
-                  </Link>
-                ))}
-                {events.map((event, idx) => (
-                  <Link
-                    key={`dup-${idx}`}
-                    href={event.link}
-                    className="underline font-medium text-sm md:text-lg hover:text-orange-100 transition-colors"
-                  >
-                    {event.label}
-                  </Link>
-                ))}
+      {/* Hero Section with Video Background */}
+      <section className="relative h-[600px] md:h-[700px] w-full overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source
+            src="https://techblazers.ca/wp-content/uploads/2025/02/212313213.mp4#t=60"
+            type="video/mp4"
+          />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-purple-900/60" />
+        <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-start pt-32 md:pt-40 items-center text-center text-white">
+          {/* Top Text */}
+          <p className="text-xs md:text-sm font-medium mb-4 tracking-wide">
+            Excelling Since 2014
+          </p>
+          
+          {/* Main Headline */}
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2 leading-tight max-w-4xl">
+            Globally Award-Winning Excellence.
+          </h1>
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+            A Decade Strong.
+          </h2>
+          
+          {/* Subtitle */}
+          <p className="text-xs md:text-sm mb-12 max-w-3xl opacity-90">
+            Discover Excellence: Surpassing Top Private Schools' Standard for Two Years
+          </p>
+          
+          {/* Stats with Icons */}
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-2">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 md:w-10 md:h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <Users className="w-4 h-4 md:w-5 md:h-5" />
+              </div>
+              <div className="text-left">
+                <div className="text-[10px] md:text-xs font-medium opacity-90">Age Range:</div>
+                <div className="text-sm md:text-base font-bold">4-18</div>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 md:w-10 md:h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <BookOpen className="w-4 h-4 md:w-5 md:h-5" />
+              </div>
+              <div className="text-left">
+                <div className="text-sm md:text-base font-bold">30+</div>
+                <div className="text-[10px] md:text-xs font-medium opacity-90">Courses</div>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 md:w-10 md:h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <Calendar className="w-4 h-4 md:w-5 md:h-5" />
+              </div>
+              <div className="text-left">
+                <div className="text-sm md:text-base font-bold">Year-Round</div>
+                <div className="text-[10px] md:text-xs font-medium opacity-90">Sessions</div>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="relative h-64 md:h-96 w-full overflow-hidden bg-gray-200">
-          <Image
-            src="/images/home1.png"
-            alt="Hero"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-            <Link
-              href="#mi3l"
-              className="px-8 py-4 bg-white text-gray-900 font-semibold text-lg md:text-2xl rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
-            >
-              Learn More!
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      <div id="mi3l" className="text-center mt-12 md:mt-16 px-4">
-        <h1 className="text-3xl md:text-5xl font-bold text-gray-900">
-          My Life Long Learning
-        </h1>
-        <p className="mt-4 text-lg md:text-xl text-gray-600">
-          Join our World Class VEX Robotics Team Today!
-        </p>
-      </div>
-
-      <section className="mt-12 md:mt-16 px-4 md:px-8 max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row gap-8 items-center">
-          <div className="md:w-1/2">
-            <h2 className="font-bold text-2xl md:text-3xl text-gray-900 mb-4">
-              Our Mission
-            </h2>
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-              Our mission is to provide a world-class robotics education to
-              students of all ages. We strive to provide a safe, inclusive, and
-              fun environment for students to learn and grow. Our goal is to
-              inspire curiosity, creativity, and a lifelong passion for
-              technology and innovation. Through hands-on learning and
-              collaborative projects, we aim to equip students with the critical
-              thinking, problem-solving, and teamwork skills necessary for
-              success.
-            </p>
-          </div>
-          <div className="md:w-1/2 w-full h-64 md:h-96 relative rounded-lg overflow-hidden">
-            <Image
-              src="/images/home2.jpg"
-              alt="Mission"
-              fill
-              className="object-cover"
-            />
-          </div>
-        </div>
       </section>
 
-      <section className="mt-12 md:mt-16 px-4 md:px-8 max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row gap-8 items-center">
-          <div className="md:w-1/3 w-full h-64 md:h-96 relative rounded-lg overflow-hidden order-2 md:order-1">
-            <Image
-              src="/images/home3.png"
-              alt="Values"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="md:w-2/3 order-1 md:order-2">
-            <h2 className="font-bold text-2xl md:text-3xl text-gray-900 mb-4">
-              Our Values
-            </h2>
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-              Our values embrace inclusivity and diversity, ensuring our
-              programs are accessible and welcoming to all students, regardless
-              of background or ability. Collaboration and teamwork are
-              paramount, fostering mutual respect and the value of working
-              together towards common goals. Upholding the highest standards of
-              integrity and respect, we ensure all community interactions are
-              conducted with honesty and kindness. Finally, we strive to empower
-              our students, building their confidence and equipping them with
-              the skills necessary for success.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="mt-12 md:mt-16 px-4 md:px-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Link
-            href="/programs"
-            className="group relative h-64 md:h-96 rounded-lg overflow-hidden"
-          >
-            <Image
-              src="/images/im2.png"
-              alt="Our Programs"
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors flex items-center justify-center">
-              <h3 className="font-bold text-2xl md:text-4xl text-white">
-                Our Programs
-              </h3>
+      {/* Features Cards Section - Overlapping Hero */}
+      <section className="relative -mt-24 md:-mt-32 z-20">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Small Class Size */}
+            <div className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="h-48 relative">
+                <Image src="/images/home1.png" alt="Small Class Size" fill className="object-cover" />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Small Class Size</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Our small class size for maximum 6 students ensures every student receives personalized guidance, maximizing learning effectiveness and engagement.
+                </p>
+              </div>
             </div>
-          </Link>
 
-          <Link
-            href="/achievements"
-            className="group relative h-64 md:h-96 rounded-lg overflow-hidden"
-          >
-            <Image
-              src="/images/im3.png"
-              alt="Our Team"
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors flex items-center justify-center">
-              <h3 className="font-bold text-2xl md:text-4xl text-white">
-                Our Team
-              </h3>
+            {/* Project-Based Learning */}
+            <div className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="h-48 relative">
+                <Image src="/images/home2.jpg" alt="Project-Based Learning" fill className="object-cover" />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Project-Based Learning</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Students learn through hands-on projects and real-world applications, developing practical skills and problem-solving abilities.
+                </p>
+              </div>
             </div>
-          </Link>
+
+            {/* Comprehensive Tracking */}
+            <div className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="h-48 relative">
+                <Image src="/images/home3.png" alt="Comprehensive Tracking" fill className="object-cover" />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Comprehensive Tracking</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Detailed progress tracking through reports and videos helps students review their work and monitor their advancement.
+                </p>
+              </div>
+            </div>
+
+            {/* Flexible Learning Path */}
+            <div className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="h-48 relative">
+                <Image src="/images/home4.png" alt="Flexible Learning Path" fill className="object-cover" />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Flexible Learning Path</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Our curriculum adapts to individual student levels, ensuring optimal challenge and growth for each participant.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="mt-12 md:mt-16 relative h-64 md:h-96 w-full overflow-hidden">
-        <Image
-          src="/images/im4.png"
-          alt="Quote"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center px-4">
-          <div className="bg-gray-900/80 backdrop-blur-sm p-6 md:p-8 rounded-lg max-w-2xl">
-            <p className="text-center text-lg md:text-xl text-white italic">
-              &quot;The cure for boredom is curiosity. There is no cure for
-              curiosity.&quot;
+      {/* About Section with Image */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-8 md:px-16 lg:px-24">
+          <div className="flex flex-col lg:flex-row gap-12 items-center">
+            {/* Left: Text Content */}
+            <div className="lg:w-1/2">
+              <p className="text-base md:text-lg font-semibold text-blue-600 mb-3 uppercase tracking-wide">About us</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                Shaping the Future of Tech
+              </h2>
+              <p className="text-base text-gray-700 leading-relaxed">
+                Techblazers is dedicated to fostering innovation and equipping young minds with essential skills in robotics, programming, and 3D design. Our programs, designed for students aged 4 to 18, provide a solid foundation through routine classes and also prepare students for prestigious competitions such as the First Lego League (FLL), VEX Robotics Competition, American Computer Science League(ACSL), and Canadian Computing Contest(CCC). In addition, we offer winter, summer, and March break camps that combine learning and fun. Embark on this exciting journey with Techblazers, where curiosity meets expertise and the future of tech brilliance begins.
+              </p>
+            </div>
+
+            {/* Right: Image */}
+            <div className="lg:w-1/2">
+              <div className="relative h-[400px] w-full rounded-lg overflow-hidden shadow-xl">
+                <Image src="/images/im2.png" alt="About Techblazers" fill className="object-cover" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Us Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-8 md:px-16 lg:px-24">
+          <div className="flex flex-col lg:flex-row gap-12 items-center">
+            {/* Left: Overlapping Images */}
+            <div className="lg:w-1/2 relative">
+              <div className="relative w-full h-[500px]">
+                {/* Background Image */}
+                <div className="absolute top-0 left-0 w-3/4 h-[350px] rounded-lg overflow-hidden shadow-xl">
+                  <Image src="/images/im3.png" alt="Teaching Environment" fill className="object-cover" />
+                </div>
+                {/* Overlapping Image */}
+                <div className="absolute bottom-0 right-0 w-3/4 h-[350px] rounded-lg overflow-hidden shadow-2xl border-4 border-white">
+                  <Image src="/images/im4.png" alt="Student Learning" fill className="object-cover" />
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Text Content */}
+            <div className="lg:w-1/2">
+              <p className="text-base md:text-lg font-semibold text-blue-600 mb-3 uppercase tracking-wide">Why us</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                Qualified And Highly Equipped Tutors
+              </h2>
+              <p className="text-base text-gray-700 leading-relaxed mb-6">
+                At our educational center located in Richmond Hill, York Region, we take great pride in our team of highly qualified instructors. Our educators come from diverse backgrounds, including private school teaching, participation in prestigious competitions, and boasting more than a decade of experience in the education field. This wealth of experience and expertise enables us to provide students with a unique and enriching learning environment. Our instructors are not only knowledgeable in their respective subjects but also dedicated to nurturing the potential within each student. They bring a passion for teaching and a commitment to excellence, ensuring that every student receives the best possible education and guidance on their learning journey.
+              </p>
+              <Link
+                href="/about-us"
+                className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors shadow-md hover:shadow-lg"
+              >
+                Know more
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Awards Section */}
+      <section className="py-20 bg-gray-100">
+        <div className="container mx-auto px-8 md:px-16 lg:px-24">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Globally Award-Winning Excellence.
+            </h2>
+            <p className="text-lg text-gray-700 max-w-4xl mx-auto">
+              TechBlazers has become Canada's world-renowned STEM team, celebrated annually on the global stage for historic achievements — earning so far 13 world championships, 26 international awards, and outstanding performances in VEX IQ, VEX Robotics, ACSL, and NASA Space Apps Challenges.
             </p>
           </div>
-          <p className="mt-4 text-center text-white text-base md:text-lg">
-            - Dorothy Parker
-          </p>
+
+          {/* Horizontal Auto-Scrolling Awards Marquee */}
+          <div className="relative overflow-hidden">
+            <div className="flex gap-6 animate-marquee whitespace-nowrap scrollbar-hide">
+              {/* First Set of Cards */}
+              {[1, 2].map((i) => (
+                <div key={i} className="flex gap-6">
+                  {/* VEX IQ */}
+                  <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow whitespace-normal">
+                    <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">VEX IQ</h3>
+                    <ul className="space-y-2 text-sm text-gray-700">
+                      <li>• 2024-2025 VEX IQ World Championships - Inspire Award</li>
+                      <li>• 2025 Create U.S. Open Robotics Championship - Design Award | Judge Award | Mega Award</li>
+                      <li>• 2024-2025 The RiverBots III VEX IQ Robotics Competition Signature Event Middle School - Create Award | Skills Rank No.1</li>
+                    </ul>
+                  </div>
+
+                  {/* VEX V5 */}
+                  <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow whitespace-normal">
+                    <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">VEX V5</h3>
+                    <ul className="space-y-2 text-sm text-gray-700">
+                      <li>• 2025 The North Dakota VEX V5 Robotics Competition Signature Event - Tournament Champion | Robot Skills Champion | Amaze Award | Think Award</li>
+                      <li>• 2024-2025 VEX World Championships - Create Award</li>
+                      <li>• 2024-2025 Ontario VEX Middle School - Championship | Design Award</li>
+                    </ul>
+                  </div>
+
+                  {/* FLL */}
+                  <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow whitespace-normal">
+                    <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">FLL</h3>
+                    <ul className="space-y-2 text-sm text-gray-700">
+                      <li>• 2023 - 2024 FLL Oakville Qualifier 3rd Place</li>
+                      <li>• 2023 - 2024 FLL Toronto Qualifier Innovate Award</li>
+                      <li>• 2022 - 2023 FLL Western Provincial Breakthrough Award and Raising Star Award</li>
+                    </ul>
+                  </div>
+
+                  {/* ACSL & CCC */}
+                  <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow whitespace-normal">
+                    <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">ACSL & CCC</h3>
+                    <ul className="space-y-2 text-sm text-gray-700">
+                      <li>• 2025 American Scholastic Computing League (ACSL) Global Finals - Bronze Medal 3rd Place</li>
+                      <li>• 2016: Canadian Computing Contest Perfect Score</li>
+                      <li>• 2015 Beaver Computing Challenge Perfect Score</li>
+                    </ul>
+                  </div>
+
+                  {/* NASA Apps Challenge */}
+                  <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow whitespace-normal">
+                    <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">NASA Apps Challenge</h3>
+                    <ul className="space-y-2 text-sm text-gray-700">
+                      <li>• 2024 The NASA Space Apps Challenge - Global Nominee</li>
+                      <li>• 2024 The NASA Space Apps Challenge - Galactic Impact</li>
+                      <li>• 2024 The NASA Space Apps Challenge - Best Use of Science</li>
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Course List Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-8 md:px-16 lg:px-24">
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-12">
+            Course List
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { title: "Robotics", icon: Bot, img: "/images/roboticsworkshop1.jpg", href: "/course-list/robotics" },
+              { title: "Coding", icon: Code, img: "/images/i.png", href: "/course-list/coding" },
+              { title: "3D Design", icon: Box, img: "/images/j.png", href: "/course-list/3d-design-2" },
+              { title: "Math", icon: Calculator, img: "/images/k.webp", href: "/course-list/math" },
+              { title: "English", icon: Type, img: "/images/l.jpg", href: "/course-list/english" },
+              { title: "French", icon: Globe, img: "/images/m.webp", href: "/course-list/french" },
+              { title: "Competition", icon: Trophy, img: "/images/vex1.png", href: "/course-list/competition" },
+              { title: "Student Plan", icon: Map, img: "/images/a.webp", href: "/course-list/student-plan" },
+            ].map((course, idx) => (
+              <Link
+                key={idx}
+                href={course.href}
+                className="group relative block rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+              >
+                {/* Image Container */}
+                <div className="h-64 w-full relative">
+                  <Image
+                    src={course.img}
+                    alt={course.title}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  {/* Black Detail Bar at bottom */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-4 flex items-center gap-4 transition-colors group-hover:bg-blue-600/90">
+                    <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                      <course.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <span className="text-white font-bold text-lg">{course.title}</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Camp Theme Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-8 md:px-16 lg:px-24">
+          <div className="text-center mb-12">
+            <p className="text-blue-600 font-semibold uppercase tracking-wide mb-2">Pick Camp as Per Your Area of Interest</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+              Featured Camp Theme
+            </h2>
+          </div>
+          
+          {/* Summer Camp Programs */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-bold text-gray-800 mb-8 border-l-4 border-blue-600 pl-4">Summer Camp</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                { title: "Junior Explorers", subtitle: "Year 4-7", link: "/summer-camp/junior-explorers-year-4-7", img: "/images/home1.png" },
+                { title: "Fencing & STEM", subtitle: "Year 4-7", link: "/summer-camp/fencing-stem-year-4-7", img: "/images/home2.jpg" },
+                { title: "Tech Masters", subtitle: "Year 8-14", link: "/summer-camp/tech-masters-year-8-14-summer", img: "/images/home3.png" },
+                { title: "AI Innovators", subtitle: "Year 8-14", link: "/summer-camp/ai-innovators-year-8-14", img: "/images/home4.png" },
+                { title: "Fencing & STEM", subtitle: "Year 8-14", link: "/summer-camp/fencing-stem-year-8-14", img: "/images/im2.png" },
+                { title: "MIT Tech Creators", subtitle: "Year 8-14", link: "/summer-camp/mit-tech-creators-year-8-14", img: "/images/im3.png" },
+              ].map((program, idx) => (
+                <Link
+                  key={idx}
+                  href={program.link}
+                  className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all group border border-gray-100"
+                >
+                  <div className="h-48 relative overflow-hidden">
+                    <Image 
+                      src={program.img} 
+                      alt={program.title} 
+                      fill 
+                      className="object-cover group-hover:scale-110 transition-transform duration-500" 
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h4 className="text-xl font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors">
+                      {program.title}
+                    </h4>
+                    <p className="text-blue-600 font-medium text-sm">{program.subtitle}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Assets Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-8 md:px-16 lg:px-24">
+          <div className="text-center mb-16">
+            <p className="text-blue-600 font-semibold uppercase tracking-widest mb-3">Core Assets</p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight">
+              Shaping Future Leaders <br className="hidden md:block" /> Through Education
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {/* Program Diversity */}
+            <div className="group p-10 bg-gray-50 rounded-3xl border border-gray-100 hover:bg-white hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+              <Library className="w-12 h-12 text-blue-600 mb-8 group-hover:scale-110 transition-transform duration-500" />
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Program Diversity</h3>
+              <p className="text-gray-600 leading-relaxed text-lg">
+                Offering a wide range of educational programs, from early childhood to advanced levels, catering to diverse age groups and learning needs.
+              </p>
+            </div>
+
+            {/* Qualified Instructors */}
+            <div className="group p-10 bg-gray-50 rounded-3xl border border-gray-100 hover:bg-white hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+              <GraduationCap className="w-12 h-12 text-blue-600 mb-8 group-hover:scale-110 transition-transform duration-500" />
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Qualified Instructors</h3>
+              <p className="text-gray-600 leading-relaxed text-lg">
+                Ensuring that all instructors and educators are highly qualified and experienced in their respective fields, guaranteeing the delivery of quality education.
+              </p>
+            </div>
+
+            {/* Modern Facilities */}
+            <div className="group p-10 bg-gray-50 rounded-3xl border border-gray-100 hover:bg-white hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+              <Building2 className="w-12 h-12 text-blue-600 mb-8 group-hover:scale-110 transition-transform duration-500" />
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Modern Facilities</h3>
+              <p className="text-gray-600 leading-relaxed text-lg">
+                Providing state-of-the-art facilities equipped with the latest educational technology, ensuring a conducive learning environment for all age groups.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gray-50 border-y border-gray-100">
+        <div className="container mx-auto px-8 md:px-16 lg:px-24">
+          <div className="flex flex-col items-center text-center gap-10">
+            {/* Content */}
+            <div className="max-w-3xl">
+              <p className="text-blue-600 font-semibold uppercase tracking-widest mb-4">
+                Join in Your Favorite Courses Today
+              </p>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 flex items-center justify-center gap-3">
+                Apply Your Courses Today
+                <ArrowRight className="w-8 h-8 text-gray-900 shrink-0" />
+              </h2>
+            </div>
+
+            {/* Button */}
+            <div className="flex justify-center">
+              <Link
+                href="/registration"
+                className="group relative inline-flex items-center gap-3 px-12 py-5 bg-blue-600 text-white font-bold text-xl rounded-full transition-all duration-300 hover:bg-blue-700 hover:shadow-[0_0_30px_rgba(37,99,235,0.4)] hover:-translate-y-1"
+              >
+                Apply Now
+                <div className="relative">
+                  <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                  {/* Custom SVG Decoration Path */}
+                  <svg className="absolute -inset-4 w-14 h-14 text-white/20 group-hover:rotate-12 transition-transform" viewBox="0 0 100 100">
+                    <path d="M10,50 Q25,10 50,10 T90,50 T50,90 T10,50" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="5,5" />
+                  </svg>
+                </div>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>
