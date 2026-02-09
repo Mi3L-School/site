@@ -23,20 +23,20 @@ export default function Home() {
         <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-start pt-32 md:pt-40 items-center text-center text-white">
           {/* Top Text */}
           <p className="text-xs md:text-sm font-medium mb-4 tracking-wide">
-            Excelling Since 2014
+            Excelling Since 2017
           </p>
           
           {/* Main Headline */}
           <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2 leading-tight max-w-4xl">
-            Globally Award-Winning Excellence.
+            Inspiring Minds, Building Leaders, 
           </h1>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-            A Decade Strong.
+            Winning Globally
           </h2>
           
           {/* Subtitle */}
           <p className="text-xs md:text-sm mb-12 max-w-3xl opacity-90">
-            Discover Excellence: Surpassing Top Private Schools' Standard for Two Years
+            Discover Life Long Learning with MI3L School: Where Young Innovators (Ages 9-18) Excel in Robotics, Coding, and STEM Education, Winning Globally Since 2017. Join Us to Ignite Your Child's Potential and Shape Future Leaders in an Automated World.
           </p>
           
           {/* Stats with Icons */}
@@ -47,7 +47,7 @@ export default function Home() {
               </div>
               <div className="text-left">
                 <div className="text-[10px] md:text-xs font-medium opacity-90">Age Range:</div>
-                <div className="text-sm md:text-base font-bold">4-18</div>
+                <div className="text-sm md:text-base font-bold">9-18</div>
               </div>
             </div>
             
@@ -74,64 +74,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Cards Section - Overlapping Hero */}
-      <section className="relative -mt-24 md:-mt-32 z-20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Small Class Size */}
-            <div className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow">
-              <div className="h-48 relative">
-                <Image src="/images/home1.png" alt="Small Class Size" fill className="object-cover" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Small Class Size</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Our small class size for maximum 6 students ensures every student receives personalized guidance, maximizing learning effectiveness and engagement.
-                </p>
-              </div>
-            </div>
-
-            {/* Project-Based Learning */}
-            <div className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow">
-              <div className="h-48 relative">
-                <Image src="/images/home2.jpg" alt="Project-Based Learning" fill className="object-cover" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Project-Based Learning</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Students learn through hands-on projects and real-world applications, developing practical skills and problem-solving abilities.
-                </p>
-              </div>
-            </div>
-
-            {/* Comprehensive Tracking */}
-            <div className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow">
-              <div className="h-48 relative">
-                <Image src="/images/home3.png" alt="Comprehensive Tracking" fill className="object-cover" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Comprehensive Tracking</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Detailed progress tracking through reports and videos helps students review their work and monitor their advancement.
-                </p>
-              </div>
-            </div>
-
-            {/* Flexible Learning Path */}
-            <div className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow">
-              <div className="h-48 relative">
-                <Image src="/images/home4.png" alt="Flexible Learning Path" fill className="object-cover" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Flexible Learning Path</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Our curriculum adapts to individual student levels, ensuring optimal challenge and growth for each participant.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+     
 
       {/* About Section with Image */}
       <section className="py-20 bg-gray-50">
@@ -141,11 +84,11 @@ export default function Home() {
             <div className="lg:w-1/2">
               <p className="text-base md:text-lg font-semibold text-blue-600 mb-3 uppercase tracking-wide">About us</p>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Shaping the Future of Tech
+                Where Innovation Takes Flight
               </h2>
               <p className="text-base text-gray-700 leading-relaxed">
-                Techblazers is dedicated to fostering innovation and equipping young minds with essential skills in robotics, programming, and 3D design. Our programs, designed for students aged 4 to 18, provide a solid foundation through routine classes and also prepare students for prestigious competitions such as the First Lego League (FLL), VEX Robotics Competition, American Computer Science League(ACSL), and Canadian Computing Contest(CCC). In addition, we offer winter, summer, and March break camps that combine learning and fun. Embark on this exciting journey with Techblazers, where curiosity meets expertise and the future of tech brilliance begins.
-              </p>
+                At MI3L School, we equip the next generation with the skills to lead in an automated world. Our specialized programs in VEX IQ, VEX V5, and AirDrone technology provide a hands-on roadmap for students (ages 9–18) to move from basic logic to advanced mechanical design. We don’t just teach—we prepare students for the podium, fostering the teamwork and technical grit required for global robotics excellence. Join MI3L School and watch your child’s potential reach new heights, from the ground to the sky.
+                  </p>
             </div>
 
             {/* Right: Image */}
@@ -180,10 +123,11 @@ export default function Home() {
             <div className="lg:w-1/2">
               <p className="text-base md:text-lg font-semibold text-blue-600 mb-3 uppercase tracking-wide">Why us</p>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Qualified And Highly Equipped Tutors
+                World-Class Coaching, Engineered for Excellence in Oakville
               </h2>
               <p className="text-base text-gray-700 leading-relaxed mb-6">
-                At our educational center located in Richmond Hill, York Region, we take great pride in our team of highly qualified instructors. Our educators come from diverse backgrounds, including private school teaching, participation in prestigious competitions, and boasting more than a decade of experience in the education field. This wealth of experience and expertise enables us to provide students with a unique and enriching learning environment. Our instructors are not only knowledgeable in their respective subjects but also dedicated to nurturing the potential within each student. They bring a passion for teaching and a commitment to excellence, ensuring that every student receives the best possible education and guidance on their learning journey.
+                Located in Oakville, mi3l School is built on a foundation of world-class expertise. Our lead coach is an accomplished aerospace engineer, bringing real-world precision and systems thinking to our students. They are supported by a team of globally awarded coaches, recognized as champions on the world stage.
+                This unique combination of elite engineering insight and championship-proven strategy creates an unmatched learning environment. We don't just teach—we mentor future innovators and leaders, equipping them with the discipline, strategic thinking, and passion for excellence that wins at the highest levels.              
               </p>
               <Link
                 href="/about-us"
@@ -207,7 +151,7 @@ export default function Home() {
               Globally Award-Winning Excellence.
             </h2>
             <p className="text-lg text-gray-700 max-w-4xl mx-auto">
-              TechBlazers has become Canada's world-renowned STEM team, celebrated annually on the global stage for historic achievements — earning so far 13 world championships, 26 international awards, and outstanding performances in VEX IQ, VEX Robotics, ACSL, and NASA Space Apps Challenges.
+              Mi3L School has become Oakville's world-renowned STEM team, celebrated annually on the global stage for historic achievements — earning so far 13 world championships, 26 international awards, and outstanding performances in VEX IQ, VEX Robotics.
             </p>
           </div>
 
@@ -227,19 +171,19 @@ export default function Home() {
                     </ul>
                   </div>
 
-                  {/* VEX V5 */}
+                  {/* VEX V5 High School*/}
                   <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow whitespace-normal">
-                    <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">VEX V5</h3>
+                    <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">VEX V5 High School</h3>
                     <ul className="space-y-2 text-sm text-gray-700">
-                      <li>• 2025 The North Dakota VEX V5 Robotics Competition Signature Event - Tournament Champion | Robot Skills Champion | Amaze Award | Think Award</li>
+                      <li>• LAUNCH at EATON V5 Robotics Competition Signature Event - Think Award</li>
                       <li>• 2024-2025 VEX World Championships - Create Award</li>
                       <li>• 2024-2025 Ontario VEX Middle School - Championship | Design Award</li>
                     </ul>
                   </div>
 
-                  {/* FLL */}
+                  {/* VEX V5 Middle School */}
                   <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow whitespace-normal">
-                    <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">FLL</h3>
+                    <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">VEX V5 Middle School</h3>
                     <ul className="space-y-2 text-sm text-gray-700">
                       <li>• 2023 - 2024 FLL Oakville Qualifier 3rd Place</li>
                       <li>• 2023 - 2024 FLL Toronto Qualifier Innovate Award</li>
@@ -247,23 +191,12 @@ export default function Home() {
                     </ul>
                   </div>
 
-                  {/* ACSL & CCC */}
-                  <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow whitespace-normal">
-                    <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">ACSL & CCC</h3>
-                    <ul className="space-y-2 text-sm text-gray-700">
-                      <li>• 2025 American Scholastic Computing League (ACSL) Global Finals - Bronze Medal 3rd Place</li>
-                      <li>• 2016: Canadian Computing Contest Perfect Score</li>
-                      <li>• 2015 Beaver Computing Challenge Perfect Score</li>
-                    </ul>
-                  </div>
 
-                  {/* NASA Apps Challenge */}
+                  {/* Air Drone */}
                   <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow whitespace-normal">
-                    <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">NASA Apps Challenge</h3>
+                    <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">Air Drone</h3>
                     <ul className="space-y-2 text-sm text-gray-700">
-                      <li>• 2024 The NASA Space Apps Challenge - Global Nominee</li>
-                      <li>• 2024 The NASA Space Apps Challenge - Galactic Impact</li>
-                      <li>• 2024 The NASA Space Apps Challenge - Best Use of Science</li>
+                      <li>• 2024 Air Drone - Global Nominee</li>
                     </ul>
                   </div>
                 </div>
@@ -273,20 +206,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Course List Section */}
+      {/* Program List Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-8 md:px-16 lg:px-24">
           <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-12">
-            Course List
+            Program List
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { title: "Robotics", icon: Bot, img: "/images/roboticsworkshop1.jpg", href: "/course-list/robotics" },
               { title: "Coding", icon: Code, img: "/images/i.png", href: "/course-list/coding" },
-              { title: "3D Design", icon: Box, img: "/images/j.png", href: "/course-list/3d-design-2" },
-              { title: "Math", icon: Calculator, img: "/images/k.webp", href: "/course-list/math" },
-              { title: "English", icon: Type, img: "/images/l.jpg", href: "/course-list/english" },
-              { title: "French", icon: Globe, img: "/images/m.webp", href: "/course-list/french" },
               { title: "Competition", icon: Trophy, img: "/images/vex1.png", href: "/course-list/competition" },
               { title: "Student Plan", icon: Map, img: "/images/a.webp", href: "/course-list/student-plan" },
             ].map((course, idx) => (
@@ -321,9 +250,8 @@ export default function Home() {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-8 md:px-16 lg:px-24">
           <div className="text-center mb-12">
-            <p className="text-blue-600 font-semibold uppercase tracking-wide mb-2">Pick Camp as Per Your Area of Interest</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Featured Camp Theme
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+              Featured Camp & Workshop
             </h2>
           </div>
           
