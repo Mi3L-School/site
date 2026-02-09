@@ -273,6 +273,17 @@ export default function Navbar() {
             </Link>
 
             <Link
+              href="/blog"
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                pathname === "/blog"
+                  ? "text-white bg-gray-800"
+                  : "text-gray-300 hover:text-white hover:bg-gray-800"
+              }`}
+            >
+              Blog
+            </Link>
+
+            <Link
               href="/jobs"
               className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
                 pathname === "/jobs"
@@ -363,6 +374,12 @@ export default function Navbar() {
               className="block px-4 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
             >
               Donate
+            </Link>
+            <Link
+              href="/blog"
+              className="block px-4 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+            >
+              Blog
             </Link>
             <Link
               href="/jobs"

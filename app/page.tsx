@@ -94,7 +94,7 @@ export default function Home() {
             {/* Right: Image */}
             <div className="lg:w-1/2">
               <div className="relative h-[400px] w-full rounded-lg overflow-hidden shadow-xl">
-                <Image src="/images/im2.png" alt="About Techblazers" fill className="object-cover" />
+                <Image src="/images/im2.png" alt="About Mi3L" fill className="object-cover" />
               </div>
             </div>
           </div>
