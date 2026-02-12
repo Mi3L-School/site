@@ -55,7 +55,7 @@ export default function RoboticsPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="font-bold text-orange-600 min-w-[120px]">Team Size:</span>
-                  <span>4-10 young minds</span>
+                  <span>4-10</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="font-bold text-orange-600 min-w-[120px]">Hardware:</span>
@@ -64,10 +64,6 @@ export default function RoboticsPage() {
                 <li className="flex items-start gap-3">
                   <span className="font-bold text-orange-600 min-w-[120px]">Programming:</span>
                   <span>C/C++</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="font-bold text-orange-600 min-w-[120px]">Features:</span>
-                  <span>Remote Control + Autonomous</span>
                 </li>
               </ul>
             </div>
@@ -319,8 +315,8 @@ export default function RoboticsPage() {
               </div>
               <div className="rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src="https://silverowlrobotics.com/wp-content/uploads/2025/01/472865027_435832442816827_7617388648051121899_n-1024x961.jpg" 
-                  alt="Team Interaction" 
+                  src="/images/homepage/home1.png"
+                  alt="Team Interaction"
                   className="w-full h-auto"
                 />
               </div>
@@ -431,9 +427,9 @@ export default function RoboticsPage() {
            {/* Achievements Carousel (Simplified for now) */}
            <div className="flex flex-wrap justify-center gap-8 mb-24">
               {[
-                "https://silverowlrobotics.com/wp-content/uploads/elementor/thumbs/IMG_2608-scaled-1-1-r3ot5s49wqbewbabvtgxdtn7fgwpfn8lqkx0ric96w.jpg",
-                "https://silverowlrobotics.com/wp-content/uploads/elementor/thumbs/Vex-Spin-Up-Awards-1-r3ot5t243kcp7x8yqbvjybeo0us2nccc2pki8sav0o.png",
-                "https://silverowlrobotics.com/wp-content/uploads/elementor/thumbs/IMG_5648-scaled-1-r3ot5wtguwhuid3i4di28agiee9ji4r9f86g5w5abs.jpg"
+                "/images/homepage/world1.webp",
+                "/images/homepage/world_middle.webp",
+                 "/images/homepage/world2.webp"
               ].map((img, idx) => (
                 <div key={idx} className="w-80 group">
                   <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-105 border border-white/10">

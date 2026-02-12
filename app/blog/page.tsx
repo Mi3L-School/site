@@ -2,9 +2,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { posts, searchPosts } from "./posts";
 
-export default function BlogPage({ searchParams }: { searchParams?: { q?: string } }) {
+const POSTS_PER_PAGE = 6;
+
+export default function BlogPage({ searchParams }: { searchParams?: { q?: string; page?: string } }) {
   const q = (searchParams && searchParams.q) || "";
+  const pageNum = Math.max(1, parseInt(searchParams?.page || "1", 10));
   const filtered = q ? searchPosts(q) : posts;
+  
+  const totalPages = Math.ceil(filtered.length / POSTS_PER_PAGE);
+  const start = (pageNum - 1) * POSTS_PER_PAGE;
+  const end = start + POSTS_PER_PAGE;
+  const paginatedPosts = filtered.slice(start, end);
 
   return (
     <div className="min-h-screen bg-white">
@@ -39,12 +47,12 @@ export default function BlogPage({ searchParams }: { searchParams?: { q?: string
       <section className="container mx-auto px-4 md:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
-            {filtered.map((post) => (
+            {paginatedPosts.map((post) => (
               <article key={post.slug} className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
                 <div className="flex flex-col md:flex-row">
                   <div className="md:w-1/2 p-6 flex items-center">
                     <div className="relative w-full h-40 md:h-48 rounded-xl overflow-hidden border-4 border-gray-100 shadow-sm bg-white">
-                      <Image src={post.cover} alt={post.title} fill className="object-cover" />
+                      <Image src={post.cover} alt={post.title} fill className="object-cover object-top" />
                     </div>
                   </div>
 
@@ -73,8 +81,45 @@ export default function BlogPage({ searchParams }: { searchParams?: { q?: string
               </article>
             ))}
 
-            {filtered.length === 0 && (
+            {paginatedPosts.length === 0 && (
               <div className="p-6 bg-gray-50 rounded-lg">No posts found.</div>
+            )}
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-8">
+                {pageNum > 1 && (
+                  <Link
+                    href={`/blog?${q ? `q=${encodeURIComponent(q)}&` : ""}page=${pageNum - 1}`}
+                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
+                  >
+                    ← Previous
+                  </Link>
+                )}
+                
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <Link
+                    key={page}
+                    href={`/blog?${q ? `q=${encodeURIComponent(q)}&` : ""}page=${page}`}
+                    className={`px-3 py-2 rounded-lg ${
+                      page === pageNum
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }`}
+                  >
+                    {page}
+                  </Link>
+                ))}
+                
+                {pageNum < totalPages && (
+                  <Link
+                    href={`/blog?${q ? `q=${encodeURIComponent(q)}&` : ""}page=${pageNum + 1}`}
+                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
+                  >
+                    Next →
+                  </Link>
+                )}
+              </div>
             )}
           </div>
 

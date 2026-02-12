@@ -25,7 +25,7 @@ export default function PostPage({ params }: Props) {
           <div className="flex flex-col md:flex-row gap-6">
             <div className="md:w-1/2">
               <div className="relative h-48 w-full rounded-xl overflow-hidden shadow-sm mb-6 border-4 border-gray-100 bg-white">
-                <Image src={post.cover} alt={post.title} fill className="object-cover" />
+                <Image src={post.cover} alt={post.title} fill className="object-cover object-top" />
               </div>
             </div>
 
