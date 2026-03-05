@@ -223,7 +223,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { title: "Robotics", icon: Bot, img: "/images/program/robotics.png", href: "/course-list/robotics" },
-              { title: "Coding", icon: Code, img: "/images/program/code.jpg", href: "/course-list/coding" },
+              { title: "Coding", icon: Code, img: "/images/program/code.jpg", href: "/course-list/aerialdrone" },
               { title: "Competition", icon: Trophy, img: "/images/vex1.png", href: "/course-list/competition" },
               ].map((course, idx) => (
               <Link
