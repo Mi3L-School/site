@@ -130,7 +130,7 @@ export default function Home() {
                 This unique combination of elite engineering insight and championship-proven strategy creates an unmatched learning environment. We don't just teach—we mentor future innovators and leaders, equipping them with the discipline, strategic thinking, and passion for excellence that wins at the highest levels.              
               </p>
               <Link
-                href="/about-us"
+                href="/about"
                 className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors shadow-md hover:shadow-lg"
               >
                 Know more
