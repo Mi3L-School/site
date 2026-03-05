@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Users, BookOpen, Calendar, Bot, Code, Box, Calculator, Type, Globe, Trophy, Map, Library, GraduationCap, Building2, ArrowRight } from "lucide-react";
+import { title } from "process";
 
 export default function Home() {
   return (
@@ -248,13 +249,11 @@ export default function Home() {
             <h3 className="text-2xl font-bold text-gray-800 mb-8 border-l-4 border-blue-600 pl-4">Summer Camp</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                { title: "Junior Explorers", subtitle: "Year 4-7", link: "/summer-camp/junior-explorers-year-4-7", img: "/images/home1.png" },
-                { title: "Fencing & STEM", subtitle: "Year 4-7", link: "/summer-camp/fencing-stem-year-4-7", img: "/images/home2.jpg" },
-                { title: "Tech Masters", subtitle: "Year 8-14", link: "/summer-camp/tech-masters-year-8-14-summer", img: "/images/home3.png" },
-                { title: "AI Innovators", subtitle: "Year 8-14", link: "/summer-camp/ai-innovators-year-8-14", img: "/images/home4.png" },
-                { title: "Fencing & STEM", subtitle: "Year 8-14", link: "/summer-camp/fencing-stem-year-8-14", img: "/images/im2.png" },
-                { title: "MIT Tech Creators", subtitle: "Year 8-14", link: "/summer-camp/mit-tech-creators-year-8-14", img: "/images/im3.png" },
-              ].map((program, idx) => (
+                { title: "Girl Power", subtitle: "Year 7-10", link: "/summer-camp/junior-explorers-year-7-10", img: "/images/workshop/girlpower_workshop.png" },
+                { title: "First Lego League", subtitle: "Year 8-14", link: "/summer-camp/first-lego-league-year-8-14", img: "/images/home3.png" },
+                { title: "VEX V5", subtitle: "Year 11-18", link: "/summer-camp/ai-innovators-year-8-14", img: "/images/home4.png" },
+                { title: "Python", subtitle: "Year 8-14", link: "/summer-camp/fencing-stem-year-8-14", img: "/images/im2.png" },
+                                  ].map((program, idx) => (
                 <Link
                   key={idx}
                   href={program.link}
