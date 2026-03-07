@@ -145,9 +145,9 @@ export default function RoboticsPage() {
            {/* Achievements Carousel (Simplified for now) */}
            <div className="flex flex-wrap justify-center gap-8 mb-24">
               {[
-                "/images/homepage/world1.webp",
-                "/images/homepage/world_middle.webp",
-                 "/images/homepage/world2.webp"
+                "/images/aerial/HighSchool.jpg",
+                "/images/aerial/middleschool.jpg",
+                 "/images/aerial/online.jpg"
               ].map((img, idx) => (
                 <div key={idx} className="w-80 group">
                   <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-105 border border-white/10">
