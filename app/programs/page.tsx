@@ -264,7 +264,7 @@ export default function Programs() {
               {programs.workshops.map((workshop) => (
                 <Link
                   key={workshop.href}
-                  href={workshop.href}
+                  href="#"
                   className="group bg-white rounded-lg p-6 shadow-md hover:shadow-xl border-2 border-transparent hover:border-orange-500 transition-all duration-300"
                 >
                   <div className="flex flex-col gap-4">

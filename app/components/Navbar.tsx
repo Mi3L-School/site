@@ -5,406 +5,350 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-const coursesLinks = [
-  { path: "/programs/full-vrc-guide", name: "Full VRC Guide" },
-  { path: "/programs/SummerCourse", name: "2025 Summer Course" },
-  { path: "/programs/ScienceFair", name: "Science Fair Preparation Course" },
-  { path: "/programs/iqWorkshop", name: "IQ Workshop" },
-  { path: "/programs/roboticsWorkshops", name: "Robotics & STEM Workshops" },
-  { path: "/programs/speakup", name: "Speak up! Workshop" },
+const programLinks = [
+  { path: "/course-list/robotics", name: "Robotics" },
+  { path: "/course-list/aerialdrone", name: "Aerial Drone" },
+  { path: "/course-list/competition", name: "Competition" },
 ];
 
-const achievementsLinks = [
+const aboutLinks = [
+  { path: "/about", name: "About Us" },
   { path: "/history", name: "History" },
   { path: "/achievements", name: "Achievements" },
 ];
 
+type DropdownId = "about" | "programs" | null;
+
 export default function Navbar() {
   const pathname = usePathname();
-  const [isCoursesDropdownOpen, setCoursesDropdownOpen] = useState(false);
-  const [isAchievementsDropdownOpen, setAchievementsDropdownOpen] = useState(false);
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const coursesRef = useRef<HTMLDivElement>(null);
-  const achievementsRef = useRef<HTMLDivElement>(null);
-  const coursesTimeoutRef = useRef<number | null>(null);
-  const achievementsTimeoutRef = useRef<number | null>(null);
+  const [openDropdown, setOpenDropdown] = useState<DropdownId>(null);
+  const [isMobileOpen, setMobileOpen] = useState(false);
+  const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({});
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navRef = useRef<HTMLElement>(null);
 
   const user = null;
 
+  // Close on outside click
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (coursesRef.current && !coursesRef.current.contains(event.target as Node)) {
-        setCoursesDropdownOpen(false);
+    const onClickOutside = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
+        setMobileOpen(false);
       }
-      if (achievementsRef.current && !achievementsRef.current.contains(event.target as Node)) {
-        setAchievementsDropdownOpen(false);
-      }
-
     };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
   }, []);
 
+  // Close mobile menu on route change
   useEffect(() => {
-    setMobileMenuOpen(false);
+    setMobileOpen(false);
+    setOpenDropdown(null);
   }, [pathname]);
 
-  const handleMouseEnter = (
-    setter: (value: boolean) => void,
-    timeoutRef: React.MutableRefObject<number | null>
-  ) => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
-    setter(true);
+  const scheduleClose = () => {
+    closeTimerRef.current = setTimeout(() => setOpenDropdown(null), 150);
   };
 
-  const handleMouseLeave = (
-    setter: (value: boolean) => void,
-    timeoutRef: React.MutableRefObject<number | null>
-  ) => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    timeoutRef.current = window.setTimeout(() => {
-      setter(false);
-      timeoutRef.current = null;
-    }, 300) as unknown as number;
+  const cancelClose = () => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
   };
+
+  const toggleMobileSection = (key: string) => {
+    setMobileExpanded((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const isActive = (path: string) => pathname === path;
+  const isDropdownActive = (links: { path: string }[]) =>
+    links.some((l) => pathname === l.path);
 
   return (
-    <nav className="sticky top-0 z-50 bg-gray-900 border-b border-gray-800 shadow-sm">
+    <nav
+      ref={navRef}
+      className="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-white/10 shadow-lg"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="flex items-center gap-3 hover:opacity-90 transition-opacity shrink-0"
+          >
             <Image
               src="/images/logo.png"
               alt="Mi3L School"
-              width={80}
-              height={52}
+              width={72}
+              height={48}
               className="object-contain"
               priority
             />
-            <span className="text-xl font-semibold text-white">Mi3L School</span>
+            <span className="text-lg font-semibold text-white hidden sm:block">
+              Mi3L School
+            </span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-1">
-
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-0.5">
+            {/* About Dropdown */}
             <div
-              ref={achievementsRef}
-              onMouseEnter={() =>
-                handleMouseEnter(setAchievementsDropdownOpen, achievementsTimeoutRef)
-              }
-              onMouseLeave={() =>
-                handleMouseLeave(setAchievementsDropdownOpen, achievementsTimeoutRef)
-              }
               className="relative"
+              onMouseEnter={() => { cancelClose(); setOpenDropdown("about"); }}
+              onMouseLeave={scheduleClose}
             >
-              <Link
-                href="/about"
-                className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors flex items-center gap-1"
+              <button
+                className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${isDropdownActive(aboutLinks)
+                  ? "text-white bg-white/10"
+                  : "text-gray-300 hover:text-white hover:bg-white/10"
+                  }`}
               >
                 About
                 <svg
-                  className="w-4 h-4"
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${openDropdown === "about" ? "rotate-180" : ""}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
                 </svg>
-              </Link>
-              {isAchievementsDropdownOpen && (
-                <div
-                  className="absolute top-full left-0 mt-1 w-48 bg-gray-800 border border-gray-700 rounded-lg shadow-lg py-1"
-                  onMouseEnter={() =>
-                    handleMouseEnter(setAchievementsDropdownOpen, achievementsTimeoutRef)
-                  }
-                  onMouseLeave={() =>
-                    handleMouseLeave(setAchievementsDropdownOpen, achievementsTimeoutRef)
-                  }
-                >
+              </button>
+
+              {/* Dropdown */}
+              <div
+                className={`absolute top-full left-0 mt-1.5 w-44 bg-gray-800 border border-white/10 rounded-xl shadow-xl py-1.5 transition-all duration-200 origin-top ${openDropdown === "about"
+                  ? "opacity-100 scale-100 pointer-events-auto"
+                  : "opacity-0 scale-95 pointer-events-none"
+                  }`}
+                onMouseEnter={() => { cancelClose(); setOpenDropdown("about"); }}
+                onMouseLeave={scheduleClose}
+              >
+                {aboutLinks.map((link) => (
                   <Link
-                    href="/about"
-                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
+                    key={link.path}
+                    href={link.path}
+                    className={`block px-4 py-2 text-sm transition-colors ${isActive(link.path)
+                      ? "text-white bg-white/10"
+                      : "text-gray-300 hover:text-white hover:bg-white/10"
+                      }`}
                   >
-                    About Us
+                    {link.name}
                   </Link>
-                  <Link
-                    href="/history"
-                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-                  >
-                    History
-                  </Link>
-                  <Link
-                    href="/achievements"
-                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-                  >
-                    Achievements
-                  </Link>
-                </div>
-              )}
+                ))}
+              </div>
             </div>
 
+            {/* Programs Dropdown */}
             <div
-              ref={coursesRef}
-              onMouseEnter={() =>
-                handleMouseEnter(setCoursesDropdownOpen, coursesTimeoutRef)
-              }
-              onMouseLeave={() =>
-                handleMouseLeave(setCoursesDropdownOpen, coursesTimeoutRef)
-              }
               className="relative"
+              onMouseEnter={() => { cancelClose(); setOpenDropdown("programs"); }}
+              onMouseLeave={scheduleClose}
             >
-              <Link
-                href="/programs"
-                className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors flex items-center gap-1"
+              <button
+                className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${isDropdownActive(programLinks)
+                  ? "text-white bg-white/10"
+                  : "text-gray-300 hover:text-white hover:bg-white/10"
+                  }`}
               >
                 Programs
                 <svg
-                  className="w-4 h-4"
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${openDropdown === "programs" ? "rotate-180" : ""}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
                 </svg>
-              </Link>
-              {isCoursesDropdownOpen && (
-                <div
-                  className="absolute top-full left-0 mt-1 w-56 bg-gray-800 border border-gray-700 rounded-lg shadow-lg py-1"
-                  onMouseEnter={() =>
-                    handleMouseEnter(setCoursesDropdownOpen, coursesTimeoutRef)
-                  }
-                  onMouseLeave={() =>
-                    handleMouseLeave(setCoursesDropdownOpen, coursesTimeoutRef)
-                  }
-                >
-                  <div className="relative group">
-                    <span className="block px-4 py-2 text-sm text-gray-300 cursor-default hover:bg-gray-700">
-                      Courses
-                    </span>
-                    <div className="absolute left-full top-0 ml-1 w-56 bg-gray-800 border border-gray-700 rounded-lg shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                      <Link
-                        href="/programs/full-vrc-guide"
-                        className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-                      >
-                        Online Courses
-                      </Link>
-                      <Link
-                        href="/programs/SummerCourse"
-                        className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-                      >
-                        2025 Summer Course
-                      </Link>
-                      <Link
-                        href="/programs/ScienceFair"
-                        className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-                      >
-                        Science Fair Preparation Course
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="relative group">
-                    <span className="block px-4 py-2 text-sm text-gray-300 cursor-default hover:bg-gray-700">
-                      Workshops
-                    </span>
-                    <div className="absolute left-full top-0 ml-1 w-56 bg-gray-800 border border-gray-700 rounded-lg shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                      <Link
-                        href="/programs/iqWorkshop"
-                        className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-                      >
-                        IQ Summer Workshop
-                      </Link>
-                      <Link
-                        href="/programs/speakup"
-                        className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-                      >
-                        Speak up! Workshop
-                      </Link>
-                      <Link
-                        href="/programs/roboticsWorkshops"
-                        className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-                      >
-                        Robotics & STEM Workshops
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="relative group">
-                    <span className="block px-4 py-2 text-sm text-gray-300 cursor-default hover:bg-gray-700">
-                      Camps
-                    </span>
-                    <div className="absolute left-full top-0 ml-1 w-56 bg-gray-800 border border-gray-700 rounded-lg shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                      <Link
-                        href="/programs/fllSummerCamp"
-                        className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-                      >
-                        FLL Robotics Summer Camp
-                      </Link>
-                      <Link
-                        href="/programs/virtualskills"
-                        className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-                      >
-                        Virtual Skills Summer Camp
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              )}
+              </button>
+
+              <div
+                className={`absolute top-full left-0 mt-1.5 w-44 bg-gray-800 border border-white/10 rounded-xl shadow-xl py-1.5 transition-all duration-200 origin-top ${openDropdown === "programs"
+                  ? "opacity-100 scale-100 pointer-events-auto"
+                  : "opacity-0 scale-95 pointer-events-none"
+                  }`}
+                onMouseEnter={() => { cancelClose(); setOpenDropdown("programs"); }}
+                onMouseLeave={scheduleClose}
+              >
+                {programLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    href={link.path}
+                    className={`block px-4 py-2 text-sm transition-colors ${isActive(link.path)
+                      ? "text-white bg-white/10"
+                      : "text-gray-300 hover:text-white hover:bg-white/10"
+                      }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
             </div>
 
-            <Link
-              href="/donation"
-              className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
-            >
-              Donate
-            </Link>
-
-            <Link
-              href="/blog"
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-                pathname === "/blog"
-                  ? "text-white bg-gray-800"
-                  : "text-gray-300 hover:text-white hover:bg-gray-800"
-              }`}
-            >
-              Blog
-            </Link>
-
-            <Link
-              href="/jobs"
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-                pathname === "/jobs"
-                  ? "text-white bg-gray-800"
-                  : "text-gray-300 hover:text-white hover:bg-gray-800"
-              }`}
-            >
-              Jobs
-            </Link>
+            {/* Direct Links */}
+            {[
+              { href: "/donation", label: "Donate" },
+              { href: "/blog", label: "Blog" },
+              { href: "/jobs", label: "Jobs" },
+            ].map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${isActive(href)
+                  ? "text-white bg-white/10"
+                  : "text-gray-300 hover:text-white hover:bg-white/10"
+                  }`}
+              >
+                {label}
+              </Link>
+            ))}
 
             {user ? (
               <Link
                 href="/profile"
-                className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+                className="px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
               >
                 Profile
               </Link>
             ) : (
               <Link
-                href="/login"
-                className="px-4 py-2 text-sm font-medium bg-orange-500 text-white hover:bg-orange-600 rounded-lg transition-colors"
+                href="/registration"
+                className="ml-1 px-4 py-2 text-sm font-semibold bg-orange-500 hover:bg-orange-400 text-white rounded-lg transition-colors shadow-sm"
               >
-                Login
+                Join Us
               </Link>
             )}
           </div>
 
+          {/* Mobile Hamburger */}
           <button
-            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+            onClick={() => setMobileOpen((v) => !v)}
+            className="md:hidden p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
             aria-label="Toggle menu"
+            aria-expanded={isMobileOpen}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {isMobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={
+                  isMobileOpen
+                    ? "M6 18L18 6M6 6l12 12"
+                    : "M4 6h16M4 12h16M4 18h16"
+                }
+              />
             </svg>
           </button>
         </div>
       </div>
 
-      {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-800 bg-gray-900">
-          <div className="px-4 py-4 space-y-1">
-            <Link
-              href="/about"
-              className="block px-4 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+      {/* Mobile Menu */}
+      <div
+        className={`md:hidden border-t border-white/10 bg-gray-900 overflow-hidden transition-all duration-300 ease-in-out ${isMobileOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+          }`}
+      >
+        <div className="px-4 py-3 space-y-0.5">
+          {/* About Section */}
+          <div>
+            <button
+              onClick={() => toggleMobileSection("about")}
+              className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
             >
-              About Us
-            </Link>
-            <Link
-              href="/history"
-              className="block px-4 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+              About
+              <svg
+                className={`w-4 h-4 transition-transform duration-200 ${mobileExpanded["about"] ? "rotate-180" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div
+              className={`overflow-hidden transition-all duration-200 ${mobileExpanded["about"] ? "max-h-40" : "max-h-0"
+                }`}
             >
-              History
-            </Link>
-            <Link
-              href="/achievements"
-              className="block px-4 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
-            >
-              Achievements
-            </Link>
-            <Link
-              href="/programs"
-              className="block px-4 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+              <div className="pl-4 mt-0.5 space-y-0.5">
+                {aboutLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    href={link.path}
+                    className="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Programs Section */}
+          <div>
+            <button
+              onClick={() => toggleMobileSection("programs")}
+              className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
             >
               Programs
-            </Link>
-            <Link
-              href="/donation"
-              className="block px-4 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+              <svg
+                className={`w-4 h-4 transition-transform duration-200 ${mobileExpanded["programs"] ? "rotate-180" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div
+              className={`overflow-hidden transition-all duration-200 ${mobileExpanded["programs"] ? "max-h-40" : "max-h-0"
+                }`}
             >
-              Donate
-            </Link>
+              <div className="pl-4 mt-0.5 space-y-0.5">
+                {programLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    href={link.path}
+                    className="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Direct Links */}
+          {[
+            { href: "/donation", label: "Donate" },
+            { href: "/blog", label: "Blog" },
+            { href: "/jobs", label: "Jobs" },
+          ].map(({ href, label }) => (
             <Link
-              href="/blog"
-              className="block px-4 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+              key={href}
+              href={href}
+              className="block px-4 py-2.5 text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
             >
-              Blog
+              {label}
             </Link>
-            <Link
-              href="/jobs"
-              className="block px-4 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
-            >
-              Jobs
-            </Link>
+          ))}
+
+          <div className="pt-2 pb-1">
             {user ? (
               <Link
                 href="/profile"
-                className="block px-4 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+                className="block px-4 py-2.5 text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
               >
                 Profile
               </Link>
             ) : (
               <Link
-                href="/login"
-                className="block px-4 py-2 text-base font-medium bg-orange-500 text-white hover:bg-orange-600 rounded-lg transition-colors text-center"
+                href="/registration"
+                className="block px-4 py-2.5 text-sm font-semibold bg-orange-500 hover:bg-orange-400 text-white rounded-lg transition-colors text-center shadow-sm"
               >
-                Login
-            </Link>
+                Join Us
+              </Link>
             )}
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 }

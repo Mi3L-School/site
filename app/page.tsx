@@ -13,20 +13,20 @@ export default function Home() {
           <p className="text-xs md:text-sm font-medium mb-4 tracking-wide">
             Excelling Since 2017
           </p>
-          
+
           {/* Main Headline */}
           <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2 leading-tight max-w-4xl">
-            Inspiring Minds, Building Leaders, 
+            Inspiring Minds, Building Leaders,
           </h1>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
             Winning Globally
           </h2>
-          
+
           {/* Subtitle */}
           <p className="text-xs md:text-sm mb-12 max-w-3xl opacity-90">
             Discover Life Long Learning with MI3L School: Where Young Innovators (Ages 9-18) Excel in Robotics, Coding, and STEM Education, Winning Globally Since 2017. Join Us to Ignite Your Child's Potential and Shape Future Leaders in an Automated World.
           </p>
-          
+
           {/* Stats with Icons */}
           <div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-2">
             <div className="flex items-center gap-2">
@@ -38,7 +38,7 @@ export default function Home() {
                 <div className="text-sm md:text-base font-bold">9-18</div>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 md:w-10 md:h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
                 <BookOpen className="w-4 h-4 md:w-5 md:h-5" />
@@ -48,7 +48,7 @@ export default function Home() {
                 <div className="text-[10px] md:text-xs font-medium opacity-90">Courses</div>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 md:w-10 md:h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
                 <Calendar className="w-4 h-4 md:w-5 md:h-5" />
@@ -62,7 +62,7 @@ export default function Home() {
         </div>
       </section>
 
-     
+
 
       {/* About Section with Image */}
       <section className="py-20 bg-gray-50">
@@ -76,7 +76,7 @@ export default function Home() {
               </h2>
               <p className="text-base text-gray-700 leading-relaxed">
                 At MI3L School, we equip the next generation with the skills to lead in an automated world. Our specialized programs in VEX IQ, VEX V5, and Aerial Drone provide a hands-on roadmap for students (ages 9–18) to move from basic logic to advanced mechanical design. We don’t just teach; we prepare students for the podium, fostering the teamwork and technical aspects required for global robotics excellence. Join MI3L School and watch your child’s potential reach new heights.
-                  </p>
+              </p>
             </div>
 
             {/* Right: YouTube Video */}
@@ -127,7 +127,7 @@ export default function Home() {
               </h2>
               <p className="text-base text-gray-700 leading-relaxed mb-6">
                 Located in Oakville, Mi3L School is built on a foundation of world-class expertise. Our lead coach is an accomplished aerospace engineer, bringing real-world precision and systems thinking to our students. They are supported by a team of globally awarded coaches, recognized as champions on the world stage.
-                This unique combination of elite engineering insight and championship-proven strategy creates an unmatched learning environment. We don't just teach—we mentor future innovators and leaders, equipping them with the discipline, strategic thinking, and passion for excellence that wins at the highest levels.              
+                This unique combination of elite engineering insight and championship-proven strategy creates an unmatched learning environment. We don't just teach—we mentor future innovators and leaders, equipping them with the discipline, strategic thinking, and passion for excellence that wins at the highest levels.
               </p>
               <Link
                 href="/about"
@@ -151,7 +151,7 @@ export default function Home() {
               Globally Award-Winning Excellence
             </h2>
             <p className="text-lg text-gray-700 max-w-4xl mx-auto">
-              Mi3L School has become Oakville's world-renowned STEM team, celebrated annually on the global stage for historic achievements — earning so far 13 world championships, 26 international awards, and outstanding performances in VEX IQ, VEX V5 Robotics.
+              Mi3L School has become Oakville's world-renowned STEM team, celebrated annually on the global stage for historic achievements — earning so far 13 world championships, 26 international awards, and outstanding performances in VEX V5 Robotics and Aerial Drone.
             </p>
           </div>
 
@@ -161,42 +161,52 @@ export default function Home() {
               {/* First Set of Cards */}
               {[1, 2].map((i) => (
                 <div key={i} className="flex gap-6">
-                  {/* VEX IQ */}
+                  {/* 2055A Capybaras */}
                   <Link href="/history">
                     <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl hover:bg-blue-50 transition-all cursor-pointer whitespace-normal">
-                      <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">VEX IQ</h3>
+                      <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">2055A Capybaras</h3>
                       <ul className="space-y-2 text-sm text-gray-700">
-                        <li>• 2024-2025 VEX IQ World Championships - Inspire Award</li>
-                        <li>• 2025 Create U.S. Open Robotics Championship - Design Award | Judge Award | Mega Award</li>
-                        <li>• 2024-2025 The RiverBots III VEX IQ Robotics Competition Signature Event Middle School - Create Award | Skills Rank No.1</li>
+                        <li>• 2025-2026 Design Award at HS Provincial Championship & World Qualifier</li>
+                        <li>• 2025-2026 Think Award at Gateway to the West Signature Event</li>
+                        <li>• 2024-2025 Think Award at Highlander Summit & Riverbot III Signature Events</li>
                       </ul>
                     </div>
                   </Link>
 
-                  {/* VEX V5 High School*/}
+                  {/* 2055X Red Pandas */}
                   <Link href="/history">
                     <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl hover:bg-blue-50 transition-all cursor-pointer whitespace-normal">
-                      <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">VEX V5 High School</h3>
+                      <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">2055X Red Pandas</h3>
                       <ul className="space-y-2 text-sm text-gray-700">
-                        <li>• LAUNCH at EATON V5 Robotics Competition Signature Event - Think Award</li>
-                        <li>• Gateway to the West VEX V5 Robotics Competition Signature Event - Create Award</li>
-                        <li>• 2023-2024 VEX V5 Robotics Competition World - Create Award</li>
+                        <li>• 2025-2026 Innovate Award at MS Provincial Championship & World Qualifier</li>
+                        <li>• 2024-2025 Design Award at VEX Robotics World MS Championship</li>
+                        <li>• 2023-2024 Tournament Champion at Ontario MS Provincial</li>
                       </ul>
                     </div>
                   </Link>
 
-                  {/* VEX V5 Middle School */}
+                  {/* 2055C The Orcas */}
                   <Link href="/history">
                     <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl hover:bg-blue-50 transition-all cursor-pointer whitespace-normal">
-                      <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">VEX V5 Middle School</h3>
+                      <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">2055C The Orcas</h3>
                       <ul className="space-y-2 text-sm text-gray-700">
-                        <li>• Waterloo Showdown V5 Robotics Competition - Tournament Champions </li>
-                        <li>• 2024 - 2025 EX V5 Robotics Competition World - Design Award</li>
-                        <li>• 2023 - 2024 Ontario Provincial Championships - Tournament Champions</li>
+                        <li>• 2025-2026 Innovate Award at iDesign Toronto</li>
+                        <li>• 2025-2026 Judge Award at Ontario MS Provincial</li>
                       </ul>
                     </div>
                   </Link>
 
+                  {/* 2055B Coconut Doggies */}
+                  <Link href="/history">
+                    <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl hover:bg-blue-50 transition-all cursor-pointer whitespace-normal">
+                      <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">2055B Coconut Doggies</h3>
+                      <ul className="space-y-2 text-sm text-gray-700">
+                        <li>• 2022-2023 Division Champions at VEX Robotics World Championship</li>
+                        <li>• 2022-2023 Design Award at VEX Robotics World Championship</li>
+                        <li>• 2022-2023 Tournament Champion at iDesign Toronto</li>
+                      </ul>
+                    </div>
+                  </Link>
 
                   {/* Air Drone */}
                   <Link href="/history">
@@ -225,7 +235,7 @@ export default function Home() {
               { title: "Robotics", icon: Bot, img: "/images/program/robotics.png", href: "/course-list/robotics" },
               { title: "Aerial Drone", icon: Code, img: "/images/program/code.jpg", href: "/course-list/aerialdrone" },
               { title: "Competition", icon: Trophy, img: "/images/vex1.png", href: "/course-list/competition" },
-              ].map((course, idx) => (
+            ].map((course, idx) => (
               <Link
                 key={idx}
                 href={course.href}
@@ -257,32 +267,32 @@ export default function Home() {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-8 md:px-16 lg:px-24">
           <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
               Featured Camps & Workshops
             </h2>
           </div>
-          
+
           {/* Summer Camp Programs */}
           <div className="mb-12">
             <h3 className="text-2xl font-bold text-gray-800 mb-8 border-l-4 border-blue-600 pl-4">Workshop</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                { title: "Girl Power", subtitle: "Year 7-10", link: "/summer-camp/junior-explorers-year-7-10", img: "/images/workshop/girlpower_workshop.png" },
-                { title: "First Lego League", subtitle: "Year 8-14", link: "/summer-camp/first-lego-league-year-8-14", img: "/images/home3.png" },
-                { title: "VEX V5", subtitle: "Year 11-18", link: "/summer-camp/ai-innovators-year-8-14", img: "/images/home4.png" },
-                { title: "Python", subtitle: "Year 8-14", link: "/summer-camp/fencing-stem-year-8-14", img: "/images/im2.png" },
-                ].map((program, idx) => (
+                { title: "Girl Power", subtitle: "Year 7-10", link: "#", img: "/images/workshop/girlpower_workshop.png" },
+                { title: "First Lego League", subtitle: "Year 8-14", link: "#", img: "/images/home3.png" },
+                { title: "VEX V5", subtitle: "Year 11-18", link: "#", img: "/images/home4.png" },
+                { title: "Python", subtitle: "Year 8-14", link: "#", img: "/images/im2.png" },
+              ].map((program, idx) => (
                 <Link
                   key={idx}
                   href={program.link}
                   className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all group border border-gray-100"
                 >
                   <div className="h-48 relative overflow-hidden">
-                    <Image 
-                      src={program.img} 
-                      alt={program.title} 
-                      fill 
-                      className="object-cover group-hover:scale-110 transition-transform duration-500" 
+                    <Image
+                      src={program.img}
+                      alt={program.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
                   <div className="p-6">

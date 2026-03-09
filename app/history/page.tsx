@@ -38,6 +38,67 @@ type TimelineItem = {
 
 const items: TimelineItem[] = [
   {
+    title: "Ontario HS Provincial Championship",
+    location: "Ontario",
+    date: "February 2026 - Ontario",
+    description: "Awards:",
+    award1: "   - Design Award (2055A)",
+    award2: "   - Qualified to World (2055A)",
+    navigatePath: "/achievements",
+  },
+  {
+    title: "Ontario MS Provincial Championship",
+    location: "Ontario",
+    date: "February 2026 - Ontario",
+    description: "Awards:",
+    award1: "   - Innovate Award (2055X)",
+    award2: "   - Judge Award (2055C)",
+    award3: "   - Qualified to World (2055X)",
+    navigatePath: "/achievements",
+  },
+  {
+    title: "University of Waterloo Qualifier",
+    location: "Waterloo ON",
+    date: "January 2026 - Waterloo ON",
+    description: "Awards:",
+    award1: "   - Tournament Champion (2055A & 2055X)",
+    award2: "   - Think Award (2055A & 2055X)",
+    navigatePath: "/achievements",
+  },
+  {
+    title: "White Oaks VRC Qualifier",
+    location: "Oakville ON",
+    date: "January 2026 - Oakville ON",
+    description: "Awards:",
+    award1: "   - Qualified to World (2055X)",
+    navigatePath: "/achievements",
+  },
+  {
+    title: "LAUNCH at EATON V5 Robotics Competition Signature Event",
+    location: "Eaton",
+    date: "December 2025 - Eaton",
+    description: "Awards:",
+    award1: "   - Think Award (2055A)",
+    navigatePath: "/achievements",
+  },
+  {
+    title: "St. Catherine VRC Qualifier",
+    location: "St. Catharines ON",
+    date: "December 2025 - St. Catharines ON",
+    description: "Awards:",
+    award1: "   - Tournament Champion (2055A)",
+    award2: "   - Think Award (2055A)",
+    navigatePath: "/achievements",
+  },
+  {
+    title: "iDESIGN Central Toronto VEX Robotics Competition",
+    location: "Toronto ON",
+    date: "November 2025 - Toronto ON",
+    description: "Awards:",
+    award1: "   - Innovate Award (2055C)",
+    navigatePath: "/achievements",
+  },
+  {
     title: "VEX Robotics World Championship",
     location: "Dallas TX",
     date: "May 9-11th, 2025 - Dallas TX",
@@ -52,7 +113,8 @@ const items: TimelineItem[] = [
     date: "January 29-30th, 2025 - Triadelphia WV",
     imgKey: "m",
     description: "Awards:",
-    award1: "   - Judges Award (2055X)",
+    award1: "   - Think Award (2055A)",
+    award2: "   - Judges Award (2055X)",
     navigatePath: "/achievements",
   },
   {
@@ -118,6 +180,7 @@ const items: TimelineItem[] = [
     imgKey: "c",
     description: "Awards:",
     award1: "   - Tournament Champions (2055X)",
+    award2: "   - Qualified to World (2055X)",
     navigatePath: "/achievements",
   },
   {
@@ -275,9 +338,8 @@ export default function History() {
               return (
                 <div
                   key={index}
-                  className={`relative flex items-center ${
-                    isEven ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
+                  className={`relative flex items-center ${isEven ? "md:flex-row" : "md:flex-row-reverse"
+                    }`}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
@@ -285,29 +347,26 @@ export default function History() {
 
                   <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 z-10">
                     <div
-                      className={`w-4 h-4 rounded-full border-4 border-white shadow-lg transition-all ${
-                        isHovered
+                      className={`w-4 h-4 rounded-full border-4 border-white shadow-lg transition-all ${isHovered
                           ? "bg-orange-500 scale-125 border-orange-500"
                           : "bg-gray-900 border-gray-900"
-                      }`}
+                        }`}
                     ></div>
                   </div>
 
                   <div
-                    className={`w-full md:w-1/2 ${
-                      isEven ? "md:pl-12 md:pr-8" : "md:pr-12 md:pl-8"
-                    } ml-16 md:ml-0`}
+                    className={`w-full md:w-1/2 ${isEven ? "md:pl-12 md:pr-8" : "md:pr-12 md:pl-8"
+                      } ml-16 md:ml-0`}
                   >
                     <Link
                       href={item.navigatePath || "#"}
                       className="block group"
                     >
                       <div
-                        className={`bg-white rounded-lg shadow-md p-6 border-l-4 ${
-                          isHovered
+                        className={`bg-white rounded-lg shadow-md p-6 border-l-4 ${isHovered
                             ? "border-orange-500 shadow-xl transform scale-105"
                             : "border-gray-300"
-                        } transition-all duration-300`}
+                          } transition-all duration-300`}
                       >
                         <div className="flex items-center justify-between mb-3">
                           <span className="text-sm font-semibold text-orange-500 uppercase tracking-wide">

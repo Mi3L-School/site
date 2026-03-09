@@ -18,13 +18,13 @@ export default function RoboticsPage() {
         </div>
 
         {/* Mountain Shape Divider */}
-        <div 
-          className="absolute bottom-0 left-0 w-full leading-[0] transform rotate-180" 
+        <div
+          className="absolute bottom-0 left-0 w-full leading-[0] transform rotate-180"
           aria-hidden="true"
         >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 1000 100" 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1000 100"
             preserveAspectRatio="none"
             className="relative block w-[calc(100%+1.3px)] h-[100px] fill-white"
           >
@@ -42,9 +42,9 @@ export default function RoboticsPage() {
             {/* Left Column: Info Card */}
             <div className="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-100">
               <div className="mb-8 overflow-hidden rounded-lg">
-                <img 
-                  src="/images/logo.png" 
-                  alt="VEX Robotics Logo" 
+                <img
+                  src="/images/logo.png"
+                  alt="VEX Robotics Logo"
                   className="h-16 w-auto"
                 />
               </div>
@@ -71,12 +71,12 @@ export default function RoboticsPage() {
             {/* Right Column: Video & Heading */}
             <div className="space-y-8">
               <div className="aspect-video rounded-2xl overflow-hidden shadow-xl bg-black">
-                <iframe 
+                <iframe
                   className="w-full h-full"
-                  src="https://www.youtube.com/embed/ocmONiVun9M?controls=1&rel=0" 
+                  src="https://www.youtube.com/embed/ocmONiVun9M?controls=1&rel=0"
                   title="VEX V5 Robotics Competition : Push Back | 2025-2026 Game"
                   frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 ></iframe>
               </div>
@@ -94,9 +94,9 @@ export default function RoboticsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left: Image */}
             <div className="rounded-2xl overflow-hidden shadow-2xl">
-              <img 
-                src="/images/homepage/world1.webp" 
-                alt="Students with Robotics" 
+              <img
+                src="/images/homepage/world1.webp"
+                alt="Students with Robotics"
                 className="w-full h-auto object-cover"
               />
             </div>
@@ -138,56 +138,56 @@ export default function RoboticsPage() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20">
-           <div className="text-center mb-20">
-              <h2 className="text-5xl md:text-7xl font-bold mb-4">Our Achievements</h2>
-           </div>
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-7xl font-bold mb-4">Our Achievements</h2>
+          </div>
 
-           {/* Achievements Carousel (Simplified for now) */}
-           <div className="flex flex-wrap justify-center gap-8 mb-24">
-              {[
-                "/images/achievement/world_championship.webp",
-                "/images/achievement/ontario_champion.webp",
-                "/images/achievement/signature.jpg"
-              ].map((img, idx) => (
-                <div key={idx} className="w-80 group">
-                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-105 border border-white/10">
-                    <img src={img} alt={`Achievement ${idx + 1}`} className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60"></div>
-                  </div>
+          {/* Achievements Carousel (Simplified for now) */}
+          <div className="flex flex-wrap justify-center gap-8 mb-24">
+            {[
+              "/images/achievement/world_championship.webp",
+              "/images/achievement/ontario_champion.webp",
+              "/images/achievement/signature.jpg"
+            ].map((img, idx) => (
+              <div key={idx} className="w-80 group">
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-105 border border-white/10">
+                  <img src={img} alt={`Achievement ${idx + 1}`} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60"></div>
                 </div>
-              ))}
-           </div>
+              </div>
+            ))}
+          </div>
 
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-              {[
-                { title: "Ontario Provincial Champion", count: "3x" },
-                { title: "Worlds Qualifiers", count: "4x" },
-                { title: "World Division Champion", count: "1x" }
-              ].map((stat, idx) => (
-                <div key={idx} className="p-8 rounded-3xl bg-gray-800/50 border border-gray-700/50 group hover:border-orange-500/50 transition-all">
-                  <h4 className="text-xl text-gray-400 mb-4 h-16 flex items-center justify-center">{stat.title}</h4>
-                  <p className="text-6xl font-bold text-orange-500 group-hover:scale-110 transition-transform">{stat.count}</p>
-                </div>
-              ))}
-           </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            {[
+              { title: "Ontario Provincial Champion", count: "3x" },
+              { title: "Worlds Qualifiers", count: "4x" },
+              { title: "World Division Champion", count: "1x" }
+            ].map((stat, idx) => (
+              <div key={idx} className="p-8 rounded-3xl bg-gray-800/50 border border-gray-700/50 group hover:border-orange-500/50 transition-all">
+                <h4 className="text-xl text-gray-400 mb-4 h-16 flex items-center justify-center">{stat.title}</h4>
+                <p className="text-6xl font-bold text-orange-500 group-hover:scale-110 transition-transform">{stat.count}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* SECTION 9: CTA FOOTER */}
       <section className="py-24 bg-white relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
-           <h2 className="text-4xl md:text-6xl font-bold text-gray-900">Be Our Next Champion</h2>
-           <div className="inline-block">
-             <Link 
-               href="/registration" 
-               className="flex items-center gap-3 px-12 py-5 bg-orange-500 text-white text-2xl font-bold rounded-2xl shadow-2xl hover:bg-orange-600 transition-all hover:scale-105"
-             >
-               Join Us
-               <svg className="w-6 h-6 fill-current" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg">
-                 <path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path>
-               </svg>
-             </Link>
-           </div>
+          <h2 className="text-4xl md:text-6xl font-bold text-gray-900">Be Our Next Champion</h2>
+          <div className="inline-block">
+            <Link
+              href="/registration"
+              className="flex items-center gap-3 px-12 py-5 bg-orange-500 text-white text-2xl font-bold rounded-2xl shadow-2xl hover:bg-orange-600 transition-all hover:scale-105"
+            >
+              Join Us
+              <svg className="w-6 h-6 fill-current" viewBox="0 0 256 512" xmlns="http://www.w3.org/2000/svg">
+                <path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path>
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
     </div>

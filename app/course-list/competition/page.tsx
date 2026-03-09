@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function RoboticsPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans selection:bg-orange-100">
-      
+
       {/* SECTION 1: HERO */}
       <section className="relative bg-gray-900 pt-32 pb-48 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -147,8 +147,8 @@ export default function RoboticsPage() {
       {/* SECTION 9: CTA */}
       <section className="py-24 bg-white text-center">
         <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-10">Be Our Next Champion</h2>
-        <Link 
-          href="/registration" 
+        <Link
+          href="/registration"
           className="inline-flex items-center gap-3 px-12 py-5 bg-orange-500 text-white text-2xl font-bold rounded-2xl shadow-xl hover:bg-orange-600 transition-all hover:scale-105"
         >
           Join Us <span>→</span>
