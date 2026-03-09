@@ -162,25 +162,31 @@ export default function Home() {
               {[1, 2].map((i) => (
                 <div key={i} className="flex gap-6">
                   {/* 2055A Capybaras */}
-                  <Link href="/history">
+                  <Link href="/history2055A">
                     <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl hover:bg-blue-50 transition-all cursor-pointer whitespace-normal">
                       <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">2055A Capybaras</h3>
                       <ul className="space-y-2 text-sm text-gray-700">
-                        <li>• 2025-2026 Design Award at HS Provincial Championship & World Qualifier</li>
-                        <li>• 2025-2026 Think Award at Gateway to the West Signature Event</li>
+                        <li>• 2025-2026 Design Award at Ontario HS Provincial Championship & World Qualifier</li>
+                        <li>• 2025-2026 Think Award at Gateway to the West Signature Event, LAUNCH AT EATON Signature, St. Catherine, University of Waterloo</li>
+                        <li>• 2025-2026 Tournament Champion at St. Catherine and University of Waterloo</li>
                         <li>• 2024-2025 Think Award at Highlander Summit & Riverbot III Signature Events</li>
+                        <li>• 2024-2025 Design Award at Design Award at Glenforest iDesign Qualifier</li>
+                        <li>• Read More ............</li>
                       </ul>
                     </div>
                   </Link>
 
                   {/* 2055X Red Pandas */}
-                  <Link href="/history">
+                  <Link href="/history2055X">
                     <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl hover:bg-blue-50 transition-all cursor-pointer whitespace-normal">
                       <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">2055X Red Pandas</h3>
                       <ul className="space-y-2 text-sm text-gray-700">
-                        <li>• 2025-2026 Innovate Award at MS Provincial Championship & World Qualifier</li>
-                        <li>• 2024-2025 Design Award at VEX Robotics World MS Championship</li>
-                        <li>• 2023-2024 Tournament Champion at Ontario MS Provincial</li>
+                        <li>• 2025-2026 Innovate Award at Ontario MS Provincial Championship & World Qualifier</li>
+                        <li>• 2025-2026 Innovate Award at White Oaks V5RC Qualifier</li>
+                        <li>• 2025-2026 Think Award and Tournament Championship at University of Waterloo Qualifier</li>
+                        <li>• 2024-2025 Design Award at VEX World MS Championship</li>
+                        <li>• 2024-2025 Design Award at Riverbot III Signature Events</li>
+                        <li>• 2024-2025 Innovate Award at St. Catherine Qualifier </li>
                       </ul>
                     </div>
                   </Link>
@@ -201,9 +207,9 @@ export default function Home() {
                     <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl hover:bg-blue-50 transition-all cursor-pointer whitespace-normal">
                       <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">2055B Coconut Doggies</h3>
                       <ul className="space-y-2 text-sm text-gray-700">
-                        <li>• 2022-2023 Division Champions at VEX Robotics World Championship</li>
-                        <li>• 2022-2023 Design Award at VEX Robotics World Championship</li>
-                        <li>• 2022-2023 Tournament Champion at iDesign Toronto</li>
+                        <li>• 2022-2023 Design Award and Division Champions at VEX Robotics World Championship</li>
+                        <li>• 2022-2023 Excellence Award at Canadian Open Signature</li>
+                        <li>• 2022-2023 Skills and Tournament Champion, Build Award at iDesign Toronto</li>
                       </ul>
                     </div>
                   </Link>
@@ -211,9 +217,13 @@ export default function Home() {
                   {/* Air Drone */}
                   <Link href="/history">
                     <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl hover:bg-blue-50 transition-all cursor-pointer whitespace-normal">
-                      <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">Aerial Drone</h3>
+                      <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">Aerial Drone Competition</h3>
                       <ul className="space-y-2 text-sm text-gray-700">
-                        <li>• 2024 Aerial Drone - Global Nominee</li>
+                        <li>• First ADC HS/MS drone teams in Canada</li>
+                        <li>• Winner for Middle school Online Challenge Career Readiness</li>
+                        <li>• Judge Award at Drones in Oxford MA</li>
+                        <li>• Winner for High school Online Challenge Career Readiness</li>
+                        <li>• Coding Award at 2025 North Central Aerial Drone Championship High School</li>
                       </ul>
                     </div>
                   </Link>

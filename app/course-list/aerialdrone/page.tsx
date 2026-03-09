@@ -257,9 +257,9 @@ export default function RoboticsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
             {[
-              { title: "Ontario Provincial Champion", count: "3x" },
-              { title: "Worlds Qualifiers", count: "4x" },
-              { title: "World Division Champion", count: "1x" }
+              { title: "Winner for HS Online Challenge", count: "" },
+              { title: "Coding Award", count: "" },
+              { title: "Winner for MS Online Challenge", count: "" }
             ].map((stat, idx) => (
               <div key={idx} className="p-8 rounded-3xl bg-gray-800/50 border border-gray-700/50 group hover:border-orange-500/50 transition-all">
                 <h4 className="text-xl text-gray-400 mb-4 h-16 flex items-center justify-center">{stat.title}</h4>
