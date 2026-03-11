@@ -192,7 +192,7 @@ export default function Home() {
                   </Link>
 
                   {/* 2055C The Orcas */}
-                  <Link href="/history">
+                  <Link href="/history2055C">
                     <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl hover:bg-blue-50 transition-all cursor-pointer whitespace-normal">
                       <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">2055C The Orcas</h3>
                       <ul className="space-y-2 text-sm text-gray-700">
@@ -203,7 +203,7 @@ export default function Home() {
                   </Link>
 
                   {/* 2055B Coconut Doggies */}
-                  <Link href="/history">
+                  <Link href="/history2055B">
                     <div className="flex-none w-80 bg-white rounded-lg shadow-lg p-6 hover:shadow-xl hover:bg-blue-50 transition-all cursor-pointer whitespace-normal">
                       <h3 className="text-xl font-bold text-blue-600 mb-4 border-b-2 border-blue-600 pb-2">2055B Coconut Doggies</h3>
                       <ul className="space-y-2 text-sm text-gray-700">
