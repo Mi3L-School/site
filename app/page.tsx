@@ -44,8 +44,8 @@ export default function Home() {
                 <BookOpen className="w-4 h-4 md:w-5 md:h-5" />
               </div>
               <div className="text-left">
-                <div className="text-sm md:text-base font-bold">30+</div>
-                <div className="text-[10px] md:text-xs font-medium opacity-90">Courses</div>
+                <div className="text-sm md:text-base font-bold">13</div>
+                <div className="text-[10px] md:text-xs font-medium opacity-90">Years experience</div>
               </div>
             </div>
 
