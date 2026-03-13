@@ -38,14 +38,7 @@ type FormState = {
     cellPhone: string;
     email: string;
   };
-  emergency1: {
-    firstName: string;
-    lastName: string;
-    homePhone: string;
-    cellPhone: string;
-    email: string;
-  };
-  emergency2: {
+  emergency: { // Changed from emergency1 to emergency (single contact)
     firstName: string;
     lastName: string;
     homePhone: string;
@@ -88,14 +81,7 @@ const initialState: FormState = {
     cellPhone: "",
     email: "",
   },
-  emergency1: {
-    firstName: "",
-    lastName: "",
-    homePhone: "",
-    cellPhone: "",
-    email: "",
-  },
-  emergency2: {
+  emergency: { // Single emergency contact
     firstName: "",
     lastName: "",
     homePhone: "",
@@ -439,38 +425,20 @@ function RegistrationInner() {
               )}
 
               {formData.step === 3 && (
-                <div className="space-y-12">
-                  <div className="space-y-6">
-                    <div className="flex items-center gap-3 text-blue-600 mb-6">
-                      <Phone className="w-6 h-6" />
-                      <h3 className="text-xl font-bold uppercase tracking-wider">Primary Emergency Contact</h3>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <InputField label="First Name" value={formData.emergency1.firstName} onChange={(v) => handleChange('emergency1', 'firstName', v)} required />
-                      <InputField label="Last Name" value={formData.emergency1.lastName} onChange={(v) => handleChange('emergency1', 'lastName', v)} required />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <InputField label="Home Phone" type="tel" value={formData.emergency1.homePhone} onChange={(v) => handleChange('emergency1', 'homePhone', v)} icon={<Phone className="w-4 h-4" />} placeholder="(000) 000-0000" />
-                      <InputField label="Cell Phone" type="tel" value={formData.emergency1.cellPhone} onChange={(v) => handleChange('emergency1', 'cellPhone', v)} required icon={<Phone className="w-4 h-4" />} placeholder="(000) 000-0000" />
-                    </div>
-                    <InputField label="Email" type="email" value={formData.emergency1.email} onChange={(v) => handleChange('emergency1', 'email', v)} required full icon={<Mail className="w-4 h-4" />} placeholder="example@example.com" />
+                <div className="space-y-6">
+                  <div className="flex items-center gap-3 text-blue-600 mb-6">
+                    <Phone className="w-6 h-6" />
+                    <h3 className="text-xl font-bold uppercase tracking-wider">Emergency Contact</h3>
                   </div>
-
-                  <div className="pt-8 border-t border-gray-100">
-                    <div className="flex items-center gap-3 text-blue-600 mb-6">
-                      <Phone className="w-6 h-6" />
-                      <h3 className="text-xl font-bold uppercase tracking-wider">Secondary Emergency Contact</h3>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <InputField label="First Name" value={formData.emergency2.firstName} onChange={(v) => handleChange('emergency2', 'firstName', v)} required />
-                      <InputField label="Last Name" value={formData.emergency2.lastName} onChange={(v) => handleChange('emergency2', 'lastName', v)} required />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <InputField label="Home Phone" type="tel" value={formData.emergency2.homePhone} onChange={(v) => handleChange('emergency2', 'homePhone', v)} icon={<Phone className="w-4 h-4" />} placeholder="(000) 000-0000" />
-                      <InputField label="Cell Phone" type="tel" value={formData.emergency2.cellPhone} onChange={(v) => handleChange('emergency2', 'cellPhone', v)} required icon={<Phone className="w-4 h-4" />} placeholder="(000) 000-0000" />
-                    </div>
-                    <InputField label="Email" type="email" value={formData.emergency2.email} onChange={(v) => handleChange('emergency2', 'email', v)} full icon={<Mail className="w-4 h-4" />} placeholder="example@example.com" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <InputField label="First Name" value={formData.emergency.firstName} onChange={(v) => handleChange('emergency', 'firstName', v)} required />
+                    <InputField label="Last Name" value={formData.emergency.lastName} onChange={(v) => handleChange('emergency', 'lastName', v)} required />
                   </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <InputField label="Home Phone" type="tel" value={formData.emergency.homePhone} onChange={(v) => handleChange('emergency', 'homePhone', v)} icon={<Phone className="w-4 h-4" />} placeholder="(000) 000-0000" />
+                    <InputField label="Cell Phone" type="tel" value={formData.emergency.cellPhone} onChange={(v) => handleChange('emergency', 'cellPhone', v)} required icon={<Phone className="w-4 h-4" />} placeholder="(000) 000-0000" />
+                  </div>
+                  <InputField label="Email" type="email" value={formData.emergency.email} onChange={(v) => handleChange('emergency', 'email', v)} required full icon={<Mail className="w-4 h-4" />} placeholder="example@example.com" />
                 </div>
               )}
 
@@ -483,10 +451,7 @@ function RegistrationInner() {
                       <CalendarIcon className="w-5 h-5" /> Free Trial Classes
                     </h4>
                     <ul className="space-y-2 text-gray-700 text-sm">
-                      <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-blue-500 rounded-full shrink-0" />
-                        <strong>Mar 12, 2026</strong>: 7:00 PM – 9:00 PM
-                      </li>
+                 
                       <li className="flex items-center gap-2">
                         <span className="w-2 h-2 bg-blue-500 rounded-full shrink-0" />
                         <strong>Mar 15, 2026</strong>: 3:00 PM – 5:00 PM
@@ -520,10 +485,8 @@ function RegistrationInner() {
                       <li className="flex items-start gap-2"><span className="text-green-600 font-bold shrink-0">5%</span> off tuition for girls or same-family members</li>
                       <li className="flex items-start gap-2"><span className="text-green-600 font-bold shrink-0">10%</span> off for 2055 family &amp; friends and Mi3L School Recreational members</li>
                       <li className="flex items-start gap-2"><span className="text-green-600 font-bold shrink-0">25%</span> off tuition for former members/students</li>
-                      <li className="flex items-start gap-2"><span className="text-amber-600 font-bold shrink-0">+25%</span> additional tuition if joining the team but missing March Break classes (special cases only)</li>
                     </ul>
                   </div>
-
 
                   {/* Program Selection */}
                   <div className="pt-8 border-t border-gray-100">
