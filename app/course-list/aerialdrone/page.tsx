@@ -123,10 +123,10 @@ export default function RoboticsPage() {
 
           {/* Schedule Segment */}
           <div className="mt-16 bg-white border border-gray-100 rounded-3xl p-8 lg:p-12 shadow-xl">
-            <h3 className="text-3xl font-bold text-gray-900 mb-6 border-b pb-4">March Drone Schedule</h3>
+            <h3 className="text-3xl font-bold text-gray-900 mb-6 border-b pb-4">March Break Drone Schedule</h3>
             <ul className="space-y-4 text-lg text-gray-600">
               <li className="flex flex-col md:flex-row gap-2 md:gap-4">
-                <span className="font-bold text-orange-600 md:min-w-[100px]">Mar 13/15:</span>
+                <span className="font-bold text-orange-600 md:min-w-[100px]">Mar 15:</span>
                 <span>Getting started with CoDrone EDU, Python, 1.1 First Flight, Before and After flight checklist. 1.2 Flight Movements: Roll and Pitch, 1.3 Throttle and Yaw.</span>
               </li>
               <li className="flex flex-col md:flex-row gap-2 md:gap-4">
@@ -209,7 +209,7 @@ export default function RoboticsPage() {
               </div>
 
               <div className="bg-purple-50/50 rounded-2xl p-6 border border-purple-100">
-                <h4 className="text-xl font-bold text-purple-600 mb-4 uppercase tracking-wider">North Central Region Championship</h4>
+                <h4 className="text-xl font-bold text-purple-600 mb-4 uppercase tracking-wider">North Central Region Championship (HS/MS)</h4>
                 <div>
                   <p className="font-bold text-gray-900 text-lg">May 15–16, 2026 — North Central Aerial Drone Championship Ingenuity</p>
                   <p className="text-gray-600 mt-1">Kettering University Connie and Jim John Recreation Center</p>
