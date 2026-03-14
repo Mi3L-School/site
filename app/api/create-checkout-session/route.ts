@@ -17,8 +17,8 @@ export async function POST(req: Request) {
             lineItems.push({
                 price_data: {
                     currency: 'cad',
-                    product_data: { name: 'March Break Classes & Aerial Drone Program' },
-                    unit_amount: 77500, // $775.00 in cents
+                    product_data: { name: 'March Break Classes (Tuition Only)' },
+                    unit_amount: 36000, // $360.00 in cents
                 },
                 quantity: 1,
             });
