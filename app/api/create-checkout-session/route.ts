@@ -24,6 +24,17 @@ export async function POST(req: Request) {
             });
         }
 
+        if (programs?.v5rcCamp) {
+            lineItems.push({
+                price_data: {
+                    currency: 'cad',
+                    product_data: { name: 'V5RC Camp (March 17-19)' },
+                    unit_amount: 25000, // $250.00 in cents
+                },
+                quantity: 1,
+            });
+        }
+
         if (lineItems.length === 0) {
             return NextResponse.json({ error: 'No programs selected.' }, { status: 400 });
         }
@@ -31,6 +42,7 @@ export async function POST(req: Request) {
         const session = await stripe.checkout.sessions.create({
             ui_mode: 'embedded',
             mode: 'payment',
+            payment_method_types: ['card'],
             line_items: lineItems,
             allow_promotion_codes: true,
             return_url: `${origin}/registration?session_id={CHECKOUT_SESSION_ID}`,

@@ -48,6 +48,7 @@ type FormState = {
   programs: {
     freeTrial: boolean;
     marchBreakAndDrone: boolean;
+    v5rcCamp: boolean;
   };
 };
 
@@ -91,6 +92,7 @@ const initialState: FormState = {
   programs: {
     freeTrial: false,
     marchBreakAndDrone: false,
+    v5rcCamp: false,
   },
 };
 
@@ -244,6 +246,7 @@ function RegistrationInner() {
   const calculateTotal = () => {
     let total = 0;
     if (formData.programs.marchBreakAndDrone) total += 775;
+    if (formData.programs.v5rcCamp) total += 250;
     return total;
   };
 
@@ -500,7 +503,8 @@ function RegistrationInner() {
 
                       {[
                         { id: 'freeTrial', label: 'Free Trial Classes', price: '$0' },
-                        { id: 'marchBreakAndDrone', label: 'March Break Classes & Aerial Drone Program', price: '$775' }
+                        { id: 'marchBreakAndDrone', label: 'March Break Classes & Aerial Drone Program', price: '$775' },
+                        { id: 'v5rcCamp', label: 'V5RC Camp (March 17-19)', price: '$250' }
                       ].map((program) => (
                         <label key={program.id} className="flex items-center p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-pointer group">
                           <input
@@ -520,6 +524,7 @@ function RegistrationInner() {
                       {[
                         { id: 'freeTrial', label: 'Free Trial Classes', price: '$0.00' },
                         { id: 'marchBreakAndDrone', label: 'March Break Classes & Aerial Drone Program', price: '$775.00' },
+                        { id: 'v5rcCamp', label: 'V5RC Camp (March 17-19)', price: '$250.00' },
                       ].filter(p => formData.programs[p.id as keyof typeof formData.programs]).map(p => (
                         <div key={p.id} className="flex justify-between items-center text-gray-600 text-sm">
                           <span>{p.label}</span>
