@@ -29,7 +29,7 @@ export async function POST(req: Request) {
                 price_data: {
                     currency: 'cad',
                     product_data: { name: 'V5RC Camp (March 17-19)' },
-                    unit_amount: 25000, // $250.00 in cents
+                    unit_amount: 18000, // $180.00 in cents
                 },
                 quantity: 1,
             });

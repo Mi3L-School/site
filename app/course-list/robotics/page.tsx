@@ -170,7 +170,7 @@ export default function RoboticsPage() {
                       </svg>
                     </div>
                     <div>
-                      <p className="font-bold text-2xl text-orange-600">$250</p>
+                      <p className="font-bold text-2xl text-orange-600">$180</p>
                       <p className="text-sm text-gray-500 italic">Everything included</p>
                     </div>
                   </div>
