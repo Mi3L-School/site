@@ -126,12 +126,8 @@ export default function RoboticsPage() {
             <h3 className="text-3xl font-bold text-gray-900 mb-6 border-b pb-4">March Break Drone Schedule</h3>
             <ul className="space-y-4 text-lg text-gray-600">
               <li className="flex flex-col md:flex-row gap-2 md:gap-4">
-                <span className="font-bold text-orange-600 md:min-w-[100px]">Mar 15:</span>
-                <span>Getting started with CoDrone EDU, Python, 1.1 First Flight, Before and After flight checklist. 1.2 Flight Movements: Roll and Pitch, 1.3 Throttle and Yaw.</span>
-              </li>
-              <li className="flex flex-col md:flex-row gap-2 md:gap-4">
                 <span className="font-bold text-orange-600 md:min-w-[100px]">Mar 17:</span>
-                <span>TRUST drone Pilot Certificate. What's in Mission 2026. Team Work. Piloting. Autonomous Flight</span>
+                <span>Getting started with CoDrone EDU, TRUST drone Pilot Certificate. What's in Mission 2026. Team Work. Piloting. Autonomous Flight</span>
               </li>
               <li className="flex flex-col md:flex-row gap-2 md:gap-4">
                 <span className="font-bold text-orange-600 md:min-w-[100px]">Mar 18:</span>

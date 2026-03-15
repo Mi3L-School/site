@@ -245,7 +245,7 @@ function RegistrationInner() {
 
   const calculateTotal = () => {
     let total = 0;
-    if (formData.programs.marchBreakAndDrone) total += 360;
+    if (formData.programs.marchBreakAndDrone) total += 300;
     if (formData.programs.v5rcCamp) total += 250;
     return total;
   };
@@ -457,7 +457,7 @@ function RegistrationInner() {
                  
                       <li className="flex items-center gap-2">
                         <span className="w-2 h-2 bg-blue-500 rounded-full shrink-0" />
-                        <strong>Mar 15, 2026</strong>: 3:00 PM – 5:00 PM
+                        <strong>Mar 17, 2026</strong>: 7:00 PM – 9:00 PM
                       </li>
                     </ul>
                     <p className="text-xs text-blue-600 mt-3 font-medium">No cost — come see if it's a good fit before committing!</p>
@@ -471,7 +471,7 @@ function RegistrationInner() {
     {/* March Break / Drone Section */}
     <div className="bg-white border border-gray-200 rounded-xl p-5">
       <p className="font-bold text-gray-900 text-base mb-1">March Break Aerial Drone Program</p>
-      <p className="text-2xl font-extrabold text-blue-600 mb-1">$360<span className="text-sm font-normal text-gray-500"> / student</span></p>
+      <p className="text-2xl font-extrabold text-blue-600 mb-1">$300<span className="text-sm font-normal text-gray-500"> / student</span></p>
       <p className="text-xs text-gray-500 mb-2">Tuition for mandatory March Break classes (2 hrs/day · 6 days).</p>
       <div className="bg-amber-50 border border-amber-100 p-2 rounded">
         <p className="text-xs text-amber-700 font-medium">
@@ -513,7 +513,7 @@ function RegistrationInner() {
 
                     {[
                       { id: 'freeTrial', label: 'Free Trial Classes', price: '$0' },
-                      { id: 'marchBreakAndDrone', label: 'March Break Classes (Tuition Only)', price: '$360' },
+                      { id: 'marchBreakAndDrone', label: 'March Break Classes (Tuition Only)', price: '$300' },
                       { id: 'v5rcCamp', label: 'V5RC Camp (March 17-19)', price: '$250' }
                       ].map((program) => (
                         <label key={program.id} className="flex items-center p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-pointer group">
@@ -533,7 +533,7 @@ function RegistrationInner() {
                     <div className="bg-gray-50 rounded-2xl p-6 space-y-3">
                       {[
                         { id: 'freeTrial', label: 'Free Trial Classes', price: '$0.00' },
-                        { id: 'marchBreakAndDrone', label: 'March Break Aerial Drone Program', price: '$360.00' },
+                        { id: 'marchBreakAndDrone', label: 'March Break Aerial Drone Program', price: '$300.00' },
                         { id: 'v5rcCamp', label: 'V5RC Camp (March 17-19)', price: '$250.00' },
                       ].filter(p => formData.programs[p.id as keyof typeof formData.programs]).map(p => (
                         <div key={p.id} className="flex justify-between items-center text-gray-600 text-sm">

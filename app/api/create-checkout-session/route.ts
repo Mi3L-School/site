@@ -18,7 +18,7 @@ export async function POST(req: Request) {
                 price_data: {
                     currency: 'cad',
                     product_data: { name: 'March Break Classes (Tuition Only)' },
-                    unit_amount: 36000, // $360.00 in cents
+                    unit_amount: 30000, // $300.00 in cents
                 },
                 quantity: 1,
             });
