@@ -246,7 +246,7 @@ function RegistrationInner() {
   const calculateTotal = () => {
     let total = 0;
     if (formData.programs.marchBreakAndDrone) total += 300;
-    if (formData.programs.v5rcCamp) total += 180;
+    if (formData.programs.v5rcCamp) total += 200;
     return total;
   };
 
@@ -483,7 +483,7 @@ function RegistrationInner() {
     {/* VRC / V5RC Section */}
     <div className="bg-white border border-gray-200 rounded-xl p-5">
       <p className="font-bold text-gray-900 text-base mb-1">V5RC Camp (March 17-19)</p>
-      <p className="text-2xl font-extrabold text-blue-600 mb-1">$180<span className="text-sm font-normal text-gray-500"> / student</span></p>
+      <p className="text-2xl font-extrabold text-blue-600 mb-1">$200<span className="text-sm font-normal text-gray-500"> / student</span></p>
       <p className="text-xs text-gray-500 mb-2">Focused intensive for VEX V5 Robotics Competition (V5RC) skills and strategy.</p>
     </div>
 
@@ -514,7 +514,7 @@ function RegistrationInner() {
                     {[
                       { id: 'freeTrial', label: 'Free Trial Classes', price: '$0' },
                       { id: 'marchBreakAndDrone', label: 'March Break Classes (Tuition Only)', price: '$300' },
-                      { id: 'v5rcCamp', label: 'V5RC Camp (March 17-19)', price: '$180' }
+                      { id: 'v5rcCamp', label: 'V5RC Camp (March 17-19)', price: '$200' }
                       ].map((program) => (
                         <label key={program.id} className="flex items-center p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-pointer group">
                           <input
@@ -534,7 +534,7 @@ function RegistrationInner() {
                       {[
                         { id: 'freeTrial', label: 'Free Trial Classes', price: '$0.00' },
                         { id: 'marchBreakAndDrone', label: 'March Break Aerial Drone Program', price: '$300.00' },
-                        { id: 'v5rcCamp', label: 'V5RC Camp (March 17-19)', price: '$180.00' },
+                        { id: 'v5rcCamp', label: 'V5RC Camp (March 17-19)', price: '$200.00' },
                       ].filter(p => formData.programs[p.id as keyof typeof formData.programs]).map(p => (
                         <div key={p.id} className="flex justify-between items-center text-gray-600 text-sm">
                           <span>{p.label}</span>
