@@ -12,7 +12,7 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey);
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const { student, guardian1, guardian2, emergency1, emergency2, programs, paymentIntentId, amount } = body;
+        const { student, guardian1, guardian2, emergency, programs, paymentIntentId, amount } = body;
 
         const { data, error } = await supabase
             .from('registrations')
@@ -34,24 +34,24 @@ export async function POST(req: Request) {
                     guardian1_home_phone: guardian1.homePhone,
                     guardian1_cell_phone: guardian1.cellPhone,
                     guardian1_email: guardian1.email,
-                    guardian2_first_name: guardian2.firstName,
-                    guardian2_last_name: guardian2.lastName,
-                    guardian2_relationship: guardian2.relationship,
-                    guardian2_home_phone: guardian2.homePhone,
-                    guardian2_cell_phone: guardian2.cellPhone,
-                    guardian2_email: guardian2.email,
-                    emergency1_first_name: emergency1.firstName,
-                    emergency1_last_name: emergency1.lastName,
-                    emergency1_home_phone: emergency1.homePhone,
-                    emergency1_cell_phone: emergency1.cellPhone,
-                    emergency1_email: emergency1.email,
-                    emergency2_first_name: emergency2.firstName,
-                    emergency2_last_name: emergency2.lastName,
-                    emergency2_home_phone: emergency2.homePhone,
-                    emergency2_cell_phone: emergency2.cellPhone,
-                    emergency2_email: emergency2.email,
-                    program_aerial_drone: programs.marchBreakAndDrone || false,
-                    program_v5rc: programs.marchBreakAndDrone || false,
+                    guardian2_first_name: guardian2?.firstName || "",
+                    guardian2_last_name: guardian2?.lastName || "",
+                    guardian2_relationship: guardian2?.relationship || "",
+                    guardian2_home_phone: guardian2?.homePhone || "",
+                    guardian2_cell_phone: guardian2?.cellPhone || "",
+                    guardian2_email: guardian2?.email || "",
+                    emergency1_first_name: emergency?.firstName || "",
+                    emergency1_last_name: emergency?.lastName || "",
+                    emergency1_home_phone: emergency?.homePhone || "",
+                    emergency1_cell_phone: emergency?.cellPhone || "",
+                    emergency1_email: emergency?.email || "",
+                    emergency2_first_name: "", // Not collected in current frontend
+                    emergency2_last_name: "",
+                    emergency2_home_phone: "",
+                    emergency2_cell_phone: "",
+                    emergency2_email: "",
+                    program_aerial_drone: programs?.marchBreakAndDrone || false,
+                    program_v5rc: programs?.v5rcCamp || false,
                     program_vex_v5_robotics: false,
                     payment_intent_id: paymentIntentId,
                     amount_paid: amount,
