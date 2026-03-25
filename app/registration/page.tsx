@@ -47,8 +47,7 @@ type FormState = {
   };
   programs: {
     freeTrial: boolean;
-    marchBreakAndDrone: boolean;
-    v5rcCamp: boolean;
+    teamTraining: boolean;
   };
 };
 
@@ -91,8 +90,7 @@ const initialState: FormState = {
   },
   programs: {
     freeTrial: false,
-    marchBreakAndDrone: false,
-    v5rcCamp: false,
+    teamTraining: false,
   },
 };
 
@@ -102,13 +100,65 @@ function RegistrationInner() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [checkoutClientSecret, setCheckoutClientSecret] = useState<string | null>(null);
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
+  const [isDev, setIsDev] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+      setIsDev(true);
+    }
+  }, []);
+
+  const devFill = () => {
+    setFormData({
+      step: 4,
+      student: {
+        firstName: "John",
+        middleName: "Quincy",
+        lastName: "Doe",
+        dob: "01-01-2010",
+        gender: "M",
+        address: "123 Main St",
+        address2: "Apt 4B",
+        city: "Toronto",
+        province: "Ontario",
+        postalCode: "M5V 2N2",
+      },
+      guardian1: {
+        firstName: "Jane",
+        lastName: "Doe",
+        relationship: "Mother",
+        homePhone: "(416) 555-1234",
+        cellPhone: "(416) 555-5678",
+        email: "jane.doe@example.com",
+      },
+      guardian2: {
+        firstName: "James",
+        lastName: "Doe",
+        relationship: "Father",
+        homePhone: "(416) 555-9876",
+        cellPhone: "(416) 555-4321",
+        email: "james.doe@example.com",
+      },
+      emergency: {
+        firstName: "Uncle",
+        lastName: "Bob",
+        homePhone: "(416) 555-1111",
+        cellPhone: "(416) 555-2222",
+        email: "bob@example.com",
+      },
+      programs: {
+        freeTrial: true,
+        teamTraining: true,
+      },
+    });
+  };
 
   const nextStep = () => {
     setFormData(prev => ({ ...prev, step: prev.step + 1 }));
   };
 
   const fetchCheckoutSession = useCallback(async () => {
-    if (calculateTotal() <= 0) return;
+    if (calculateTotal(formData) <= 0) return;
     setIsPaymentLoading(true);
     try {
       // Save form data to localStorage so we can retrieve it after Stripe redirect
@@ -129,11 +179,11 @@ function RegistrationInner() {
     } finally {
       setIsPaymentLoading(false);
     }
-  }, [formData.programs, formData.student.firstName, formData.student.lastName]);
+  }, [formData]); // Updated dependency to include formData for correct total calculation
 
   useEffect(() => {
     if (formData.step === 4) {
-      if (calculateTotal() > 0) {
+      if (calculateTotal(formData) > 0) {
         setCheckoutClientSecret(null);
         fetchCheckoutSession();
       } else {
@@ -177,7 +227,7 @@ function RegistrationInner() {
         body: JSON.stringify({
           ...payload,
           paymentIntentId,
-          amount: calculateTotal()
+          amount: calculateTotal(payload)
         }),
       });
     } catch (error) {
@@ -243,10 +293,10 @@ function RegistrationInner() {
     }));
   };
 
-  const calculateTotal = () => {
+  const calculateTotal = (data?: FormState) => {
+    const programs = data ? data.programs : formData.programs;
     let total = 0;
-    if (formData.programs.marchBreakAndDrone) total += 300;
-    if (formData.programs.v5rcCamp) total += 200;
+    if (programs.teamTraining) total += 450;
     return total;
   };
 
@@ -323,6 +373,15 @@ function RegistrationInner() {
             <div className="text-center mb-10">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Registration Form</h2>
               <div className="w-16 h-1 bg-blue-600 mx-auto rounded-full"></div>
+              {isDev && (
+                <button
+                  type="button"
+                  onClick={devFill}
+                  className="mt-4 px-4 py-2 bg-amber-100 text-amber-700 text-xs font-bold rounded-full hover:bg-amber-200 transition-all border border-amber-200"
+                >
+                  🛠️ DEV: FILL & SKIP TO STEP 4
+                </button>
+              )}
             </div>
 
             {renderStepIndicator()}
@@ -457,7 +516,7 @@ function RegistrationInner() {
                  
                       <li className="flex items-center gap-2">
                         <span className="w-2 h-2 bg-blue-500 rounded-full shrink-0" />
-                        <strong>Mar 17, 2026</strong>: 7:00 PM – 9:00 PM
+                        <strong>Mar 26, 2026</strong>: 7:00 PM – 9:00 PM
                       </li>
                     </ul>
                     <p className="text-xs text-blue-600 mt-3 font-medium">No cost — come see if it's a good fit before committing!</p>
@@ -466,25 +525,19 @@ function RegistrationInner() {
 {/* Updated Pricing Breakdown */}
 <div>
   <h4 className="text-lg font-bold text-gray-900 mb-4">Program Costs</h4>
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div className="grid grid-cols-1 gap-4">
     
-    {/* March Break / Drone Section */}
+    {/* Team Training Section */}
     <div className="bg-white border border-gray-200 rounded-xl p-5">
-      <p className="font-bold text-gray-900 text-base mb-1">March Break Aerial Drone Program</p>
-      <p className="text-2xl font-extrabold text-blue-600 mb-1">$300<span className="text-sm font-normal text-gray-500"> / student</span></p>
-      <p className="text-xs text-gray-500 mb-2">Tuition for mandatory March Break classes (2 hrs/day · 6 days).</p>
-      <div className="bg-amber-50 border border-amber-100 p-2 rounded">
-        <p className="text-xs text-amber-700 font-medium">
-          Note: Drone hardware ($415) will be invoiced separately once delivery dates are confirmed.
+      <p className="font-bold text-gray-900 text-base mb-1">Weekly Team Training (5 Weeks)</p>
+      <p className="text-2xl font-extrabold text-blue-600 mb-1">$450<span className="text-sm font-normal text-gray-500"> / student</span></p>
+      <p className="text-xs text-gray-500 mb-2">4 hours/week for 5 weeks. Focus on advanced robotics skills and competition strategy.</p>
+      <div className="bg-blue-50 border border-blue-100 p-3 rounded-lg">
+        <p className="text-xs text-blue-800 font-bold mb-1">Schedule (Thu/Fri 7-9 PM):</p>
+        <p className="text-[10px] text-blue-700 leading-relaxed">
+          Mar 26, 27 | Apr 2, 3, 16, 17, 30 | May 1, 7, 8
         </p>
       </div>
-    </div>
-
-    {/* VRC / V5RC Section */}
-    <div className="bg-white border border-gray-200 rounded-xl p-5">
-      <p className="font-bold text-gray-900 text-base mb-1">V5RC Camp (March 17-19)</p>
-      <p className="text-2xl font-extrabold text-blue-600 mb-1">$200<span className="text-sm font-normal text-gray-500"> / student</span></p>
-      <p className="text-xs text-gray-500 mb-2">Focused intensive for VEX V5 Robotics Competition (V5RC) skills and strategy.</p>
     </div>
 
   </div>
@@ -513,8 +566,7 @@ function RegistrationInner() {
 
                     {[
                       { id: 'freeTrial', label: 'Free Trial Classes', price: '$0' },
-                      { id: 'marchBreakAndDrone', label: 'March Break Classes (Tuition Only)', price: '$300' },
-                      { id: 'v5rcCamp', label: 'V5RC Camp (March 17-19)', price: '$200' }
+                      { id: 'teamTraining', label: 'Team Training (5 Weeks)', price: '$450' }
                       ].map((program) => (
                         <label key={program.id} className="flex items-center p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-pointer group">
                           <input
@@ -533,8 +585,7 @@ function RegistrationInner() {
                     <div className="bg-gray-50 rounded-2xl p-6 space-y-3">
                       {[
                         { id: 'freeTrial', label: 'Free Trial Classes', price: '$0.00' },
-                        { id: 'marchBreakAndDrone', label: 'March Break Aerial Drone Program', price: '$300.00' },
-                        { id: 'v5rcCamp', label: 'V5RC Camp (March 17-19)', price: '$200.00' },
+                        { id: 'teamTraining', label: 'Team Training (5 Weeks)', price: '$450.00' },
                       ].filter(p => formData.programs[p.id as keyof typeof formData.programs]).map(p => (
                         <div key={p.id} className="flex justify-between items-center text-gray-600 text-sm">
                           <span>{p.label}</span>

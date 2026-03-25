@@ -152,9 +152,9 @@ export default function AdminDashboard() {
                                         </td>
                                         <td className="px-6 py-4">
                                             <div className="flex flex-wrap gap-1">
-                                                {r.program_aerial_drone && <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full">Drones</span>}
-                                                {r.program_v5rc && <span className="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs rounded-full">V5RC</span>}
-                                                {r.program_vex_v5_robotics && <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full">Vex V5</span>}
+                                                {r.program_team_training && <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full">Team Training</span>}
+                                                {/* If amount is 0 and no programs are selected, it must be the Free Trial */}
+                                                {(r.amount_paid <= 0 && !r.program_team_training) && <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full italic">Free Trial</span>}
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 font-medium text-gray-900">${r.amount_paid}</td>

@@ -13,23 +13,12 @@ export async function POST(req: Request) {
 
         const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
-        if (programs?.marchBreakAndDrone) {
+        if (programs?.teamTraining) {
             lineItems.push({
                 price_data: {
                     currency: 'cad',
-                    product_data: { name: 'March Break Classes (Tuition Only)' },
-                    unit_amount: 30000, // $300.00 in cents
-                },
-                quantity: 1,
-            });
-        }
-
-        if (programs?.v5rcCamp) {
-            lineItems.push({
-                price_data: {
-                    currency: 'cad',
-                    product_data: { name: 'V5RC Camp (March 17-19)' },
-                    unit_amount: 20000, // $200.00 in cents
+                    product_data: { name: 'Weekly Team Training (5 Weeks)' },
+                    unit_amount: 45000, // $450.00 in cents
                 },
                 quantity: 1,
             });
