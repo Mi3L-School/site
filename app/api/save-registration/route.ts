@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
+import { sendRegistrationReceipt } from '@/lib/email';
+
 // Use service role key for admin-level bypass of RLS if necessary, 
 // but for public registration, anon key + RLS is better.
 // However, since we want a "service" to save this, we use the env vars.
@@ -59,6 +61,16 @@ export async function POST(req: Request) {
             ]);
 
         if (error) throw error;
+
+        // Send confirmation email via Resend
+        if (guardian1?.email) {
+            await sendRegistrationReceipt({
+                email: guardian1.email,
+                studentName: `${student.firstName} ${student.lastName}`,
+                programs: programs,
+                amount: amount
+            });
+        }
 
         return NextResponse.json({ success: true, data });
     } catch (err: any) {

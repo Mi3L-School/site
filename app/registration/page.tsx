@@ -129,7 +129,7 @@ function RegistrationInner() {
         relationship: "Mother",
         homePhone: "(416) 555-1234",
         cellPhone: "(416) 555-5678",
-        email: "jane.doe@example.com",
+        email: "sxu5215@gmail.com",
       },
       guardian2: {
         firstName: "James",
