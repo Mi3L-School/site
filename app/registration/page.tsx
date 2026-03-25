@@ -206,7 +206,8 @@ function RegistrationInner() {
           const draft = localStorage.getItem('mi3l_registration_draft');
           if (draft) {
             const savedForm = JSON.parse(draft);
-            await handleSaveRegistration(data.paymentIntentId as string, savedForm);
+            // Pass amountTotal from Stripe (in cents) to the save function
+            await handleSaveRegistration(data.paymentIntentId as string, savedForm, data.amountTotal);
             localStorage.removeItem('mi3l_registration_draft');
           }
           setIsSubmitted(true);
@@ -218,16 +219,21 @@ function RegistrationInner() {
     handleReturn();
   }, [searchParams]);
 
-  const handleSaveRegistration = async (paymentIntentId: string, data?: FormState) => {
+  const handleSaveRegistration = async (paymentIntentId: string, data?: FormState, finalAmountCents?: number) => {
     try {
       const payload = data || formData;
+      // Use finalAmountCents from Stripe if available, otherwise fallback to frontend calculation
+      const finalAmount = finalAmountCents !== undefined 
+        ? finalAmountCents / 100 
+        : calculateTotal(payload);
+
       await fetch("/api/save-registration", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...payload,
           paymentIntentId,
-          amount: calculateTotal(payload)
+          amount: finalAmount
         }),
       });
     } catch (error) {
