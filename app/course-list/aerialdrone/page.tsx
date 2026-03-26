@@ -124,7 +124,63 @@ export default function RoboticsPage() {
 
         </div>
       </section>
+  {/* SECTION: FLIGHT TRAINING & PRICING */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gray-900 rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row">
+            
+            {/* Left Column: Pricing Accent */}
+            <div className="p-10 bg-orange-500 text-white lg:w-1/3 flex flex-col justify-center items-center text-center">
+              <div className="bg-white/20 p-4 rounded-full mb-6">
+                <svg className="w-12 h-12 fill-current" viewBox="0 0 24 24">
+                  <path d="M21,16.5C21,16.88 20.79,17.21 20.47,17.38L12.57,21.82C12.41,21.94 12.21,22 12,22C11.79,22 11.59,21.94 11.43,21.82L3.53,17.38C3.21,17.21 3,16.88 3,16.5V7.5C3,7.12 3.21,6.79 3.53,6.62L11.43,2.18C11.59,2.06 11.79,2 12,2C12.21,2 12.41,2.06 12.57,2.18L20.47,6.62C20.79,6.79 21,7.12 21,7.5V16.5Z" />
+                </svg>
+              </div>
+              <h2 className="text-3xl font-bold mb-2">Weekly Team Training</h2>
+              <p className="text-orange-100 mb-6 font-medium tracking-wide uppercase">5-Week Intensive Program</p>
+              <div className="text-6xl font-black mb-2">$450</div>
+              <p className="text-sm opacity-90">Per Student</p>
+            </div>
 
+            {/* Right Column: Content & Schedule */}
+            <div className="p-8 md:p-12 lg:w-2/3">
+              <div className="mb-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="h-1 w-12 bg-orange-500 rounded-full"></span>
+                  <h3 className="text-2xl font-bold text-white">Advanced Flight & Strategy</h3>
+                </div>
+                <p className="text-gray-400 text-lg leading-relaxed">
+                  Go beyond basic piloting. Our 5-week course (4 hours per week) is designed for teams aiming for the podium, focusing on 
+                  <span className="text-white"> precision flight maneuvers, autonomous Python coding,</span> and 
+                  <span className="text-white"> competition strategy.</span>
+                </p>
+              </div>
+
+              {/* Schedule Grid */}
+              <div className="space-y-6">
+                <h4 className="text-orange-500 font-bold uppercase tracking-widest text-xs flex items-center gap-2">
+                  <span className="inline-block w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
+                  Training Schedule (Thu/Fri 7:00 PM – 9:00 PM)
+                </h4>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {[
+                    { month: "March", dates: "26, 27" },
+                    { month: "April", dates: "2, 3, 16, 17, 30" },
+                    { month: "May", dates: "1, 7, 8" }
+                  ].map((item, idx) => (
+                    <div key={idx} className="bg-gray-800/50 border border-gray-700 p-5 rounded-2xl hover:border-orange-500/50 transition-colors">
+                      <p className="text-orange-500 font-bold text-lg mb-1">{item.month}</p>
+                      <p className="text-gray-300 font-medium">{item.dates}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
 
       {/* SECTION 8: ACHIEVEMENTS */}
       <section className="py-24 bg-gray-900 text-white relative overflow-hidden">
