@@ -284,17 +284,15 @@ export default function Home() {
 
           {/* Summer Camp Programs */}
           <div className="mb-12">
-            <h3 className="text-2xl font-bold text-gray-800 mb-8 border-l-4 border-blue-600 pl-4">Workshop</h3>
+            <h3 className="text-2xl font-bold text-gray-800 mb-8 border-l-4 border-blue-600 pl-4">Summer Camp & Workshop</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                { title: "Girl Power", subtitle: "Year 7-10", link: "#", img: "/images/workshop/girlpower_workshop.png" },
-                { title: "First Lego League", subtitle: "Year 8-14", link: "#", img: "/images/home3.png" },
-                { title: "VEX V5", subtitle: "Year 11-18", link: "#", img: "/images/home4.png" },
-                { title: "Python", subtitle: "Year 8-14", link: "#", img: "/images/im2.png" },
+                { title: "2026 Summer Camp", subtitle: "Year 8-14",img: "/images/workshop/SummerCamp.png", href: "/course-list/summercamp2026" },
+                { title: "Girl Power", subtitle: "Year 7-10", img: "/images/workshop/GirlPower.png",href: "/course-list/girlpower" },
               ].map((program, idx) => (
                 <Link
                   key={idx}
-                  href={program.link}
+                  href={program.href}
                   className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all group border border-gray-100"
                 >
                   <div className="h-48 relative overflow-hidden">
@@ -302,7 +300,7 @@ export default function Home() {
                       src={program.img}
                       alt={program.title}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="object-cover object-top group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
                   <div className="p-6">
