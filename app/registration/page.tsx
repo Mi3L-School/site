@@ -48,6 +48,7 @@ type FormState = {
   programs: {
     freeTrial: boolean;
     teamTraining: boolean;
+    vexTraining: boolean;
   };
 };
 
@@ -91,6 +92,7 @@ const initialState: FormState = {
   programs: {
     freeTrial: false,
     teamTraining: false,
+    vexTraining: false,
   },
 };
 
@@ -149,6 +151,7 @@ function RegistrationInner() {
       programs: {
         freeTrial: true,
         teamTraining: true,
+        vexTraining: false,
       },
     });
   };
@@ -303,6 +306,7 @@ function RegistrationInner() {
     const programs = data ? data.programs : formData.programs;
     let total = 0;
     if (programs.teamTraining) total += 450;
+    if (programs.vexTraining) total += 320;
     return total;
   };
 
@@ -533,6 +537,19 @@ function RegistrationInner() {
   <h4 className="text-lg font-bold text-gray-900 mb-4">Program Costs</h4>
   <div className="grid grid-cols-1 gap-4">
     
+    {/* VEX Training Section */}
+    <div className="bg-white border border-gray-200 rounded-xl p-5">
+      <p className="font-bold text-gray-900 text-base mb-1">VEX V5 Robotics Training (8 Courses)</p>
+      <p className="text-2xl font-extrabold text-orange-600 mb-1">$320<span className="text-sm font-normal text-gray-500"> / student</span></p>
+      <p className="text-xs text-gray-500 mb-2">Comprehensive 8-course intensive focusing on V5 hardware, C++ coding, and competition-ready sensor integration.</p>
+      <div className="bg-orange-50 border border-orange-100 p-3 rounded-lg">
+        <p className="text-xs text-orange-800 font-bold mb-1">Schedule (Sat/Sun 3-5 PM):</p>
+        <p className="text-[10px] text-orange-700 leading-relaxed">
+          Apr 11, 12, 18, 19 | May 2, 3, 9, 10
+        </p>
+      </div>
+    </div>
+
     {/* Team Training Section */}
     <div className="bg-white border border-gray-200 rounded-xl p-5">
       <p className="font-bold text-gray-900 text-base mb-1">Weekly Team Training (5 Weeks)</p>
@@ -570,10 +587,11 @@ function RegistrationInner() {
                     <div className="space-y-4 mb-8">
                       <label className="text-sm font-semibold text-gray-700 block mb-4">Select Programs to Register</label>
 
-                    {[
-                      { id: 'freeTrial', label: 'Free Trial Classes', price: '$0' },
-                      { id: 'teamTraining', label: 'Team Training (5 Weeks)', price: '$450' }
-                      ].map((program) => (
+                      {[
+                        { id: 'freeTrial', label: 'Free Trial Classes', price: '$0' },
+                        { id: 'vexTraining', label: 'VEX V5 Robotics Training (8 Courses)', price: '$320' },
+                        { id: 'teamTraining', label: 'Team Training (5 Weeks)', price: '$450' }
+                        ].map((program) => (
                         <label key={program.id} className="flex items-center p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-pointer group">
                           <input
                             type="checkbox"
@@ -591,6 +609,7 @@ function RegistrationInner() {
                     <div className="bg-gray-50 rounded-2xl p-6 space-y-3">
                       {[
                         { id: 'freeTrial', label: 'Free Trial Classes', price: '$0.00' },
+                        { id: 'vexTraining', label: 'VEX V5 Robotics Training (8 Courses)', price: '$320.00' },
                         { id: 'teamTraining', label: 'Team Training (5 Weeks)', price: '$450.00' },
                       ].filter(p => formData.programs[p.id as keyof typeof formData.programs]).map(p => (
                         <div key={p.id} className="flex justify-between items-center text-gray-600 text-sm">

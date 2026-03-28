@@ -53,7 +53,7 @@ export async function POST(req: Request) {
                     emergency2_cell_phone: "",
                     emergency2_email: "",
                     program_team_training: programs?.teamTraining || false,
-                    program_vex_v5_robotics: false,
+                    program_vex_v5_robotics: programs?.vexTraining || false,
                     payment_intent_id: paymentIntentId,
                     amount_paid: amount,
                     status: 'paid'

@@ -24,6 +24,17 @@ export async function POST(req: Request) {
             });
         }
 
+        if (programs?.vexTraining) {
+            lineItems.push({
+                price_data: {
+                    currency: 'cad',
+                    product_data: { name: 'VEX V5 Robotics Training (8 Courses)' },
+                    unit_amount: 32000, // $320.00 in cents
+                },
+                quantity: 1,
+            });
+        }
+
         if (lineItems.length === 0) {
             return NextResponse.json({ error: 'No programs selected.' }, { status: 400 });
         }
