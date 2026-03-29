@@ -17,7 +17,7 @@ export async function POST(req: Request) {
             lineItems.push({
                 price_data: {
                     currency: 'cad',
-                    product_data: { name: 'Weekly Team Training (5 Weeks)' },
+                    product_data: { name: 'Aerial Drone Weekly Team Training (5 Weeks)' },
                     unit_amount: 45000, // $450.00 in cents
                 },
                 quantity: 1,
@@ -28,8 +28,8 @@ export async function POST(req: Request) {
             lineItems.push({
                 price_data: {
                     currency: 'cad',
-                    product_data: { name: 'VEX V5 Robotics Training (8 Courses)' },
-                    unit_amount: 32000, // $320.00 in cents
+                    product_data: { name: 'VEX V5 Robotics Training (10 Courses)' },
+                    unit_amount: 40000, // $400.00 in cents
                 },
                 quantity: 1,
             });

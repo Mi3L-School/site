@@ -306,7 +306,7 @@ function RegistrationInner() {
     const programs = data ? data.programs : formData.programs;
     let total = 0;
     if (programs.teamTraining) total += 450;
-    if (programs.vexTraining) total += 320;
+    if (programs.vexTraining) total += 400;
     return total;
   };
 
@@ -539,20 +539,20 @@ function RegistrationInner() {
     
     {/* VEX Training Section */}
     <div className="bg-white border border-gray-200 rounded-xl p-5">
-      <p className="font-bold text-gray-900 text-base mb-1">VEX V5 Robotics Training (8 Courses)</p>
-      <p className="text-2xl font-extrabold text-orange-600 mb-1">$320<span className="text-sm font-normal text-gray-500"> / student</span></p>
-      <p className="text-xs text-gray-500 mb-2">Comprehensive 8-course intensive focusing on V5 hardware, C++ coding, and competition-ready sensor integration.</p>
+      <p className="font-bold text-gray-900 text-base mb-1">VEX V5 Robotics Training (10 Courses)</p>
+      <p className="text-2xl font-extrabold text-orange-600 mb-1">$400<span className="text-sm font-normal text-gray-500"> / student</span></p>
+      <p className="text-xs text-gray-500 mb-2">Comprehensive 10-course intensive focusing on V5 hardware, C++ coding, and competition-ready sensor integration.</p>
       <div className="bg-orange-50 border border-orange-100 p-3 rounded-lg">
         <p className="text-xs text-orange-800 font-bold mb-1">Schedule (Sat/Sun 3-5 PM):</p>
         <p className="text-[10px] text-orange-700 leading-relaxed">
-          Apr 11, 12, 18, 19 | May 2, 3, 9, 10
+          Apr 11, 12, 18, 19 | May 2, 3, 9, 10, 23, 24
         </p>
       </div>
     </div>
 
     {/* Team Training Section */}
     <div className="bg-white border border-gray-200 rounded-xl p-5">
-      <p className="font-bold text-gray-900 text-base mb-1">Weekly Team Training (5 Weeks)</p>
+      <p className="font-bold text-gray-900 text-base mb-1">Aerial Drone Weekly Team Training (5 Weeks)</p>
       <p className="text-2xl font-extrabold text-blue-600 mb-1">$450<span className="text-sm font-normal text-gray-500"> / student</span></p>
       <p className="text-xs text-gray-500 mb-2">4 hours/week for 5 weeks. Focus on advanced robotics skills and competition strategy.</p>
       <div className="bg-blue-50 border border-blue-100 p-3 rounded-lg">
@@ -589,8 +589,8 @@ function RegistrationInner() {
 
                       {[
                         { id: 'freeTrial', label: 'Free Trial Classes', price: '$0' },
-                        { id: 'vexTraining', label: 'VEX V5 Robotics Training (8 Courses)', price: '$320' },
-                        { id: 'teamTraining', label: 'Team Training (5 Weeks)', price: '$450' }
+                        { id: 'vexTraining', label: 'VEX V5 Robotics Training (10 Courses)', price: '$400' },
+                        { id: 'teamTraining', label: 'Aerial Drone Weekly Team Training (5 Weeks)', price: '$450' }
                         ].map((program) => (
                         <label key={program.id} className="flex items-center p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-pointer group">
                           <input
@@ -609,8 +609,8 @@ function RegistrationInner() {
                     <div className="bg-gray-50 rounded-2xl p-6 space-y-3">
                       {[
                         { id: 'freeTrial', label: 'Free Trial Classes', price: '$0.00' },
-                        { id: 'vexTraining', label: 'VEX V5 Robotics Training (8 Courses)', price: '$320.00' },
-                        { id: 'teamTraining', label: 'Team Training (5 Weeks)', price: '$450.00' },
+                        { id: 'vexTraining', label: 'VEX V5 Robotics Training (10 Courses)', price: '$400.00' },
+                        { id: 'teamTraining', label: 'Aerial Drone Weekly Team Training (5 Weeks)', price: '$450.00' },
                       ].filter(p => formData.programs[p.id as keyof typeof formData.programs]).map(p => (
                         <div key={p.id} className="flex justify-between items-center text-gray-600 text-sm">
                           <span>{p.label}</span>

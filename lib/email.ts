@@ -15,8 +15,8 @@ export async function sendRegistrationReceipt({
 }) {
   const selectedPrograms = [];
   if (programs.freeTrial) selectedPrograms.push("Free Trial Classes");
-  if (programs.teamTraining) selectedPrograms.push("Weekly Team Training (5 Weeks)");
-  if (programs.vexTraining) selectedPrograms.push("VEX V5 Robotics Training (8 Courses)");
+  if (programs.teamTraining) selectedPrograms.push("Aerial Drone Weekly Team Training (5 Weeks)");
+  if (programs.vexTraining) selectedPrograms.push("VEX V5 Robotics Training (10 Courses)");
 
   const html = `
     <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px; background-color: #fff;">
