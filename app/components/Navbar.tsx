@@ -7,8 +7,11 @@ import { usePathname } from "next/navigation";
 
 const programLinks = [
   { path: "/course-list/robotics", name: "Robotics Course" },
-  { path: "/course-list/aerialdrone", name: "Aerial Drone Course & Team" },
-  { path: "/course-list/competition", name: "VEX V5 Team" },
+  { path: "/course-list/aerialdrone", name: "Aerial Drone Course" },
+];
+
+const teamLinks = [
+  { path: "/teams/vex-v5", name: "VEX V5 Team" },
 ];
 
 const aboutLinks = [
@@ -17,7 +20,7 @@ const aboutLinks = [
   { path: "/achievements", name: "Achievements" },
 ];
 
-type DropdownId = "about" | "programs" | null;
+type DropdownId = "about" | "programs" | "teams" | null;
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -137,7 +140,7 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Programs Dropdown */}
+{/* Programs Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => { cancelClose(); setOpenDropdown("programs"); }}
@@ -183,8 +186,55 @@ export default function Navbar() {
               </div>
             </div>
 
+            {/* Teams Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => { cancelClose(); setOpenDropdown("teams"); }}
+              onMouseLeave={scheduleClose}
+            >
+              <button
+                className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${isDropdownActive(teamLinks)
+                  ? "text-white bg-white/10"
+                  : "text-gray-300 hover:text-white hover:bg-white/10"
+                  }`}
+              >
+                Teams
+                <svg
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${openDropdown === "teams" ? "rotate-180" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <div
+                className={`absolute top-full left-0 mt-1.5 w-44 bg-gray-800 border border-white/10 rounded-xl shadow-xl py-1.5 transition-all duration-200 origin-top ${openDropdown === "teams"
+                  ? "opacity-100 scale-100 pointer-events-auto"
+                  : "opacity-0 scale-95 pointer-events-none"
+                  }`}
+                onMouseEnter={() => { cancelClose(); setOpenDropdown("teams"); }}
+                onMouseLeave={scheduleClose}
+              >
+                {teamLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    href={link.path}
+                    className={`block px-4 py-2 text-sm transition-colors ${isActive(link.path)
+                      ? "text-white bg-white/10"
+                      : "text-gray-300 hover:text-white hover:bg-white/10"
+                      }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             {/* Direct Links */}
             {[
+              { href: "/activities", label: "Activities" },
               { href: "/donation", label: "Donate" },
               { href: "/blog", label: "Blog" },
               { href: "/jobs", label: "Jobs" },
@@ -315,8 +365,43 @@ export default function Navbar() {
             </div>
           </div>
 
+          {/* Teams Section */}
+          <div>
+            <button
+              onClick={() => toggleMobileSection("teams")}
+              className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+            >
+              Teams
+              <svg
+                className={`w-4 h-4 transition-transform duration-200 ${mobileExpanded["teams"] ? "rotate-180" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div
+              className={`overflow-hidden transition-all duration-200 ${mobileExpanded["teams"] ? "max-h-40" : "max-h-0"
+                }`}
+            >
+              <div className="pl-4 mt-0.5 space-y-0.5">
+                {teamLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    href={link.path}
+                    className="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {/* Direct Links */}
           {[
+            { href: "/activities", label: "Activities" },
             { href: "/donation", label: "Donate" },
             { href: "/blog", label: "Blog" },
             { href: "/jobs", label: "Jobs" },

@@ -244,7 +244,7 @@ export default function Home() {
             {[
               { title: "Robotics", icon: Bot, img: "/images/program/robotics.png", href: "/course-list/robotics" },
               { title: "Aerial Drone", icon: Code, img: "/images/program/code.jpg", href: "/course-list/aerialdrone" },
-              { title: "Competition", icon: Trophy, img: "/images/vex1.png", href: "/course-list/competition" },
+              { title: "Competition", icon: Trophy, img: "/images/vex1.png", href: "/teams/vex-v5" },
             ].map((course, idx) => (
               <Link
                 key={idx}

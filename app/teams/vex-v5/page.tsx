@@ -127,9 +127,9 @@ export default function RoboticsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             {[
-              { title: "High School Team", awards: "7x", detail: "World Championship Qualifier" },
-              { title: "Middle School Team", awards: "5x", detail: "World Championship Qualifier" },
-              { title: "All Girls Team", awards: "2x", detail: "Inovate & Judge Awards" }
+              { title: "High School Team", awards: "20x", detail: "From 2022 - 2026" },
+              { title: "Middle School Team", awards: "16x", detail: "From 2023 - 2026" },
+              { title: "New All Girls Team", awards: "2x", detail: "Inovate & Judge Awards" }
             ].map((stat, idx) => (
               <div key={idx} className="p-8 rounded-3xl bg-gray-800/50 border border-gray-700 hover:border-orange-500 transition-all">
                 <h4 className="text-gray-400 font-medium mb-2">{stat.title}</h4>
@@ -144,7 +144,7 @@ export default function RoboticsPage() {
         </div>
       </section>
 
- 
+
       {/* SECTION 9: CTA */}
 
       <section className="py-24 bg-white text-center">
