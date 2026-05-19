@@ -10,6 +10,8 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY 
 
 type FormState = {
   step: number;
+  registrationType: 'member' | 'summercamp'; // Add registration type
+  summercampWeek?: string; // Selected week for summer camp
   student: {
     firstName: string;
     middleName: string;
@@ -46,14 +48,18 @@ type FormState = {
     email: string;
   };
   programs: {
-    freeTrial: boolean;
-    teamTraining: boolean;
-    vexTraining: boolean;
+    freeTrial?: boolean;
+    teamTraining?: boolean;
+    vexTraining?: boolean;
+    summercampFull?: boolean; // Full-day camp option
+    summercampHalf?: boolean; // Half-day camp option
   };
 };
 
 const initialState: FormState = {
   step: 1,
+  registrationType: 'member', // Default to member
+  summercampWeek: '', // Initialize empty week selection
   student: {
     firstName: "",
     middleName: "",
@@ -93,12 +99,15 @@ const initialState: FormState = {
     freeTrial: false,
     teamTraining: false,
     vexTraining: false,
+    summercampFull: false,
+    summercampHalf: false,
   },
 };
 
 function RegistrationInner() {
   const searchParams = useSearchParams();
-  const [formData, setFormData] = useState<FormState>(initialState);
+  const registrationType = (searchParams.get('type') === 'summercamp') ? 'summercamp' : 'member';
+  const [formData, setFormData] = useState<FormState>({ ...initialState, registrationType });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [checkoutClientSecret, setCheckoutClientSecret] = useState<string | null>(null);
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
@@ -172,7 +181,12 @@ function RegistrationInner() {
         body: JSON.stringify({
           programs: formData.programs,
           origin: window.location.origin,
-          metadata: { studentName: `${formData.student.firstName} ${formData.student.lastName}` },
+          metadata: {
+            studentName: `${formData.student.firstName} ${formData.student.lastName}`,
+            ...(formData.registrationType === 'summercamp' && formData.summercampWeek && {
+              summercampWeek: formData.summercampWeek,
+            }),
+          },
         }),
       });
       const data = await res.json();
@@ -303,10 +317,19 @@ function RegistrationInner() {
   };
 
   const calculateTotal = (data?: FormState) => {
-    const programs = data ? data.programs : formData.programs;
+    const form = data || formData;
+    const programs = form.programs;
     let total = 0;
-    if (programs.teamTraining) total += 450;
-    if (programs.vexTraining) total += 400;
+    
+    if (form.registrationType === 'summercamp') {
+      // Summer camp pricing
+      if (programs.summercampFull) total += 350; // Full-day camp
+      if (programs.summercampHalf) total += 200; // Half-day camp
+    } else {
+      // Member registration pricing
+      if (programs.teamTraining) total += 450;
+      if (programs.vexTraining) total += 400;
+    }
     return total;
   };
 
@@ -365,7 +388,7 @@ function RegistrationInner() {
       <section className="relative bg-gray-900 pt-32 pb-48 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
-            Become A Member
+            {formData.registrationType === 'summercamp' ? 'Summer Camp Registration' : 'Become A Member'}
           </h1>
         </div>
         <div className="absolute bottom-0 left-0 w-full leading-[0] transform rotate-180" aria-hidden="true">
@@ -517,65 +540,130 @@ function RegistrationInner() {
               {formData.step === 4 && (
                 <div className="space-y-10 animate-in fade-in slide-in-from-right-4 duration-500">
 
-                  {/* Free Trial */}
-                  <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
-                    <h4 className="text-lg font-bold text-blue-700 mb-3 flex items-center gap-2">
-                      <CalendarIcon className="w-5 h-5" /> Free Trial Classes
-                    </h4>
-                    <ul className="space-y-2 text-gray-700 text-sm">
-                 
-                      <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-blue-500 rounded-full shrink-0" />
-                        <strong>Mar 26, 2026</strong>: 7:00 PM – 9:00 PM
-                      </li>
-                    </ul>
-                    <p className="text-xs text-blue-600 mt-3 font-medium">No cost — come see if it's a good fit before committing!</p>
-                  </div>
+                  {/* Member Registration Programs */}
+                  {formData.registrationType === 'member' && (
+                    <>
+                      {/* Free Trial */}
+                      <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+                        <h4 className="text-lg font-bold text-blue-700 mb-3 flex items-center gap-2">
+                          <CalendarIcon className="w-5 h-5" /> Free Trial Classes
+                        </h4>
+                        <ul className="space-y-2 text-gray-700 text-sm">
+                     
+                          <li className="flex items-center gap-2">
+                            <span className="w-2 h-2 bg-blue-500 rounded-full shrink-0" />
+                            <strong>Mar 26, 2026</strong>: 7:00 PM – 9:00 PM
+                          </li>
+                        </ul>
+                        <p className="text-xs text-blue-600 mt-3 font-medium">No cost — come see if it's a good fit before committing!</p>
+                      </div>
 
-{/* Updated Pricing Breakdown */}
-<div>
-  <h4 className="text-lg font-bold text-gray-900 mb-4">Program Costs</h4>
-  <div className="grid grid-cols-1 gap-4">
-    
-    {/* VEX Training Section */}
-    <div className="bg-white border border-gray-200 rounded-xl p-5">
-      <p className="font-bold text-gray-900 text-base mb-1">VEX V5 Robotics Training (10 Courses)</p>
-      <p className="text-2xl font-extrabold text-orange-600 mb-1">$400<span className="text-sm font-normal text-gray-500"> / student</span></p>
-      <p className="text-xs text-gray-500 mb-2">Comprehensive 10-course intensive focusing on V5 hardware, C++ coding, and competition-ready sensor integration.</p>
-      <div className="bg-orange-50 border border-orange-100 p-3 rounded-lg">
-        <p className="text-xs text-orange-800 font-bold mb-1">Schedule (Sat/Sun 3-5 PM):</p>
-        <p className="text-[10px] text-orange-700 leading-relaxed">
-          Apr 11, 12, 18, 19 | May 2, 3, 9, 10, 23, 24
-        </p>
-      </div>
-    </div>
+                      {/* Updated Pricing Breakdown */}
+                      <div>
+                        <h4 className="text-lg font-bold text-gray-900 mb-4">Program Costs</h4>
+                        <div className="grid grid-cols-1 gap-4">
+                          
+                          {/* VEX Training Section */}
+                          <div className="bg-white border border-gray-200 rounded-xl p-5">
+                            <p className="font-bold text-gray-900 text-base mb-1">VEX V5 Robotics Training (10 Courses)</p>
+                            <p className="text-2xl font-extrabold text-orange-600 mb-1">$400<span className="text-sm font-normal text-gray-500"> / student</span></p>
+                            <p className="text-xs text-gray-500 mb-2">Comprehensive 10-course intensive focusing on V5 hardware, C++ coding, and competition-ready sensor integration.</p>
+                            <div className="bg-orange-50 border border-orange-100 p-3 rounded-lg">
+                              <p className="text-xs text-orange-800 font-bold mb-1">Schedule (Sat/Sun 3-5 PM):</p>
+                              <p className="text-[10px] text-orange-700 leading-relaxed">
+                                Apr 11, 12, 18, 19 | May 2, 3, 9, 10, 23, 24
+                              </p>
+                            </div>
+                          </div>
 
-    {/* Team Training Section */}
-    <div className="bg-white border border-gray-200 rounded-xl p-5">
-      <p className="font-bold text-gray-900 text-base mb-1">Aerial Drone Weekly Team Training (5 Weeks)</p>
-      <p className="text-2xl font-extrabold text-blue-600 mb-1">$450<span className="text-sm font-normal text-gray-500"> / student</span></p>
-      <p className="text-xs text-gray-500 mb-2">4 hours/week for 5 weeks. Focus on advanced robotics skills and competition strategy.</p>
-      <div className="bg-blue-50 border border-blue-100 p-3 rounded-lg">
-        <p className="text-xs text-blue-800 font-bold mb-1">Schedule (Thu/Fri 7-9 PM):</p>
-        <p className="text-[10px] text-blue-700 leading-relaxed">
-          Mar 26, 27 | Apr 2, 3, 16, 17, 30 | May 1, 7, 8
-        </p>
-      </div>
-    </div>
+                          {/* Team Training Section */}
+                          <div className="bg-white border border-gray-200 rounded-xl p-5">
+                            <p className="font-bold text-gray-900 text-base mb-1">Aerial Drone Weekly Team Training (5 Weeks)</p>
+                            <p className="text-2xl font-extrabold text-blue-600 mb-1">$450<span className="text-sm font-normal text-gray-500"> / student</span></p>
+                            <p className="text-xs text-gray-500 mb-2">4 hours/week for 5 weeks. Focus on advanced robotics skills and competition strategy.</p>
+                            <div className="bg-blue-50 border border-blue-100 p-3 rounded-lg">
+                              <p className="text-xs text-blue-800 font-bold mb-1">Schedule (Thu/Fri 7-9 PM):</p>
+                              <p className="text-[10px] text-blue-700 leading-relaxed">
+                                Mar 26, 27 | Apr 2, 3, 16, 17, 30 | May 1, 7, 8
+                              </p>
+                            </div>
+                          </div>
 
-  </div>
-  <p className="text-xs text-gray-400 mt-3">* All costs are tax-included.</p>
-</div>
+                        </div>
+                        <p className="text-xs text-gray-400 mt-3">* All costs are tax-included.</p>
+                      </div>
 
-                  {/* Discounts */}
-                  <div className="bg-green-50 border border-green-200 rounded-2xl p-6">
-                    <h4 className="text-lg font-bold text-green-800 mb-3">Discounts &amp; Notes</h4>
-                    <ul className="space-y-2 text-sm text-gray-700">
-                      <li className="flex items-start gap-2"><span className="text-green-600 font-bold shrink-0">5%</span> off tuition for girls or same-family members</li>
-                      <li className="flex items-start gap-2"><span className="text-green-600 font-bold shrink-0">10%</span> off for 2055 family &amp; friends and Mi3L School Recreational members</li>
-                      <li className="flex items-start gap-2"><span className="text-green-600 font-bold shrink-0">25%</span> off tuition for former members/students</li>
-                    </ul>
-                  </div>
+                      {/* Discounts */}
+                      <div className="bg-green-50 border border-green-200 rounded-2xl p-6">
+                        <h4 className="text-lg font-bold text-green-800 mb-3">Discounts &amp; Notes</h4>
+                        <ul className="space-y-2 text-sm text-gray-700">
+                          <li className="flex items-start gap-2"><span className="text-green-600 font-bold shrink-0">5%</span> off tuition for girls or same-family members</li>
+                          <li className="flex items-start gap-2"><span className="text-green-600 font-bold shrink-0">10%</span> off for 2055 family &amp; friends and Mi3L School Recreational members</li>
+                          <li className="flex items-start gap-2"><span className="text-green-600 font-bold shrink-0">25%</span> off tuition for former members/students</li>
+                        </ul>
+                      </div>
+                    </>
+                  )}
+
+                  {/* Summer Camp Programs */}
+                  {formData.registrationType === 'summercamp' && (
+                    <>
+                      <div className="bg-orange-50 border border-orange-200 rounded-2xl p-6">
+                        <h4 className="text-lg font-bold text-orange-700 mb-4">Summer 2026: BJJ &amp; Robotics Camp</h4>
+                        <div className="space-y-4">
+                          <div className="bg-white border border-orange-100 rounded-xl p-5">
+                            <p className="font-bold text-gray-900 text-base mb-1">Full-Day Camp (9:00 AM – 4:30 PM)</p>
+                            <p className="text-2xl font-extrabold text-orange-600 mb-1">$350<span className="text-sm font-normal text-gray-500"> / student</span></p>
+                            <p className="text-xs text-gray-500 mb-2">Full immersion: 3 hours BJJ (9 AM – 12 PM) + Lunch + 3 hours Robotics (1 PM – 4 PM)</p>
+                          </div>
+                          <div className="bg-white border border-blue-100 rounded-xl p-5">
+                            <p className="font-bold text-gray-900 text-base mb-1">Half-Day Camp (Choose One)</p>
+                            <p className="text-2xl font-extrabold text-blue-600 mb-1">$200<span className="text-sm font-normal text-gray-500"> / student</span></p>
+                            <p className="text-xs text-gray-500">
+                              <strong>Morning Session:</strong> BJJ Only (9 AM – 12 PM)<br/>
+                              <strong>Afternoon Session:</strong> Robotics Only (1 PM – 4 PM)
+                            </p>
+                          </div>
+                        </div>
+                        <p className="text-xs text-orange-600 mt-3 font-medium">Ages 8-14. Limited spaces available!</p>
+                      </div>
+
+                      {/* Week Selection */}
+                      <div className="border-t border-gray-100 pt-8">
+                        <h4 className="text-lg font-bold text-gray-900 mb-4">Select Your Week</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          {[
+                            { id: 'week1', label: 'Week 1', dates: 'July 6-10' },
+                            { id: 'week2', label: 'Week 2', dates: 'July 13-17' },
+                            { id: 'week3', label: 'Week 3', dates: 'July 20-24' },
+                            { id: 'week4', label: 'Week 4', dates: 'July 27-31' },
+                            { id: 'week5', label: 'Week 5', dates: 'Aug 3-7' },
+                            { id: 'week6', label: 'Week 6', dates: 'Aug 10-14' },
+                            { id: 'week7', label: 'Week 7', dates: 'Aug 17-21' },
+                            { id: 'week8', label: 'Week 8', dates: 'Aug 25-29' },
+                          ].map((week) => (
+                            <label key={week.id} className="flex items-center p-4 rounded-xl border border-gray-200 hover:border-orange-300 hover:bg-orange-50/30 transition-all cursor-pointer group">
+                              <input
+                                type="radio"
+                                name="summercampWeek"
+                                className="w-5 h-5 rounded-full border-gray-300 text-orange-600 focus:ring-orange-500 mr-4"
+                                checked={formData.summercampWeek === week.id}
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setFormData(prev => ({ ...prev, summercampWeek: week.id }));
+                                  }
+                                }}
+                              />
+                              <div className="flex-1">
+                                <p className="text-sm font-semibold text-gray-900 group-hover:text-orange-700 transition-colors">{week.label}</p>
+                                <p className="text-xs text-gray-500">{week.dates}</p>
+                              </div>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  )}
 
                   {/* Program Selection */}
                   <div className="pt-8 border-t border-gray-100">
@@ -587,39 +675,92 @@ function RegistrationInner() {
                     <div className="space-y-4 mb-8">
                       <label className="text-sm font-semibold text-gray-700 block mb-4">Select Programs to Register</label>
 
-                      {[
-                        { id: 'freeTrial', label: 'Free Trial Classes', price: '$0' },
-                        { id: 'vexTraining', label: 'VEX V5 Robotics Training (10 Courses)', price: '$400' },
-                        { id: 'teamTraining', label: 'Aerial Drone Weekly Team Training (5 Weeks)', price: '$450' }
+                      {formData.registrationType === 'member' ? (
+                        [
+                          { id: 'freeTrial', label: 'Free Trial Classes', price: '$0' },
+                          { id: 'vexTraining', label: 'VEX V5 Robotics Training (10 Courses)', price: '$400' },
+                          { id: 'teamTraining', label: 'Aerial Drone Weekly Team Training (5 Weeks)', price: '$450' }
                         ].map((program) => (
-                        <label key={program.id} className="flex items-center p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-pointer group">
-                          <input
-                            type="checkbox"
-                            className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-4"
-                            checked={formData.programs[program.id as keyof typeof formData.programs] || false}
-                            onChange={(e) => handleChange('programs', program.id, e.target.checked)}
-                          />
-                          <span className="text-gray-900 font-medium group-hover:text-blue-700 transition-colors">{program.label}</span>
-                          <span className="ml-auto text-blue-600 font-bold">{program.price}</span>
-                        </label>
-                      ))}
+                          <label key={program.id} className="flex items-center p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-pointer group">
+                            <input
+                              type="checkbox"
+                              className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-4"
+                              checked={formData.programs[program.id as keyof typeof formData.programs] || false}
+                              onChange={(e) => handleChange('programs', program.id, e.target.checked)}
+                            />
+                            <span className="text-gray-900 font-medium group-hover:text-blue-700 transition-colors">{program.label}</span>
+                            <span className="ml-auto text-blue-600 font-bold">{program.price}</span>
+                          </label>
+                        ))
+                      ) : (
+                        [
+                          { id: 'summercampFull', label: 'Full-Day Camp (9 AM – 4:30 PM)', price: '$350' },
+                          { id: 'summercampHalf', label: 'Half-Day Camp (Choose Morning or Afternoon)', price: '$200' }
+                        ].map((program) => (
+                          <label key={program.id} className="flex items-center p-4 rounded-xl border border-gray-100 hover:border-orange-200 hover:bg-orange-50/30 transition-all cursor-pointer group">
+                            <input
+                              type="radio"
+                              name="summercampOption"
+                              className="w-5 h-5 rounded-full border-gray-300 text-orange-600 focus:ring-orange-500 mr-4"
+                              checked={formData.programs[program.id as keyof typeof formData.programs] || false}
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  handleChange('programs', 'summercampFull', program.id === 'summercampFull');
+                                  handleChange('programs', 'summercampHalf', program.id === 'summercampHalf');
+                                }
+                              }}
+                            />
+                            <span className="text-gray-900 font-medium group-hover:text-orange-700 transition-colors">{program.label}</span>
+                            <span className="ml-auto text-orange-600 font-bold">{program.price}</span>
+                          </label>
+                        ))
+                      )}
                     </div>
 
                     {/* Order Summary */}
                     <div className="bg-gray-50 rounded-2xl p-6 space-y-3">
-                      {[
-                        { id: 'freeTrial', label: 'Free Trial Classes', price: '$0.00' },
-                        { id: 'vexTraining', label: 'VEX V5 Robotics Training (10 Courses)', price: '$400.00' },
-                        { id: 'teamTraining', label: 'Aerial Drone Weekly Team Training (5 Weeks)', price: '$450.00' },
-                      ].filter(p => formData.programs[p.id as keyof typeof formData.programs]).map(p => (
-                        <div key={p.id} className="flex justify-between items-center text-gray-600 text-sm">
-                          <span>{p.label}</span>
-                          <span>{p.price} CAD</span>
-                        </div>
-                      ))}
+                      {formData.registrationType === 'member' ? (
+                        [
+                          { id: 'freeTrial', label: 'Free Trial Classes', price: '$0.00' },
+                          { id: 'vexTraining', label: 'VEX V5 Robotics Training (10 Courses)', price: '$400.00' },
+                          { id: 'teamTraining', label: 'Aerial Drone Weekly Team Training (5 Weeks)', price: '$450.00' },
+                        ].filter(p => formData.programs[p.id as keyof typeof formData.programs]).map(p => (
+                          <div key={p.id} className="flex justify-between items-center text-gray-600 text-sm">
+                            <span>{p.label}</span>
+                            <span>{p.price} CAD</span>
+                          </div>
+                        ))
+                      ) : (
+                        <>
+                          {[
+                            { id: 'summercampFull', label: 'Full-Day Camp (9 AM – 4:30 PM)', price: '$350.00' },
+                            { id: 'summercampHalf', label: 'Half-Day Camp', price: '$200.00' },
+                          ].filter(p => formData.programs[p.id as keyof typeof formData.programs]).map(p => (
+                            <div key={p.id} className="flex justify-between items-center text-gray-600 text-sm">
+                              <span>{p.label}</span>
+                              <span>{p.price} CAD</span>
+                            </div>
+                          ))}
+                          {formData.summercampWeek && (
+                            <div className="flex justify-between items-center text-gray-600 text-sm">
+                              <span>Selected Week</span>
+                              <span className="font-semibold text-orange-600">
+                                {formData.summercampWeek === 'week1' && 'Week 1 (July 6-10)'}
+                                {formData.summercampWeek === 'week2' && 'Week 2 (July 13-17)'}
+                                {formData.summercampWeek === 'week3' && 'Week 3 (July 20-24)'}
+                                {formData.summercampWeek === 'week4' && 'Week 4 (July 27-31)'}
+                                {formData.summercampWeek === 'week5' && 'Week 5 (Aug 3-7)'}
+                                {formData.summercampWeek === 'week6' && 'Week 6 (Aug 10-14)'}
+                                {formData.summercampWeek === 'week7' && 'Week 7 (Aug 17-21)'}
+                                {formData.summercampWeek === 'week8' && 'Week 8 (Aug 25-29)'}
+                              </span>
+                            </div>
+                          )}
+                        </>
+                      )}
                       <div className="flex justify-between items-center text-xl font-bold text-gray-900 pt-3 border-t border-gray-200">
                         <span>Total</span>
-                        <span className="text-blue-600">${calculateTotal().toFixed(2)} CAD</span>
+                        <span className={`${formData.registrationType === 'member' ? 'text-blue-600' : 'text-orange-600'}`}>${calculateTotal().toFixed(2)} CAD</span>
                       </div>
                     </div>
 
@@ -638,12 +779,18 @@ function RegistrationInner() {
                         </EmbeddedCheckoutProvider>
                       </div>
                     )}
-                    {!checkoutClientSecret && !isPaymentLoading && calculateTotal() === 0 && !formData.programs.freeTrial && (
+                    {!checkoutClientSecret && !isPaymentLoading && calculateTotal() === 0 && !formData.programs.freeTrial && formData.registrationType === 'member' && (
                       <p className="text-sm text-amber-600 text-center">Please select at least one program to proceed to payment.</p>
                     )}
+                    {!checkoutClientSecret && !isPaymentLoading && calculateTotal() === 0 && !formData.programs.summercampFull && !formData.programs.summercampHalf && formData.registrationType === 'summercamp' && (
+                      <p className="text-sm text-amber-600 text-center">Please select a camp option to proceed to payment.</p>
+                    )}
+                    {!checkoutClientSecret && !isPaymentLoading && (formData.programs.summercampFull || formData.programs.summercampHalf) && !formData.summercampWeek && formData.registrationType === 'summercamp' && (
+                      <p className="text-sm text-amber-600 text-center">Please select a week for the camp to proceed to payment.</p>
+                    )}
 
-                    {/* Submit directly for $0 / Free Trial Only */}
-                    {!isPaymentLoading && calculateTotal() === 0 && formData.programs.freeTrial && (
+                    {/* Submit directly for $0 / Free Trial Only (Member Registration) */}
+                    {!isPaymentLoading && calculateTotal() === 0 && formData.programs.freeTrial && formData.registrationType === 'member' && (
                       <div className="mt-6 text-center">
                         <p className="text-sm text-gray-600 mb-4">You have only selected the Free Trial Classes. No payment is required.</p>
                         <button

@@ -20,7 +20,7 @@ export default function SummerCampPage() {
             <Link href="#schedule" className="px-8 py-4 bg-orange-500 text-white font-bold rounded-full hover:bg-orange-600 transition-all">
               View Schedule
             </Link>
-            <Link href="/registration" className="px-8 py-4 bg-white text-blue-900 font-bold rounded-full hover:bg-gray-100 transition-all">
+            <Link href="/registration?type=summercamp" className="px-8 py-4 bg-white text-blue-900 font-bold rounded-full hover:bg-gray-100 transition-all">
               Register Now
             </Link>
           </div>
@@ -115,7 +115,7 @@ export default function SummerCampPage() {
         <h2 className="text-4xl md:text-5xl font-bold mb-8">Secure Your Spot for Summer</h2>
         <p className="text-xl text-blue-200 mb-10">Spaces are limited to ensure quality instruction for both BJJ and Robotics.</p>
         <Link
-          href="/registration"
+          href="/registration?type=summercamp"
           className="inline-flex items-center gap-3 px-12 py-5 bg-orange-500 text-white text-2xl font-bold rounded-2xl shadow-2xl hover:bg-orange-600 transition-all hover:scale-105"
         >
           Register for Camp

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: '2026-02-25.clover',
+    apiVersion: '2024-12-27',
 });
 
 const PRICE_PER_PROGRAM = 500; // $5.00 in cents
@@ -30,6 +30,28 @@ export async function POST(req: Request) {
                     currency: 'cad',
                     product_data: { name: 'VEX V5 Robotics Training (10 Courses)' },
                     unit_amount: 40000, // $400.00 in cents
+                },
+                quantity: 1,
+            });
+        }
+
+        if (programs?.summercampFull) {
+            lineItems.push({
+                price_data: {
+                    currency: 'cad',
+                    product_data: { name: 'Summer Camp - Full-Day (9 AM – 4:30 PM)' },
+                    unit_amount: 35000, // $350.00 in cents
+                },
+                quantity: 1,
+            });
+        }
+
+        if (programs?.summercampHalf) {
+            lineItems.push({
+                price_data: {
+                    currency: 'cad',
+                    product_data: { name: 'Summer Camp - Half-Day' },
+                    unit_amount: 20000, // $200.00 in cents
                 },
                 quantity: 1,
             });
