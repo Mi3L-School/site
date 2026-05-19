@@ -35,28 +35,6 @@ export async function POST(req: Request) {
             });
         }
 
-        if (programs?.summercampFull) {
-            lineItems.push({
-                price_data: {
-                    currency: 'cad',
-                    product_data: { name: 'Summer Camp - Full-Day (9 AM – 4:30 PM)' },
-                    unit_amount: 35000, // $350.00 in cents
-                },
-                quantity: 1,
-            });
-        }
-
-        if (programs?.summercampHalf) {
-            lineItems.push({
-                price_data: {
-                    currency: 'cad',
-                    product_data: { name: 'Summer Camp - Half-Day' },
-                    unit_amount: 20000, // $200.00 in cents
-                },
-                quantity: 1,
-            });
-        }
-
         if (lineItems.length === 0) {
             return NextResponse.json({ error: 'No programs selected.' }, { status: 400 });
         }
