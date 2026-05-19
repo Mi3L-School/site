@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: '2024-12-27',
+    apiVersion: '2026-02-25.clover',
 });
 
 const PRICE_PER_PROGRAM = 500; // $5.00 in cents
