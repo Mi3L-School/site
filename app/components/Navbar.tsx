@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 const programLinks = [
   { path: "/course-list/robotics", name: "Robotics Course" },
   { path: "/course-list/aerialdrone", name: "Aerial Drone Course" },
+  { path: "/course-list/summercamp2026", name: "Summer Camp" },
 ];
 
 const teamLinks = [
