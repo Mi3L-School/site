@@ -1,12 +1,19 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: '2026-02-25.clover',
-});
+function getStripe() {
+    const secretKey = process.env.STRIPE_SECRET_KEY;
+    if (!secretKey) {
+        throw new Error('Missing STRIPE_SECRET_KEY');
+    }
+    return new Stripe(secretKey, {
+        apiVersion: '2026-02-25.clover',
+    });
+}
 
 export async function GET(req: Request) {
     try {
+        const stripe = getStripe();
         const { searchParams } = new URL(req.url);
         const sessionId = searchParams.get('session_id');
 
