@@ -38,7 +38,7 @@ type FormState = {
     cellPhone: string;
     email: string;
   };
-  emergency: { // Changed from emergency1 to emergency (single contact)
+  emergency: {
     firstName: string;
     lastName: string;
     homePhone: string;
@@ -46,9 +46,14 @@ type FormState = {
     email: string;
   };
   programs: {
-    freeTrial: boolean;
-    teamTraining: boolean;
-    vexTraining: boolean;
+    summerCamp: {
+      selected: boolean;
+      weeks: {
+        id: string;
+        label: string;
+        type: 'fullday' | 'halfday';
+      }[];
+    };
   };
 };
 
@@ -82,7 +87,7 @@ const initialState: FormState = {
     cellPhone: "",
     email: "",
   },
-  emergency: { // Single emergency contact
+  emergency: {
     firstName: "",
     lastName: "",
     homePhone: "",
@@ -90,18 +95,21 @@ const initialState: FormState = {
     email: "",
   },
   programs: {
-    freeTrial: false,
-    teamTraining: false,
-    vexTraining: false,
+    summerCamp: {
+      selected: true, // Summer camp is the default selected program
+      weeks: [],
+    },
   },
 };
 
 function RegistrationInner() {
   const searchParams = useSearchParams();
+  const registrationType = searchParams.get('type') || 'general';
   const [formData, setFormData] = useState<FormState>(initialState);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [checkoutClientSecret, setCheckoutClientSecret] = useState<string | null>(null);
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
   const [isDev, setIsDev] = useState(false);
 
   useEffect(() => {
@@ -131,7 +139,7 @@ function RegistrationInner() {
         relationship: "Mother",
         homePhone: "(416) 555-1234",
         cellPhone: "(416) 555-5678",
-        email: "sxu5215@gmail.com",
+        email: "test@example.com",
       },
       guardian2: {
         firstName: "James",
@@ -149,9 +157,13 @@ function RegistrationInner() {
         email: "bob@example.com",
       },
       programs: {
-        freeTrial: true,
-        teamTraining: true,
-        vexTraining: false,
+        summerCamp: {
+          selected: true,
+          weeks: [
+            { id: 'week1', label: 'Week 1 (July 7-11)', type: 'fullday' },
+            { id: 'week2', label: 'Week 2 (July 14-18)', type: 'halfday' },
+          ],
+        },
       },
     });
   };
@@ -160,11 +172,33 @@ function RegistrationInner() {
     setFormData(prev => ({ ...prev, step: prev.step + 1 }));
   };
 
+  const calculateTotal = (data?: FormState) => {
+    const programs = data ? data.programs : formData.programs;
+    let total = 0;
+    if (programs.summerCamp.selected) {
+      total += programs.summerCamp.weeks.reduce((sum, week) => {
+        const rate = week.type === 'halfday' ? 200 : 350;
+        return sum + rate;
+      }, 0);
+    }
+    return total;
+  };
+
+  const parseJsonResponse = async (res: Response) => {
+    const contentType = res.headers.get('content-type') || '';
+    const text = await res.text();
+    if (!contentType.includes('application/json')) {
+      console.error('Invalid API response: expected JSON but received:', text);
+      throw new Error('Invalid JSON response');
+    }
+    return JSON.parse(text);
+  };
+
   const fetchCheckoutSession = useCallback(async () => {
     if (calculateTotal(formData) <= 0) return;
+    setCheckoutError(null);
     setIsPaymentLoading(true);
     try {
-      // Save form data to localStorage so we can retrieve it after Stripe redirect
       localStorage.setItem('mi3l_registration_draft', JSON.stringify(formData));
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
@@ -175,14 +209,29 @@ function RegistrationInner() {
           metadata: { studentName: `${formData.student.firstName} ${formData.student.lastName}` },
         }),
       });
-      const data = await res.json();
-      if (data.clientSecret) setCheckoutClientSecret(data.clientSecret);
+      if (!res.ok) {
+        const text = await res.text();
+        const message = `Failed to create checkout session: ${res.status} ${text}`;
+        setCheckoutError(message);
+        console.error('Error creating checkout session:', message);
+        return;
+      }
+      const data = await parseJsonResponse(res);
+      if (data.clientSecret) {
+        setCheckoutClientSecret(data.clientSecret);
+      } else {
+        const message = data.error || 'Unable to create checkout session';
+        setCheckoutError(message);
+        console.error('Error creating checkout session:', message);
+      }
     } catch (err) {
-      console.error('Error creating checkout session:', err);
+      const message = err instanceof Error ? err.message : String(err);
+      setCheckoutError(message);
+      console.error('Error creating checkout session:', message);
     } finally {
       setIsPaymentLoading(false);
     }
-  }, [formData]); // Updated dependency to include formData for correct total calculation
+  }, [formData]);
 
   useEffect(() => {
     if (formData.step === 4) {
@@ -193,9 +242,8 @@ function RegistrationInner() {
         setCheckoutClientSecret(null);
       }
     }
-  }, [formData.step, formData.programs, fetchCheckoutSession]);
+  }, [formData.step, formData.programs.summerCamp.weeks, fetchCheckoutSession]);
 
-  // Handle redirect back from Stripe after payment
   useEffect(() => {
     const sessionId = searchParams.get('session_id');
     if (!sessionId) return;
@@ -203,13 +251,16 @@ function RegistrationInner() {
     const handleReturn = async () => {
       try {
         const res = await fetch(`/api/checkout-session-status?session_id=${sessionId}`);
-        const data = await res.json();
+        if (!res.ok) {
+          const text = await res.text();
+          console.error('Error fetching checkout session status:', res.status, text);
+          return;
+        }
+        const data = await parseJsonResponse(res);
         if (data.paymentStatus === 'paid') {
-          // Retrieve saved form data from localStorage
           const draft = localStorage.getItem('mi3l_registration_draft');
           if (draft) {
             const savedForm = JSON.parse(draft);
-            // Pass amountTotal from Stripe (in cents) to the save function
             await handleSaveRegistration(data.paymentIntentId as string, savedForm, data.amountTotal);
             localStorage.removeItem('mi3l_registration_draft');
           }
@@ -225,12 +276,11 @@ function RegistrationInner() {
   const handleSaveRegistration = async (paymentIntentId: string, data?: FormState, finalAmountCents?: number) => {
     try {
       const payload = data || formData;
-      // Use finalAmountCents from Stripe if available, otherwise fallback to frontend calculation
       const finalAmount = finalAmountCents !== undefined 
         ? finalAmountCents / 100 
         : calculateTotal(payload);
 
-      await fetch("/api/save-registration", {
+      const res = await fetch("/api/save-registration", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -239,6 +289,12 @@ function RegistrationInner() {
           amount: finalAmount
         }),
       });
+      if (!res.ok) {
+        const text = await res.text();
+        console.error("Error saving registration:", res.status, text);
+      } else {
+        await parseJsonResponse(res);
+      }
     } catch (error) {
       console.error("Error saving registration:", error);
     }
@@ -283,7 +339,7 @@ function RegistrationInner() {
     return `${mm}-${dd}-${yyyy}`;
   };
 
-  const handleChange = (section: keyof FormState, field: string, value: string | boolean) => {
+  const handleChange = (section: keyof FormState, field: string, value: any) => {
     let finalValue = value;
     if (typeof value === 'string') {
       if (field.toLowerCase().includes("phone")) {
@@ -302,12 +358,62 @@ function RegistrationInner() {
     }));
   };
 
-  const calculateTotal = (data?: FormState) => {
-    const programs = data ? data.programs : formData.programs;
-    let total = 0;
-    if (programs.teamTraining) total += 450;
-    if (programs.vexTraining) total += 400;
-    return total;
+  const summerCampWeekOptions = [
+    { id: 'week1', label: 'Week 1 (July 7-11)' },
+    { id: 'week2', label: 'Week 2 (July 14-18)' },
+    { id: 'week3', label: 'Week 3 (July 21-25)' },
+    { id: 'week4', label: 'Week 4 (July 28 - Aug 1)' },
+    { id: 'week5', label: 'Week 5 (Aug 4-8)' },
+    { id: 'week6', label: 'Week 6 (Aug 11-15)' },
+    { id: 'week7', label: 'Week 7 (Aug 18-22)' },
+    { id: 'week8', label: 'Week 8 (Aug 25-29)' },
+  ];
+
+  const handleSummerCampChange = (updates: Partial<FormState["programs"]["summerCamp"]>) => {
+    setFormData((prev) => ({
+      ...prev,
+      programs: {
+        ...prev.programs,
+        summerCamp: {
+          ...prev.programs.summerCamp,
+          ...updates,
+        }
+      },
+    }));
+  };
+
+  const toggleSummerCampWeek = (weekId: string, weekLabel: string, checked: boolean) => {
+    setFormData((prev) => {
+      const existingWeeks = prev.programs.summerCamp.weeks;
+      const nextWeeks: FormState['programs']['summerCamp']['weeks'] = checked
+        ? [...existingWeeks, { id: weekId, label: weekLabel, type: 'halfday' }]
+        : existingWeeks.filter((week) => week.id !== weekId);
+      return {
+        ...prev,
+        programs: {
+          ...prev.programs,
+          summerCamp: {
+            ...prev.programs.summerCamp,
+            weeks: nextWeeks,
+          },
+        },
+      };
+    });
+  };
+
+  const setSummerCampWeekType = (weekId: string, type: 'fullday' | 'halfday') => {
+    setFormData((prev) => ({
+      ...prev,
+      programs: {
+        ...prev.programs,
+        summerCamp: {
+          ...prev.programs.summerCamp,
+          weeks: prev.programs.summerCamp.weeks.map((week) =>
+            week.id === weekId ? { ...week, type } : week
+          ),
+        },
+      },
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -365,7 +471,7 @@ function RegistrationInner() {
       <section className="relative bg-gray-900 pt-32 pb-48 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
-            Become A Member
+            Sign Up for Summer Camp
           </h1>
         </div>
         <div className="absolute bottom-0 left-0 w-full leading-[0] transform rotate-180" aria-hidden="true">
@@ -381,7 +487,9 @@ function RegistrationInner() {
         <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden">
           <div className="p-8 md:p-12">
             <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Registration Form</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                Summer Camp Registration Form
+              </h2>
               <div className="w-16 h-1 bg-blue-600 mx-auto rounded-full"></div>
               {isDev && (
                 <button
@@ -516,58 +624,63 @@ function RegistrationInner() {
 
               {formData.step === 4 && (
                 <div className="space-y-10 animate-in fade-in slide-in-from-right-4 duration-500">
+                  {/* Pricing Configuration Setup */}
+                  <div>
+                    <div className="flex items-center gap-3 text-blue-600 mb-6">
+                      <CreditCard className="w-6 h-6" />
+                      <h3 className="text-xl font-bold uppercase tracking-wider">Program Customization &amp; Payment</h3>
+                    </div>
 
-                  {/* Free Trial */}
-                  <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
-                    <h4 className="text-lg font-bold text-blue-700 mb-3 flex items-center gap-2">
-                      <CalendarIcon className="w-5 h-5" /> Free Trial Classes
-                    </h4>
-                    <ul className="space-y-2 text-gray-700 text-sm">
-                 
-                      <li className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-blue-500 rounded-full shrink-0" />
-                        <strong>Mar 26, 2026</strong>: 7:00 PM – 9:00 PM
-                      </li>
-                    </ul>
-                    <p className="text-xs text-blue-600 mt-3 font-medium">No cost — come see if it's a good fit before committing!</p>
+                    <div className="grid grid-cols-1 gap-4">
+                      <div className="bg-white border border-gray-200 rounded-xl p-5">
+                        <p className="font-bold text-gray-900 text-base mb-1">BJJ &amp; Robotics Summer Camp Options</p>
+                        <p className="text-xs text-gray-500 mb-3">Select your weeks first, then decide if each selected week is full day or half day.</p>
+                        <p className="text-xs text-gray-500 mb-4">Full Day is <span className="font-semibold text-gray-900">$350/week</span>, Half Day is <span className="font-semibold text-gray-900">$200/week</span>.</p>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                          {summerCampWeekOptions.map((weekOption) => {
+                            const selectedWeek = formData.programs.summerCamp.weeks.find((week) => week.id === weekOption.id);
+                            return (
+                              <div key={weekOption.id} className="rounded-2xl border border-gray-200 p-4 hover:border-blue-300 transition-all">
+                                <label className="flex items-center gap-3 cursor-pointer">
+                                  <input
+                                    type="checkbox"
+                                    className="w-4 h-4 text-blue-600 border-gray-300 rounded"
+                                    checked={Boolean(selectedWeek)}
+                                    onChange={(e) => toggleSummerCampWeek(weekOption.id, weekOption.label, e.target.checked)}
+                                  />
+                                  <span className="text-gray-900 text-sm">{weekOption.label}</span>
+                                </label>
+
+                                {selectedWeek && (
+                                  <div className="mt-3 flex flex-wrap items-center gap-2 text-sm">
+                                    <span className="text-gray-600">Pace:</span>
+                                    <button
+                                      type="button"
+                                      onClick={() => setSummerCampWeekType(weekOption.id, 'fullday')}
+                                      className={`px-3 py-2 rounded-full border text-sm font-semibold transition ${selectedWeek.type === 'fullday' ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-gray-300 bg-white text-gray-700 hover:border-blue-400'}`}
+                                    >
+                                      Full Day
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => setSummerCampWeekType(weekOption.id, 'halfday')}
+                                      className={`px-3 py-2 rounded-full border text-sm font-semibold transition ${selectedWeek.type === 'halfday' ? 'border-purple-600 bg-purple-50 text-purple-700' : 'border-gray-300 bg-white text-gray-700 hover:border-purple-400'}`}
+                                    >
+                                      Half Day
+                                    </button>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-400 mt-3">* All calculated configurations are tax-included.</p>
                   </div>
 
-{/* Updated Pricing Breakdown */}
-<div>
-  <h4 className="text-lg font-bold text-gray-900 mb-4">Program Costs</h4>
-  <div className="grid grid-cols-1 gap-4">
-    
-    {/* VEX Training Section */}
-    <div className="bg-white border border-gray-200 rounded-xl p-5">
-      <p className="font-bold text-gray-900 text-base mb-1">VEX V5 Robotics Training (10 Courses)</p>
-      <p className="text-2xl font-extrabold text-orange-600 mb-1">$400<span className="text-sm font-normal text-gray-500"> / student</span></p>
-      <p className="text-xs text-gray-500 mb-2">Comprehensive 10-course intensive focusing on V5 hardware, C++ coding, and competition-ready sensor integration.</p>
-      <div className="bg-orange-50 border border-orange-100 p-3 rounded-lg">
-        <p className="text-xs text-orange-800 font-bold mb-1">Schedule (Sat/Sun 3-5 PM):</p>
-        <p className="text-[10px] text-orange-700 leading-relaxed">
-          Apr 11, 12, 18, 19 | May 2, 3, 9, 10, 23, 24
-        </p>
-      </div>
-    </div>
-
-    {/* Team Training Section */}
-    <div className="bg-white border border-gray-200 rounded-xl p-5">
-      <p className="font-bold text-gray-900 text-base mb-1">Aerial Drone Weekly Team Training (5 Weeks)</p>
-      <p className="text-2xl font-extrabold text-blue-600 mb-1">$450<span className="text-sm font-normal text-gray-500"> / student</span></p>
-      <p className="text-xs text-gray-500 mb-2">4 hours/week for 5 weeks. Focus on advanced robotics skills and competition strategy.</p>
-      <div className="bg-blue-50 border border-blue-100 p-3 rounded-lg">
-        <p className="text-xs text-blue-800 font-bold mb-1">Schedule (Thu/Fri 7-9 PM):</p>
-        <p className="text-[10px] text-blue-700 leading-relaxed">
-          Mar 26, 27 | Apr 2, 3, 16, 17, 30 | May 1, 7, 8
-        </p>
-      </div>
-    </div>
-
-  </div>
-  <p className="text-xs text-gray-400 mt-3">* All costs are tax-included.</p>
-</div>
-
-                  {/* Discounts */}
+                  {/* Discounts Info Panel */}
                   <div className="bg-green-50 border border-green-200 rounded-2xl p-6">
                     <h4 className="text-lg font-bold text-green-800 mb-3">Discounts &amp; Notes</h4>
                     <ul className="space-y-2 text-sm text-gray-700">
@@ -577,94 +690,59 @@ function RegistrationInner() {
                     </ul>
                   </div>
 
-                  {/* Program Selection */}
-                  <div className="pt-8 border-t border-gray-100">
-                    <div className="flex items-center gap-3 text-blue-600 mb-6">
-                      <CreditCard className="w-6 h-6" />
-                      <h3 className="text-xl font-bold uppercase tracking-wider">Program Selection &amp; Payment</h3>
-                    </div>
-
-                    <div className="space-y-4 mb-8">
-                      <label className="text-sm font-semibold text-gray-700 block mb-4">Select Programs to Register</label>
-
-                      {[
-                        { id: 'freeTrial', label: 'Free Trial Classes', price: '$0' },
-                        { id: 'vexTraining', label: 'VEX V5 Robotics Training (10 Courses)', price: '$400' },
-                        { id: 'teamTraining', label: 'Aerial Drone Weekly Team Training (5 Weeks)', price: '$450' }
-                        ].map((program) => (
-                        <label key={program.id} className="flex items-center p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-pointer group">
-                          <input
-                            type="checkbox"
-                            className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-4"
-                            checked={formData.programs[program.id as keyof typeof formData.programs] || false}
-                            onChange={(e) => handleChange('programs', program.id, e.target.checked)}
-                          />
-                          <span className="text-gray-900 font-medium group-hover:text-blue-700 transition-colors">{program.label}</span>
-                          <span className="ml-auto text-blue-600 font-bold">{program.price}</span>
-                        </label>
-                      ))}
-                    </div>
-
-                    {/* Order Summary */}
-                    <div className="bg-gray-50 rounded-2xl p-6 space-y-3">
-                      {[
-                        { id: 'freeTrial', label: 'Free Trial Classes', price: '$0.00' },
-                        { id: 'vexTraining', label: 'VEX V5 Robotics Training (10 Courses)', price: '$400.00' },
-                        { id: 'teamTraining', label: 'Aerial Drone Weekly Team Training (5 Weeks)', price: '$450.00' },
-                      ].filter(p => formData.programs[p.id as keyof typeof formData.programs]).map(p => (
-                        <div key={p.id} className="flex justify-between items-center text-gray-600 text-sm">
-                          <span>{p.label}</span>
-                          <span>{p.price} CAD</span>
-                        </div>
-                      ))}
-                      <div className="flex justify-between items-center text-xl font-bold text-gray-900 pt-3 border-t border-gray-200">
-                        <span>Total</span>
-                        <span className="text-blue-600">${calculateTotal().toFixed(2)} CAD</span>
+                  {/* Clean Order Summary Breakdown */}
+                  <div className="bg-gray-50 rounded-2xl p-6 space-y-3">
+                    {formData.programs.summerCamp.weeks.length > 0 ? (
+                      <div className="space-y-3">
+                        {formData.programs.summerCamp.weeks.map((week) => {
+                          const cost = week.type === 'halfday' ? 200 : 350;
+                          return (
+                            <div key={week.id} className="flex justify-between items-center text-gray-600 text-sm">
+                              <span>
+                                {week.label} ({week.type === 'halfday' ? 'Half Day' : 'Full Day'})
+                              </span>
+                              <span>${cost}.00 CAD</span>
+                            </div>
+                          );
+                        })}
                       </div>
+                    ) : (
+                      <div className="text-sm text-gray-500 italic">No weeks checked yet.</div>
+                    )}
+                    
+                    <div className="flex justify-between items-center text-xl font-bold text-gray-900 pt-3 border-t border-gray-200">
+                      <span>Total Invoice</span>
+                      <span className="text-blue-600">${calculateTotal().toFixed(2)} CAD</span>
                     </div>
-
-                    {/* Stripe Embedded Checkout OR Free Submit */}
-                    {isPaymentLoading && (
-                      <div className="text-center py-8 text-gray-400 text-sm">Loading secure payment...</div>
-                    )}
-                    {checkoutClientSecret && !isPaymentLoading && calculateTotal() > 0 && (
-                      <div className="mt-6">
-                        <p className="text-sm text-gray-500 text-center uppercase tracking-widest font-bold mb-4">Secure Payment via Stripe</p>
-                        <EmbeddedCheckoutProvider
-                          stripe={stripePromise}
-                          options={{ clientSecret: checkoutClientSecret }}
-                        >
-                          <EmbeddedCheckout />
-                        </EmbeddedCheckoutProvider>
-                      </div>
-                    )}
-                    {!checkoutClientSecret && !isPaymentLoading && calculateTotal() === 0 && !formData.programs.freeTrial && (
-                      <p className="text-sm text-amber-600 text-center">Please select at least one program to proceed to payment.</p>
-                    )}
-
-                    {/* Submit directly for $0 / Free Trial Only */}
-                    {!isPaymentLoading && calculateTotal() === 0 && formData.programs.freeTrial && (
-                      <div className="mt-6 text-center">
-                        <p className="text-sm text-gray-600 mb-4">You have only selected the Free Trial Classes. No payment is required.</p>
-                        <button
-                          type="button"
-                          onClick={async () => {
-                            setIsPaymentLoading(true);
-                            // Send dummy payment ID for free trial
-                            await handleSaveRegistration("free_trial_" + Date.now());
-                            setIsSubmitted(true);
-                            setIsPaymentLoading(false);
-                          }}
-                          className="px-12 py-4 bg-green-600 text-white font-bold rounded-2xl hover:bg-green-700 shadow-xl hover:shadow-green-200 transition-all"
-                        >
-                          Complete Free Registration
-                        </button>
-                      </div>
-                    )}
                   </div>
+
+                  {/* Stripe Engine Render Hooks */}
+                  {isPaymentLoading && (
+                    <div className="text-center py-8 text-gray-400 text-sm">Loading secure payment portal...</div>
+                  )}
+                  {checkoutError && (
+                    <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-red-800 text-sm mb-4">
+                      {checkoutError}
+                    </div>
+                  )}
+                  {checkoutClientSecret && !isPaymentLoading && calculateTotal() > 0 && (
+                    <div className="mt-6">
+                      <p className="text-sm text-gray-500 text-center uppercase tracking-widest font-bold mb-4">Secure Checkout Powered by Stripe</p>
+                      <EmbeddedCheckoutProvider
+                        stripe={stripePromise}
+                        options={{ clientSecret: checkoutClientSecret }}
+                      >
+                        <EmbeddedCheckout />
+                      </EmbeddedCheckoutProvider>
+                    </div>
+                  )}
+                  {!checkoutClientSecret && !isPaymentLoading && calculateTotal() === 0 && (
+                    <p className="text-sm text-amber-600 text-center font-medium">Please select a camp format and at least one week to initialize payment.</p>
+                  )}
                 </div>
               )}
 
+              {/* Form Navigation Controls */}
               <div className="flex flex-col md:flex-row justify-between pt-10 gap-4">
                 {formData.step > 1 ? (
                   <button
