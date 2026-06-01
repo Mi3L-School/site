@@ -686,7 +686,7 @@ function RegistrationInner() {
                     <ul className="space-y-2 text-sm text-gray-700">
                       <li className="flex items-start gap-2"><span className="text-green-600 font-bold shrink-0">5%</span> off tuition for girls or same-family members</li>
                       <li className="flex items-start gap-2"><span className="text-green-600 font-bold shrink-0">10%</span> off for 2055 family &amp; friends and Mi3L School Recreational members</li>
-                      <li className="flex items-start gap-2"><span className="text-green-600 font-bold shrink-0">25%</span> off tuition for former members/students</li>
+                      <li className="flex items-start gap-2"><span className="text-green-600 font-bold shrink-0">10%</span> off tuition for former members/students</li>
                     </ul>
                   </div>
 
