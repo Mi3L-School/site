@@ -10,7 +10,7 @@ import { supabase } from './supabase';
  */
 export async function supabaseKeepAlive() {
   // Only run 10% of the time to minimize overhead
-  if (Math.random() >= 0.1) return;
+  if (Math.random() >= 0.1 || !supabase) return;
 
   try {
     // Query the registrations table with a limit of 1 to minimize data transfer

@@ -2,9 +2,16 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
 function getStripe() {
-    const secretKey = process.env.STRIPE_SECRET_KEY;
+    const secretKey = [
+        process.env.STRIPE_SECRET_KEY,
+        process.env.STRIPE_API_KEY,
+        process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY,
+        process.env.SUPABASE_STRIPE_SECRET_KEY,
+        process.env.SUPABASE_ENV_STRIPE_SECRET_KEY,
+    ].find((value) => typeof value === 'string' && value.trim())?.trim();
+
     if (!secretKey) {
-        throw new Error('Missing STRIPE_SECRET_KEY');
+        throw new Error('Missing Stripe secret key. Set STRIPE_SECRET_KEY (or another supported environment variable) before creating checkout sessions.');
     }
     return new Stripe(secretKey, {
         apiVersion: '2026-02-25.clover',
