@@ -19,6 +19,13 @@ const teams = [
       "Design Award @ Glenforest Qualifier",
       "Think Award @ Highlander Signature Event",
     ],
+    achievements25: [
+      "Ontario HS Provincial Championship Design Award & World Championship Qualifier",
+      "Gateway to the West VEX V5 Robotics Competition Signature Event: Think Award",
+      "Waterloo Showdown: Tournament Championship & Think Award",
+      "St. Catherine VRC Qualifier: Tournament Champion & Think Award",
+      "Lauch at Eaton V5 Robotics Competition Signature Event: Think Award",
+    ],
   },
   {
     id: "2055x",
@@ -35,6 +42,25 @@ const teams = [
       "Judges Award @ Gateway Signature Event",
       "Design Award @ Riverbots Signature Event",
       "Innovate Award @ St. Catharines Qualifier",
+    ],
+    achievements25: [
+      "Ontario MS Provincial Championship",
+      "Innovate Award & World Qualifier",
+      "Waterloo Showdown - A V5RC Push Back Qualifier: Tournament Champions",
+      "White Oak V5RC Qualifier: Innovate Award",
+      "Waterloo Throwdown - A V5RC Push Back Qualifier: Tournament Finalists & Think Award",
+    ],
+  },
+  {
+    id: "2055c",
+    name: "All Girls Team",
+    number: "2055C",
+    photo: "/images/teams/2055c_team_On.jpg",
+    achievements23: [],
+    achievements24: [],
+    achievements25: [
+      "Ontario MS Provincial Championship Judge Award",
+      "iDesign Toronto Tournament: Innovate Award",
     ],
   },
 ];
@@ -86,10 +112,10 @@ export default function Achievements() {
                   </h2>
                   <div className="mt-8">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                      2024-2025 Season Highlights:
+                      2025-2026 Season Highlights:
                     </h3>
                     <ul className="space-y-3">
-                      {team.achievements24.map((achievement, index) => (
+                      {(team.achievements25 ?? []).map((achievement, index) => (
                         <li key={index} className="flex items-start">
                           <svg
                             className="shrink-0 h-5 w-5 text-orange-500 mt-0.5"
@@ -108,30 +134,58 @@ export default function Achievements() {
                       ))}
                     </ul>
                   </div>
-                  <div className="mt-8">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                      2023-2024 Season Highlights:
-                    </h3>
-                    <ul className="space-y-3">
-                      {team.achievements23.map((achievement, index) => (
-                        <li key={index} className="flex items-start">
-                          <svg
-                            className="shrink-0 h-5 w-5 text-orange-500 mt-0.5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          <span className="ml-3 text-gray-700">{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  {(team.achievements24?.length ?? 0) > 0 && (
+                    <div className="mt-8">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                        2024-2025 Season Highlights:
+                      </h3>
+                      <ul className="space-y-3">
+                        {team.achievements24.map((achievement, index) => (
+                          <li key={index} className="flex items-start">
+                            <svg
+                              className="shrink-0 h-5 w-5 text-orange-500 mt-0.5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                            <span className="ml-3 text-gray-700">{achievement}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {(team.achievements23?.length ?? 0) > 0 && (
+                    <div className="mt-8">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                        2023-2024 Season Highlights:
+                      </h3>
+                      <ul className="space-y-3">
+                        {team.achievements23.map((achievement, index) => (
+                          <li key={index} className="flex items-start">
+                            <svg
+                              className="shrink-0 h-5 w-5 text-orange-500 mt-0.5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                            <span className="ml-3 text-gray-700">{achievement}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

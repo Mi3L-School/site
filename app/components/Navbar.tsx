@@ -21,7 +21,13 @@ const aboutLinks = [
   { path: "/achievements", name: "Achievements" },
 ];
 
-type DropdownId = "about" | "programs" | "teams" | null;
+const communityOutreachLinks = [
+  { path: "/programs/special-needs-workshop", name: "Special Needs Workshop" },
+  { path: "/programs/girl-power", name: "Girl Power" },
+  { path: "/programs/girl-guide-workshop", name: "Girl Guide Workshop" },
+];
+
+type DropdownId = "about" | "programs" | "teams" | "communityOutreach" | null;
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -47,8 +53,12 @@ export default function Navbar() {
 
   // Close mobile menu on route change
   useEffect(() => {
-    setMobileOpen(false);
-    setOpenDropdown(null);
+    const timer = window.setTimeout(() => {
+      setMobileOpen(false);
+      setOpenDropdown(null);
+    }, 0);
+
+    return () => window.clearTimeout(timer);
   }, [pathname]);
 
   const scheduleClose = () => {
@@ -173,6 +183,52 @@ export default function Navbar() {
                 onMouseLeave={scheduleClose}
               >
                 {programLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    href={link.path}
+                    className={`block px-4 py-2 text-sm transition-colors ${isActive(link.path)
+                      ? "text-white bg-white/10"
+                      : "text-gray-300 hover:text-white hover:bg-white/10"
+                      }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Community Outreach Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => { cancelClose(); setOpenDropdown("communityOutreach"); }}
+              onMouseLeave={scheduleClose}
+            >
+              <button
+                className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${isDropdownActive(communityOutreachLinks)
+                  ? "text-white bg-white/10"
+                  : "text-gray-300 hover:text-white hover:bg-white/10"
+                  }`}
+              >
+                Community Outreach
+                <svg
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${openDropdown === "communityOutreach" ? "rotate-180" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <div
+                className={`absolute top-full left-0 mt-1.5 w-56 bg-gray-800 border border-white/10 rounded-xl shadow-xl py-1.5 transition-all duration-200 origin-top ${openDropdown === "communityOutreach"
+                  ? "opacity-100 scale-100 pointer-events-auto"
+                  : "opacity-0 scale-95 pointer-events-none"
+                  }`}
+                onMouseEnter={() => { cancelClose(); setOpenDropdown("communityOutreach"); }}
+                onMouseLeave={scheduleClose}
+              >
+                {communityOutreachLinks.map((link) => (
                   <Link
                     key={link.path}
                     href={link.path}
@@ -354,6 +410,40 @@ export default function Navbar() {
             >
               <div className="pl-4 mt-0.5 space-y-0.5">
                 {programLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    href={link.path}
+                    className="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Community Outreach Section */}
+          <div>
+            <button
+              onClick={() => toggleMobileSection("communityOutreach")}
+              className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+            >
+              Community Outreach
+              <svg
+                className={`w-4 h-4 transition-transform duration-200 ${mobileExpanded["communityOutreach"] ? "rotate-180" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div
+              className={`overflow-hidden transition-all duration-200 ${mobileExpanded["communityOutreach"] ? "max-h-60" : "max-h-0"
+                }`}
+            >
+              <div className="pl-4 mt-0.5 space-y-0.5">
+                {communityOutreachLinks.map((link) => (
                   <Link
                     key={link.path}
                     href={link.path}
