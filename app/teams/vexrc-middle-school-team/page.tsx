@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const members = [
-  { name: "Mark", role: "Captain", image: "/images/teams/mark.png" },
+  { name: "Mark", role: "Captain", image: "/images/teams/Mark.png" },
   { name: "Kayra", role: "Program Lead", image: "/images/teams/kayra.jpg" },
   { name: "Daniel", role: "Notebook Lead", image: "/images/teams/daniel.png" },
   { name: "Fisher", role: "Builder", image: "/images/teams/fisher.png" },

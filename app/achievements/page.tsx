@@ -67,7 +67,7 @@ const teams = [
     id: "arialdrone",
     name: "Aerial Drone Team",
     number: "ArialDrone",
-    photo: "/images/teams/aerialdrone_team.jpg",
+    photo: "/images/teams/aerialdrone_team.JPG",
     achievements23: [],
     achievements24: [
       "2024-2025 • Gravity • 2055A • Mar 14, 2025 • Drone Career Readiness • Winner • Online Challenge • HS",
