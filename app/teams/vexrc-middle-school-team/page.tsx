@@ -6,6 +6,8 @@ const members = [
   { name: "Kayra", role: "Program Lead", image: "/images/teams/kayra.jpg" },
   { name: "Daniel", role: "Notebook Lead", image: "/images/teams/daniel.png" },
   { name: "Fisher", role: "Builder", image: "/images/teams/fisher.png" },
+  { name: "Simon", role: "Builder", image: "/images/teams/simon.png" },
+
 ];
 
 export default function VexrcMiddleSchoolTeamPage() {
@@ -13,8 +15,8 @@ export default function VexrcMiddleSchoolTeamPage() {
     <div className="min-h-screen bg-white text-gray-900 selection:bg-orange-100">
       <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-sm uppercase tracking-[0.35em] text-orange-400 font-semibold">VEXRC Middle School</p>
-          <h1 className="mt-6 text-5xl md:text-6xl font-bold tracking-tight">VEXRC Middle School Team</h1>
+          <p className="text-sm uppercase tracking-[0.35em] text-orange-400 font-semibold">2025-2026 VEXRC Middle School</p>
+          <h1 className="mt-6 text-5xl md:text-6xl font-bold tracking-tight">2025-2026 VEXRC Middle School Team</h1>
           <p className="mt-6 text-lg text-slate-300 max-w-3xl mx-auto">
             Our middle school team learns the fundamentals of build quality, programming logic, and teamwork while gaining hands-on competition experience.
           </p>

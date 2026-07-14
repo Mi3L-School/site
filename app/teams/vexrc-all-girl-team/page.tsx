@@ -11,8 +11,8 @@ export default function VexrcAllGirlTeamPage() {
     <div className="min-h-screen bg-white text-gray-900 selection:bg-orange-100">
       <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-sm uppercase tracking-[0.35em] text-orange-400 font-semibold">VEXRC All Girl</p>
-          <h1 className="mt-6 text-5xl md:text-6xl font-bold tracking-tight">VEXRC All Girl Team</h1>
+          <p className="text-sm uppercase tracking-[0.35em] text-orange-400 font-semibold">2025-2026 VEXRC All Girl</p>
+          <h1 className="mt-6 text-5xl md:text-6xl font-bold tracking-tight">2025-2026 VEXRC All Girl Team</h1>
           <p className="mt-6 text-lg text-slate-300 max-w-3xl mx-auto">
             An all-girl robotics team that builds skills, confidence, and leadership while competing in VEX Robotics events.
           </p>

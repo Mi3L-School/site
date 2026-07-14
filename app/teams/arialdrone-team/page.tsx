@@ -2,10 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 const members = [
-  { name: "Ethan Nguyen", role: "Pilot & Flight Coordinator", image: "/images/teams/ethans.png" },
-  { name: "Lila Green", role: "Airframe Design Lead", image: "/images/teams/ethanw.png" },
-  { name: "Amina Hussain", role: "Sensor & Navigation Engineer", image: "/images/teams/ayush.png" },
-  { name: "Diego Cruz", role: "Safety Officer & Data Analyst", image: "/images/teams/justin.png" },
+  { name: "Kayra", role: "Captain & Lead Programmer", image: "/images/teams/kayra.jpg" },
+  { name: "Andy", role: "Teamwork Pilot & Programmer", image: "/images/teams/andy.jpg" },
+  { name: "Ethan D", role: "Teamwork & Skills Pilot", image: "/images/teams/ethand.jpg" },
+  { name: "Tyreke", role: "Skills Pilot", image: "/images/teams/Tyreke.jpg" },
+ { name: "Lucas", role: "Pilot", image: "/images/teams/lucas.jpg" },
+ { name: "William", role: "Captain & Programmer", image: "/images/teams/william.jpg" },
+ 
 ];
 
 export default function ArialDroneTeamPage() {
@@ -13,8 +16,8 @@ export default function ArialDroneTeamPage() {
     <div className="min-h-screen bg-white text-gray-900 selection:bg-orange-100">
       <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-sm uppercase tracking-[0.35em] text-orange-400 font-semibold">ArialDrone</p>
-          <h1 className="mt-6 text-5xl md:text-6xl font-bold tracking-tight">ArialDrone Team</h1>
+          <p className="text-sm uppercase tracking-[0.35em] text-orange-400 font-semibold">2025-2026 ArialDrone</p>
+          <h1 className="mt-6 text-5xl md:text-6xl font-bold tracking-tight">2025-2026 ArialDrone Team</h1>
           <p className="mt-6 text-lg text-slate-300 max-w-3xl mx-auto">
             The ArialDrone team trains students in aerial robotics, drone control, and mission planning for precision flight challenges.
           </p>
