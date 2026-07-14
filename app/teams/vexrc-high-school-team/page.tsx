@@ -8,6 +8,7 @@ const members = [
   { name: "Thomas", role: "Build Lead", image: "/images/teams/thomas.png" },
   { name: "Ethon Si", role: "Programmer", image: "/images/teams/ethans.png" },
   { name: "Ethon Wang", role: "Programmer", image: "/images/teams/ethanw.png" },
+  { name: "Jasper", role: "Builder", image: "/images/teams/jasper.png" },
   
 ];
 
