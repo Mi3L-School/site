@@ -12,7 +12,11 @@ const programLinks = [
 ];
 
 const teamLinks = [
-  { path: "/teams/vex-v5", name: "VEX V5 Team" },
+  { path: "/teams", name: "Teams Home" },
+  { path: "/teams/vexrc-high-school-team", name: "VEXRC High School Team" },
+  { path: "/teams/vexrc-middle-school-team", name: "VEXRC Middle School Team" },
+  { path: "/teams/vexrc-all-girl-team", name: "VEXRC All Girl Team" },
+  { path: "/teams/arialdrone-team", name: "ArialDrone Team" },
 ];
 
 const aboutLinks = [

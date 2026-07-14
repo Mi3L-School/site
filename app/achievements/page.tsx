@@ -63,6 +63,27 @@ const teams = [
       "iDesign Toronto Tournament: Innovate Award",
     ],
   },
+  {
+    id: "arialdrone",
+    name: "Aerial Drone Team",
+    number: "ArialDrone",
+    photo: "/images/teams/aerialdrone_team.jpg",
+    achievements23: [],
+    achievements24: [
+      "2024-2025 • Gravity • 2055A • Mar 14, 2025 • Drone Career Readiness • Winner • Online Challenge • HS",
+      "2024-2025 • Gravity • 2055A • May 16-17, 2025 • North Central Championship at Kettering University • Code Award • North Central Championship • HS",
+      "2024-2025 • Gravity • 2055X • Apr 12, 2025 • Drones in Oxford MA • Judge Award • Qualifier • MS",
+      "2024-2025 • Gravity • 2055X • Mar 14, 2025 • Drone Career Readiness • Winner • Online Challenge • MS",
+    ],
+    achievements25: [
+      "2025-2026 • Time Warp • 2055A • Apr 19, 2026 • Mi3L School • All Around Award • Qualifier • MS",
+      "2025-2026 • Time Warp • 2055A • Apr 19, 2026 • Mi3L School • Skills Champion • Qualifier • MS",
+      "2025-2026 • Time Warp • 2055X • Apr 19, 2026 • Mi3L School • Communication Award • Qualifier • MS",
+      "2025-2026 • Time Warp • 2055A • May 15-16, 2026 • North Central Championship at Kettering University • All Around Award • North Central Championship • MS",
+      "2025-2026 • Time Warp • 2055X • May 15-16, 2026 • North Central Championship at Kettering University • Team Work Finalist • North Central Championship • MS",
+      "2025-2026 • Time Warp • 2055...* • May 15-16, 2026 • North Central Championship at Kettering University • Code Award",
+    ],
+  },
 ];
 
 export default function Achievements() {

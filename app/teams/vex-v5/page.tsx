@@ -129,7 +129,7 @@ export default function RoboticsPage() {
             {[
               { title: "High School Team", awards: "20x", detail: "From 2022 - 2026" },
               { title: "Middle School Team", awards: "16x", detail: "From 2023 - 2026" },
-              { title: "New All Girls Team", awards: "2x", detail: "Inovate & Judge Awards" }
+              { title: "All Girls Team", awards: "2x", detail: "From 2025 - 2026" }
             ].map((stat, idx) => (
               <div key={idx} className="p-8 rounded-3xl bg-gray-800/50 border border-gray-700 hover:border-orange-500 transition-all">
                 <h4 className="text-gray-400 font-medium mb-2">{stat.title}</h4>
