@@ -16,6 +16,13 @@ export default function SpecialNeedsWorkshopPage() {
             In collaboration with the Northstar Special Needs Society, we hosted an exclusive STEM and robotics workshop designed specifically for children with special needs.
           </p>
 
+          <div className="mt-8 rounded-2xl border border-gray-200 p-8">
+            <h2 className="text-2xl font-semibold text-gray-900">Why it matters</h2>
+            <p className="mt-4 text-gray-700 leading-7">
+              Our goal was to ensure that the future of innovation remains accessible to every child, regardless of their learning journey. By creating spaces where students can learn, create, and belong, we help inspire the next generation of thinkers and builders.
+            </p>
+          </div>
+
           <div className="mt-10 grid gap-5 lg:grid-cols-[0.9fr_1.2fr_0.9fr] lg:items-start">
             <section className="rounded-2xl bg-orange-50 p-6">
               <h2 className="text-xl font-semibold text-gray-900">
@@ -48,13 +55,6 @@ export default function SpecialNeedsWorkshopPage() {
                 <li>• A strong commitment to making innovation accessible for every child</li>
               </ul>
             </section>
-          </div>
-
-          <div className="mt-8 rounded-2xl border border-gray-200 p-8">
-            <h2 className="text-2xl font-semibold text-gray-900">Why it matters</h2>
-            <p className="mt-4 text-gray-700 leading-7">
-              Our goal was to ensure that the future of innovation remains accessible to every child, regardless of their learning journey. By creating spaces where students can learn, create, and belong, we help inspire the next generation of thinkers and builders.
-            </p>
           </div>
 
         </div>
