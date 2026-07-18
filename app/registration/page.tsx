@@ -111,6 +111,10 @@ function RegistrationInner() {
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
   const [isDev, setIsDev] = useState(false);
+  const [isProgramConfirmed, setIsProgramConfirmed] = useState(false);
+  const [isConfirmingProgram, setIsConfirmingProgram] = useState(false);
+  const [confirmedRegistrationId, setConfirmedRegistrationId] = useState<string | null>(null);
+  const [confirmMessage, setConfirmMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
@@ -194,19 +198,30 @@ function RegistrationInner() {
     return JSON.parse(text);
   };
 
-  const fetchCheckoutSession = useCallback(async () => {
+  const persistRegistrationDraft = useCallback((data: FormState, registrationId?: string | null) => {
+    const draft = {
+      ...data,
+      registrationId: registrationId ?? null,
+    };
+    localStorage.setItem('mi3l_registration_draft', JSON.stringify(draft));
+  }, []);
+
+  const fetchCheckoutSession = useCallback(async (registrationId?: string | null) => {
     if (calculateTotal(formData) <= 0) return;
     setCheckoutError(null);
     setIsPaymentLoading(true);
     try {
-      localStorage.setItem('mi3l_registration_draft', JSON.stringify(formData));
+      persistRegistrationDraft(formData, registrationId);
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           programs: formData.programs,
           origin: window.location.origin,
-          metadata: { studentName: `${formData.student.firstName} ${formData.student.lastName}` },
+          metadata: {
+            studentName: `${formData.student.firstName} ${formData.student.lastName}`,
+            registrationId: registrationId || '',
+          },
         }),
       });
       if (!res.ok) {
@@ -231,18 +246,7 @@ function RegistrationInner() {
     } finally {
       setIsPaymentLoading(false);
     }
-  }, [formData]);
-
-  useEffect(() => {
-    if (formData.step === 4) {
-      if (calculateTotal(formData) > 0) {
-        setCheckoutClientSecret(null);
-        fetchCheckoutSession();
-      } else {
-        setCheckoutClientSecret(null);
-      }
-    }
-  }, [formData.step, formData.programs.summerCamp.weeks, fetchCheckoutSession]);
+  }, [formData, persistRegistrationDraft]);
 
   useEffect(() => {
     const sessionId = searchParams.get('session_id');
@@ -261,7 +265,7 @@ function RegistrationInner() {
           const draft = localStorage.getItem('mi3l_registration_draft');
           if (draft) {
             const savedForm = JSON.parse(draft);
-            await handleSaveRegistration(data.paymentIntentId as string, savedForm, data.amountTotal);
+            await handleSaveRegistration(data.paymentIntentId as string, savedForm, data.amountTotal, savedForm.registrationId ?? null);
             localStorage.removeItem('mi3l_registration_draft');
           }
           setIsSubmitted(true);
@@ -273,30 +277,73 @@ function RegistrationInner() {
     handleReturn();
   }, [searchParams]);
 
-  const handleSaveRegistration = async (paymentIntentId: string, data?: FormState, finalAmountCents?: number) => {
+  const handleConfirmSelection = async () => {
+    setCheckoutError(null);
+    setConfirmMessage(null);
+    setIsConfirmingProgram(true);
+
+    try {
+      const res = await fetch('/api/save-registration', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          status: 'pending_payment',
+        }),
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Failed to confirm registration: ${res.status} ${text}`);
+      }
+
+      const data = await parseJsonResponse(res);
+      const registrationId = data.registrationId || null;
+      setConfirmedRegistrationId(registrationId);
+      setIsProgramConfirmed(true);
+      persistRegistrationDraft(formData, registrationId);
+      setConfirmMessage('Selection confirmed. Please complete payment below.');
+
+      if (calculateTotal(formData) > 0) {
+        await fetchCheckoutSession(registrationId);
+      } else {
+        setCheckoutError('Please select at least one camp week before continuing to payment.');
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      setCheckoutError(message);
+      console.error('Error confirming registration:', error);
+    } finally {
+      setIsConfirmingProgram(false);
+    }
+  };
+
+  const handleSaveRegistration = async (paymentIntentId?: string, data?: FormState, finalAmountCents?: number, registrationId?: string | null) => {
     try {
       const payload = data || formData;
-      const finalAmount = finalAmountCents !== undefined 
-        ? finalAmountCents / 100 
+      const finalAmount = finalAmountCents !== undefined
+        ? finalAmountCents / 100
         : calculateTotal(payload);
 
-      const res = await fetch("/api/save-registration", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/save-registration', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...payload,
           paymentIntentId,
-          amount: finalAmount
+          amount: finalAmount,
+          registrationId,
+          status: paymentIntentId ? 'paid' : 'pending_payment',
         }),
       });
       if (!res.ok) {
         const text = await res.text();
-        console.error("Error saving registration:", res.status, text);
+        console.error('Error saving registration:', res.status, text);
       } else {
         await parseJsonResponse(res);
       }
     } catch (error) {
-      console.error("Error saving registration:", error);
+      console.error('Error saving registration:', error);
     }
   };
 
@@ -714,6 +761,26 @@ function RegistrationInner() {
                       <span>Total Invoice</span>
                       <span className="text-blue-600">${calculateTotal().toFixed(2)} CAD</span>
                     </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-blue-100 bg-blue-50/70 p-5">
+                    <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                      <div>
+                        <p className="text-sm font-semibold text-blue-800">Confirm your camp selection before payment</p>
+                        <p className="text-sm text-blue-700 mt-1">
+                          Your selected weeks and full-day or half-day choices will be saved to your registration record before Stripe opens.
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleConfirmSelection}
+                        disabled={isConfirmingProgram || calculateTotal() <= 0 || formData.programs.summerCamp.weeks.length === 0}
+                        className="inline-flex items-center justify-center rounded-2xl bg-blue-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
+                      >
+                        {isConfirmingProgram ? 'Confirming...' : isProgramConfirmed ? 'Selection Confirmed' : 'Confirm Selection'}
+                      </button>
+                    </div>
+                    {confirmMessage && <p className="mt-3 text-sm text-blue-700">{confirmMessage}</p>}
                   </div>
 
                   {/* Stripe Engine Render Hooks */}

@@ -36,6 +36,8 @@ CREATE TABLE registrations (
     emergency2_email TEXT,
     program_team_training BOOLEAN DEFAULT FALSE,
     program_vex_v5_robotics BOOLEAN DEFAULT FALSE,
+    program_summer_camp BOOLEAN DEFAULT FALSE,
+    summer_camp_weeks JSONB DEFAULT '[]'::jsonb,
     payment_intent_id TEXT,
     amount_paid DECIMAL(10, 2),
     status TEXT DEFAULT 'pending'

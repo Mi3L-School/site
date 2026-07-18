@@ -1,6 +1,7 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resendApiKey = process.env.RESEND_API_KEY;
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 export async function sendRegistrationReceipt({
   email,
@@ -50,6 +51,11 @@ export async function sendRegistrationReceipt({
       </p>
     </div>
   `;
+
+  if (!resend) {
+    console.warn('Resend API key is not configured; skipping registration receipt email.');
+    return { success: false, error: 'RESEND_API_KEY missing' };
+  }
 
   try {
     const { data, error } = await resend.emails.send({
