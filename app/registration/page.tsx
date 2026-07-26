@@ -10,10 +10,13 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY 
 
 // Aug 4-7 (week2) is a 4-day week (no Monday), so it's priced lower than the standard 5-day weeks.
 const SHORT_SUMMER_CAMP_WEEK_IDS = ['week2'];
+// Jul 27-31 (week1) is a single 1pm-4pm afternoon session, so it's always billed at the half-day rate.
+const HALF_DAY_ONLY_WEEK_IDS = ['week1'];
 
 function getSummerCampWeekRate(weekId: string, type: 'fullday' | 'halfday') {
+  const effectiveType = HALF_DAY_ONLY_WEEK_IDS.includes(weekId) ? 'halfday' : type;
   const isShortWeek = SHORT_SUMMER_CAMP_WEEK_IDS.includes(weekId);
-  if (type === 'halfday') return isShortWeek ? 160 : 200;
+  if (effectiveType === 'halfday') return isShortWeek ? 160 : 200;
   return isShortWeek ? 280 : 350;
 }
 
@@ -173,8 +176,8 @@ function RegistrationInner() {
         summerCamp: {
           selected: true,
           weeks: [
-            { id: 'week1', label: 'Week 1 (Jul 27-31) — Grades 1-8 — VEX IQ', type: 'fullday' },
-            { id: 'week2', label: 'Week 2 (Aug 4-7) — Grades 5-11 — VEX V5RC (Days 1-4)', type: 'halfday' },
+            { id: 'week1', label: 'Week 1 (Jul 27-31) — Grades 1-8 — Aerial Drone & Python (1pm-4pm only)', type: 'halfday' },
+            { id: 'week2', label: 'Week 2 (Aug 4-7) — Grades 5-11 — VEX V5RC (Days 1-4: Drive Train & Foundation)', type: 'halfday' },
           ],
         },
       },
@@ -414,9 +417,9 @@ function RegistrationInner() {
   };
 
   const summerCampWeekOptions = [
-    { id: 'week1', label: 'Week 1 (Jul 27-31) — Grades 1-8 — VEX IQ' },
-    { id: 'week2', label: 'Week 2 (Aug 4-7) — Grades 5-11 — VEX V5RC (Days 1-4)' },
-    { id: 'week3', label: 'Week 3 (Aug 10-14) — Grades 5-11 — VEX V5RC (Days 5-9)' },
+    { id: 'week1', label: 'Week 1 (Jul 27-31) — Grades 1-8 — Aerial Drone & Python (1pm-4pm only)' },
+    { id: 'week2', label: 'Week 2 (Aug 4-7) — Grades 5-11 — VEX V5RC (Days 1-4: Drive Train & Foundation)' },
+    { id: 'week3', label: 'Week 3 (Aug 10-14) — Grades 5-11 — VEX V5RC (Days 5-9: Arm & Functions)' },
     { id: 'week4', label: 'Week 4 (Aug 17-21) — Grades 5-11 — Science Fair (Days 1-5)' },
     { id: 'week5', label: 'Week 5 (Aug 24-28) — Grades 5-11 — Science Fair (Days 6-10)' },
   ];
@@ -687,7 +690,7 @@ function RegistrationInner() {
                       <div className="bg-white border border-gray-200 rounded-xl p-5">
                         <p className="font-bold text-gray-900 text-base mb-1">BJJ &amp; Robotics Summer Camp Options</p>
                         <p className="text-xs text-gray-500 mb-3">Select your weeks first, then decide if each selected week is full day or half day.</p>
-                        <p className="text-xs text-gray-500 mb-4">Full Day is <span className="font-semibold text-gray-900">$350/week</span>, Half Day is <span className="font-semibold text-gray-900">$200/week</span>. Aug 4-7 is a shorter 4-day week: Full Day <span className="font-semibold text-gray-900">$280</span>, Half Day <span className="font-semibold text-gray-900">$160</span>.</p>
+                        <p className="text-xs text-gray-500 mb-4">Full Day is <span className="font-semibold text-gray-900">$350/week</span>, Half Day is <span className="font-semibold text-gray-900">$200/week</span>. Aug 4-7 is a shorter 4-day week: Full Day <span className="font-semibold text-gray-900">$280</span>, Half Day <span className="font-semibold text-gray-900">$160</span>. Jul 27-31 is afternoon-only and always billed at the Half Day rate.</p>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
                           {summerCampWeekOptions.map((weekOption) => {
@@ -704,7 +707,12 @@ function RegistrationInner() {
                                   <span className="text-gray-900 text-sm">{weekOption.label}</span>
                                 </label>
 
-                                {selectedWeek && (
+                                {selectedWeek && weekOption.id === 'week1' && (
+                                  <p className="mt-3 text-sm text-gray-500 italic">
+                                    Half-day rate applies — Jul 27-31 runs 1pm-4pm only.
+                                  </p>
+                                )}
+                                {selectedWeek && weekOption.id !== 'week1' && (
                                   <div className="mt-3 flex flex-wrap items-center gap-2 text-sm">
                                     <span className="text-gray-600">Pace:</span>
                                     <button

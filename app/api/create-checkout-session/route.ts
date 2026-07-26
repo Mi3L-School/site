@@ -78,9 +78,12 @@ export async function POST(req: Request) {
 
         // Aug 4-7 (week2) is a 4-day week (no Monday), so it's priced lower than the standard 5-day weeks.
         const SHORT_SUMMER_CAMP_WEEK_IDS = ['week2'];
+        // Jul 27-31 (week1) is a single 1pm-4pm afternoon session, so it's always billed at the half-day rate.
+        const HALF_DAY_ONLY_WEEK_IDS = ['week1'];
         const getWeekRateCents = (weekId: string, type: 'halfday' | 'fullday') => {
+            const effectiveType = HALF_DAY_ONLY_WEEK_IDS.includes(weekId) ? 'halfday' : type;
             const isShortWeek = SHORT_SUMMER_CAMP_WEEK_IDS.includes(weekId);
-            if (type === 'halfday') return isShortWeek ? 16000 : 20000;
+            if (effectiveType === 'halfday') return isShortWeek ? 16000 : 20000;
             return isShortWeek ? 28000 : 35000;
         };
 
@@ -88,12 +91,13 @@ export async function POST(req: Request) {
             const groups = new Map<string, { type: SelectedWeek['type']; unitAmount: number; count: number }>();
             for (const week of selectedWeeks) {
                 const unitAmount = getWeekRateCents(week.id, week.type);
-                const key = `${week.type}-${unitAmount}`;
+                const effectiveType: SelectedWeek['type'] = HALF_DAY_ONLY_WEEK_IDS.includes(week.id) ? 'halfday' : week.type;
+                const key = `${effectiveType}-${unitAmount}`;
                 const existing = groups.get(key);
                 if (existing) {
                     existing.count += 1;
                 } else {
-                    groups.set(key, { type: week.type, unitAmount, count: 1 });
+                    groups.set(key, { type: effectiveType, unitAmount, count: 1 });
                 }
             }
 
