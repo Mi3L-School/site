@@ -5,6 +5,39 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function SummerCampPage() {
+  const weeklySchedule = [
+    {
+      dates: "Jul 27 - 31",
+      grades: "Grades 1-8",
+      morning: "Aerial Drone or Brazilian Jiu-Jitsu (BJJ)",
+      afternoon: "VEX IQ Robotics — Building & Programming",
+    },
+    {
+      dates: "Aug 4 - 7",
+      grades: "Grades 5-11",
+      morning: "Aerial Drone or Brazilian Jiu-Jitsu (BJJ)",
+      afternoon: "VEX V5RC Robotics — Days 1-4: Chassis & Fundamentals",
+    },
+    {
+      dates: "Aug 10 - 14",
+      grades: "Grades 5-11",
+      morning: "Aerial Drone or Brazilian Jiu-Jitsu (BJJ)",
+      afternoon: "VEX V5RC Robotics — Days 5-9: Mechanisms & Functions",
+    },
+    {
+      dates: "Aug 17 - 21",
+      grades: "Grades 5-11",
+      morning: "Aerial Drone or Brazilian Jiu-Jitsu (BJJ)",
+      afternoon: "Science Fair — \"Everyone Can Be a Scientist\" Series, Days 1-5",
+    },
+    {
+      dates: "Aug 24 - 28",
+      grades: "Grades 5-11",
+      morning: "Aerial Drone or Brazilian Jiu-Jitsu (BJJ)",
+      afternoon: "Science Fair — \"Everyone Can Be a Scientist\" Series, Days 6-10",
+    },
+  ];
+
   const roboticsProgression = [
     { day: "Day 1", title: "Game Analysis and Strategy", detail: "2026-2027 season overview" },
     { day: "Day 2", title: "CAD Drive Train", detail: "Design the robot base" },
@@ -12,9 +45,9 @@ export default function SummerCampPage() {
     { day: "Day 4", title: "C++ and VEX PROS", detail: "Program the drivetrain" },
     { day: "Day 5", title: "Test and Drive", detail: "Refine movement and reliability" },
     { day: "Day 6", title: "CAD Scoring Functions", detail: "Design scoring mechanisms" },
-    { day: "Days 7-8", title: "Build Scoring Functions", detail: "Construct the scoring system" },
-    { day: "Day 9", title: "Program Scoring Functions", detail: "Code the mechanisms" },
-    { day: "Day 10", title: "Test and Scrimmage", detail: "Put everything together in competition-style play" },
+    { day: "Day 7", title: "Build Scoring Functions", detail: "Construct the scoring system" },
+    { day: "Day 8", title: "Program Scoring Functions", detail: "Code the mechanisms" },
+    { day: "Day 9", title: "Test and Scrimmage", detail: "Put everything together in competition-style play" },
   ];
 
   const campHighlights = [
@@ -30,12 +63,12 @@ export default function SummerCampPage() {
       {/* SECTION 1: HERO */}
       <section className="relative bg-gradient-to-br from-blue-900 via-indigo-900 to-gray-900 pt-32 pb-48 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <span className="text-orange-400 font-bold tracking-widest uppercase mb-4 block">Summer 2026 Adventure</span>
+          <span className="text-orange-400 font-bold tracking-widest uppercase mb-4 block">Summer 2026 Adventure · Jul 27 - Aug 28</span>
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-            Drone & VEX V5RC Robotics Camp
+            Drone, BJJ & Robotics Summer Camp
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-            Master aerial drone technology in the morning and build confidence with robotics in the afternoon through a hands-on summer experience focused on flight, strategy, design, building, coding, and competition for ages 8-14.
+            Choose Aerial Drone or Brazilian Jiu-Jitsu (BJJ) every morning, then dive into VEX Robotics or our Science Fair series every afternoon — a five-week, hands-on summer experience for grades 1-11.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="#schedule" className="px-8 py-4 bg-orange-500 text-white font-bold rounded-full hover:bg-orange-600 transition-all">
@@ -67,7 +100,7 @@ export default function SummerCampPage() {
               <ul className="space-y-6 text-lg">
                 <li className="flex items-center gap-4">
                   <div className="bg-orange-100 p-3 rounded-lg text-orange-600 font-bold">Age</div>
-                  <span>8 - 14 Years Old</span>
+                  <span>Grades 1-11 (varies by week — see schedule below)</span>
                 </li>
                 <li className="flex items-center gap-4">
                   <div className="bg-blue-100 p-3 rounded-lg text-blue-600 font-bold">Time</div>
@@ -75,11 +108,11 @@ export default function SummerCampPage() {
                 </li>
                 <li className="flex items-center gap-4">
                   <div className="bg-purple-100 p-3 rounded-lg text-purple-600 font-bold">Tech</div>
-                  <span>VEX, 3D Design, Science Fair, Public Speaking, and LEGO Robotics</span>
+                  <span>Aerial Drone, BJJ, VEX IQ, VEX V5RC, and Science Fair</span>
                 </li>
               </ul>
 
-              {/* Schedule Table */}
+              {/* Daily Structure */}
               <div className="mt-10 overflow-hidden rounded-xl border border-gray-200">
                 <table className="w-full text-left border-collapse">
                   <thead>
@@ -91,7 +124,7 @@ export default function SummerCampPage() {
                   <tbody>
                     <tr className="border-t">
                       <td className="p-4 text-orange-600 font-semibold">9am - 12pm</td>
-                      <td className="p-4">Aerial Drone Flight Training</td>
+                      <td className="p-4">Aerial Drone or Brazilian Jiu-Jitsu (BJJ)</td>
                     </tr>
                     <tr className="border-t bg-blue-50/30">
                       <td className="p-4 text-gray-500 font-semibold">12pm - 1pm</td>
@@ -99,12 +132,36 @@ export default function SummerCampPage() {
                     </tr>
                     <tr className="border-t">
                       <td className="p-4 text-blue-600 font-semibold">1pm - 4pm</td>
-                      <td className="p-4">VEX Robotics (FLL / IQ / V5)</td>
+                      <td className="p-4">VEX Robotics or Science Fair (varies by week)</td>
                     </tr>
                     <tr className="border-t">
                       <td className="p-4 text-green-600 font-semibold">4pm - 4:30pm</td>
                       <td className="p-4">Pickup Window</td>
                     </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Weekly Schedule */}
+              <div className="mt-10 overflow-hidden rounded-xl border border-gray-200">
+                <table className="w-full text-left border-collapse text-sm">
+                  <thead>
+                    <tr className="bg-gray-100">
+                      <th className="p-4 font-bold">Dates</th>
+                      <th className="p-4 font-bold">Grades</th>
+                      <th className="p-4 font-bold">Morning</th>
+                      <th className="p-4 font-bold">Afternoon</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {weeklySchedule.map((week) => (
+                      <tr key={week.dates} className="border-t align-top">
+                        <td className="p-4 font-semibold text-blue-900 whitespace-nowrap">{week.dates}</td>
+                        <td className="p-4 text-gray-600 whitespace-nowrap">{week.grades}</td>
+                        <td className="p-4 text-orange-600">{week.morning}</td>
+                        <td className="p-4 text-blue-600">{week.afternoon}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
@@ -114,8 +171,8 @@ export default function SummerCampPage() {
             <div className="space-y-8">
               <div className="h-[600px] rounded-2xl overflow-hidden shadow-xl bg-gray-200 relative">
                  <Image
-                   src="/images/summer_camp/summer_camp.PNG"
-                   alt="Summer Camp - Drone and Robotics"
+                   src="/images/summer_camp/Drone_Camp_Summer_2026.PNG"
+                   alt="Aerial Drone Summer Camp Flyer"
                    fill
                    className="object-cover"
                    style={{ objectPosition: 'center 50%' }}
@@ -126,7 +183,7 @@ export default function SummerCampPage() {
                 Full-Day Immersion
               </h3>
               <p className="text-xl text-gray-600 leading-relaxed">
-                Our morning sessions focus on mastering <strong>Aerial Drone</strong> technology and flight skills. After lunch, we shift gears into high-tech engineering with <strong>VEX Robotics</strong>, covering everything from LEGO building to advanced C++ coding.
+                Every morning, campers choose between mastering <strong>Aerial Drone</strong> flight or training in <strong>Brazilian Jiu-Jitsu (BJJ)</strong>. After lunch, the afternoon rotates week by week through <strong>VEX IQ</strong>, <strong>VEX V5RC</strong> robotics, and our <strong>Science Fair</strong> series — see the full week-by-week breakdown above.
               </p>
             </div>
           </div>
@@ -138,13 +195,13 @@ export default function SummerCampPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="inline-block px-4 py-1.5 mb-4 text-sm font-semibold tracking-wider uppercase rounded-full bg-blue-100 text-blue-700">
-              VEX V5RC Summer Camp
+              VEX V5RC Deep Dive · Aug 4 - 14
             </span>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              A Structured 10-Day Robotics Journey
+              A Structured 9-Day Robotics Journey
             </h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Students will move through game strategy, CAD design, building, programming, testing, and scrimmage in a clear progression. The two-day lesson cycle rotates across Weeks 1 through 8, giving campers a steady rhythm while they build confidence and teamwork.
+              During the Aug 4-14 afternoons (Grades 5-11), students move through game strategy, CAD design, building, programming, testing, and scrimmage in a clear progression, building confidence and teamwork day by day.
             </p>
           </div>
 
@@ -179,7 +236,7 @@ export default function SummerCampPage() {
                 ))}
               </ol>
               <p className="mt-6 text-sm text-gray-400">
-                The two-day learning sequence rotates from Week 1 through Week 8, so students experience a consistent structure while building their skills over time.
+                Days 1-4 (chassis &amp; fundamentals) run Aug 4-7, and Days 5-9 (mechanisms &amp; scrimmage) run Aug 10-14.
               </p>
             </div>
           </div>
@@ -291,13 +348,13 @@ export default function SummerCampPage() {
           <h2 className="text-4xl font-bold mb-12 text-center">Why Choose Our Camp?</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-gray-800 p-6 rounded-xl">
-              <div className="text-4xl font-bold text-orange-500 mb-2">2</div>
-              <h4 className="text-lg font-semibold mb-2">Unique Disciplines</h4>
-              <p className="text-gray-300">Combine aerial drone technology with cutting-edge robotics engineering in one immersive experience.</p>
+              <div className="text-4xl font-bold text-orange-500 mb-2">5</div>
+              <h4 className="text-lg font-semibold mb-2">Weeks of Camp</h4>
+              <p className="text-gray-300">Choose Aerial Drone or BJJ each morning, then VEX Robotics or Science Fair each afternoon.</p>
             </div>
             <div className="bg-gray-800 p-6 rounded-xl">
-              <div className="text-4xl font-bold text-orange-500 mb-2">8-14</div>
-              <h4 className="text-lg font-semibold mb-2">Age Range</h4>
+              <div className="text-4xl font-bold text-orange-500 mb-2">1-11</div>
+              <h4 className="text-lg font-semibold mb-2">Grade Range</h4>
               <p className="text-gray-300">Inclusive programming for all experience levels, from beginners to advanced learners.</p>
             </div>
             <div className="bg-gray-800 p-6 rounded-xl">
@@ -314,36 +371,6 @@ export default function SummerCampPage() {
         </div>
       </section>
 
-      {/* SECTION 6.5: DRONE SUMMER CAMP FLYER */}
-      <section className="py-20 bg-gradient-to-br from-indigo-50 to-blue-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Also Featuring: Drone Summer Camp</h2>
-            <p className="text-xl text-gray-600">Check out our Aerial Drone Program for another exciting summer experience!</p>
-          </div>
-          <div className="max-w-3xl mx-auto">
-            <Link href="/course-list/aerialdrone" className="block group">
-              <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-                <div className="relative h-96 w-full">
-                  <Image
-                    src="/images/summer_camp/Drone_Camp_Summer_2026.PNG"
-                    alt="Drone Summer Camp 2026 Flyer"
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    priority
-                  />
-                </div>
-              </div>
-            </Link>
-            <div className="text-center mt-8">
-              <Link href="/course-list/aerialdrone" className="inline-flex items-center gap-3 px-8 py-4 bg-blue-900 text-white font-bold rounded-full hover:bg-blue-800 transition-all">
-                Learn More About Drone Camp
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* SECTION 7: FAQ */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -351,11 +378,11 @@ export default function SummerCampPage() {
           <div className="space-y-6">
             <div className="border border-gray-200 rounded-lg p-6">
               <h4 className="text-xl font-semibold text-gray-900 mb-2">Do I need prior experience?</h4>
-              <p className="text-gray-700">No! Both drone piloting and robotics programming are designed for all experience levels. Our instructors will work with everyone from complete beginners to experienced students.</p>
+              <p className="text-gray-700">No! Drone piloting, BJJ, robotics, and Science Fair are all designed for all experience levels. Our instructors will work with everyone from complete beginners to experienced students.</p>
             </div>
             <div className="border border-gray-200 rounded-lg p-6">
               <h4 className="text-xl font-semibold text-gray-900 mb-2">What if my child only wants to do half-day?</h4>
-              <p className="text-gray-700">We offer flexible scheduling! You can choose morning-only (Drone) or afternoon-only (Robotics) sessions. Pricing is adjusted accordingly.</p>
+              <p className="text-gray-700">We offer flexible scheduling! You can choose morning-only (Drone or BJJ) or afternoon-only (Robotics/Science Fair, depending on the week) sessions. Pricing is adjusted accordingly.</p>
             </div>
             <div className="border border-gray-200 rounded-lg p-6">
               <h4 className="text-xl font-semibold text-gray-900 mb-2">Are meals provided?</h4>

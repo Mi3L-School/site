@@ -8,6 +8,15 @@ import { EmbeddedCheckout, EmbeddedCheckoutProvider } from "@stripe/react-stripe
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "");
 
+// Aug 4-7 (week2) is a 4-day week (no Monday), so it's priced lower than the standard 5-day weeks.
+const SHORT_SUMMER_CAMP_WEEK_IDS = ['week2'];
+
+function getSummerCampWeekRate(weekId: string, type: 'fullday' | 'halfday') {
+  const isShortWeek = SHORT_SUMMER_CAMP_WEEK_IDS.includes(weekId);
+  if (type === 'halfday') return isShortWeek ? 160 : 200;
+  return isShortWeek ? 280 : 350;
+}
+
 type FormState = {
   step: number;
   student: {
@@ -164,8 +173,8 @@ function RegistrationInner() {
         summerCamp: {
           selected: true,
           weeks: [
-            { id: 'week1', label: 'Week 1 (July 7-11)', type: 'fullday' },
-            { id: 'week2', label: 'Week 2 (July 14-18)', type: 'halfday' },
+            { id: 'week1', label: 'Week 1 (Jul 27-31) — Grades 1-8 — VEX IQ', type: 'fullday' },
+            { id: 'week2', label: 'Week 2 (Aug 4-7) — Grades 5-11 — VEX V5RC (Days 1-4)', type: 'halfday' },
           ],
         },
       },
@@ -181,8 +190,7 @@ function RegistrationInner() {
     let total = 0;
     if (programs.summerCamp.selected) {
       total += programs.summerCamp.weeks.reduce((sum, week) => {
-        const rate = week.type === 'halfday' ? 200 : 350;
-        return sum + rate;
+        return sum + getSummerCampWeekRate(week.id, week.type);
       }, 0);
     }
     return total;
@@ -406,14 +414,11 @@ function RegistrationInner() {
   };
 
   const summerCampWeekOptions = [
-    { id: 'week1', label: 'Week 1 (July 7-11)' },
-    { id: 'week2', label: 'Week 2 (July 14-18)' },
-    { id: 'week3', label: 'Week 3 (July 21-25)' },
-    { id: 'week4', label: 'Week 4 (July 28 - Aug 1)' },
-    { id: 'week5', label: 'Week 5 (Aug 4-8)' },
-    { id: 'week6', label: 'Week 6 (Aug 11-15)' },
-    { id: 'week7', label: 'Week 7 (Aug 18-22)' },
-    { id: 'week8', label: 'Week 8 (Aug 25-29)' },
+    { id: 'week1', label: 'Week 1 (Jul 27-31) — Grades 1-8 — VEX IQ' },
+    { id: 'week2', label: 'Week 2 (Aug 4-7) — Grades 5-11 — VEX V5RC (Days 1-4)' },
+    { id: 'week3', label: 'Week 3 (Aug 10-14) — Grades 5-11 — VEX V5RC (Days 5-9)' },
+    { id: 'week4', label: 'Week 4 (Aug 17-21) — Grades 5-11 — Science Fair (Days 1-5)' },
+    { id: 'week5', label: 'Week 5 (Aug 24-28) — Grades 5-11 — Science Fair (Days 6-10)' },
   ];
 
   const handleSummerCampChange = (updates: Partial<FormState["programs"]["summerCamp"]>) => {
@@ -682,7 +687,7 @@ function RegistrationInner() {
                       <div className="bg-white border border-gray-200 rounded-xl p-5">
                         <p className="font-bold text-gray-900 text-base mb-1">BJJ &amp; Robotics Summer Camp Options</p>
                         <p className="text-xs text-gray-500 mb-3">Select your weeks first, then decide if each selected week is full day or half day.</p>
-                        <p className="text-xs text-gray-500 mb-4">Full Day is <span className="font-semibold text-gray-900">$350/week</span>, Half Day is <span className="font-semibold text-gray-900">$200/week</span>.</p>
+                        <p className="text-xs text-gray-500 mb-4">Full Day is <span className="font-semibold text-gray-900">$350/week</span>, Half Day is <span className="font-semibold text-gray-900">$200/week</span>. Aug 4-7 is a shorter 4-day week: Full Day <span className="font-semibold text-gray-900">$280</span>, Half Day <span className="font-semibold text-gray-900">$160</span>.</p>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
                           {summerCampWeekOptions.map((weekOption) => {
@@ -742,7 +747,7 @@ function RegistrationInner() {
                     {formData.programs.summerCamp.weeks.length > 0 ? (
                       <div className="space-y-3">
                         {formData.programs.summerCamp.weeks.map((week) => {
-                          const cost = week.type === 'halfday' ? 200 : 350;
+                          const cost = getSummerCampWeekRate(week.id, week.type);
                           return (
                             <div key={week.id} className="flex justify-between items-center text-gray-600 text-sm">
                               <span>

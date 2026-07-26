@@ -76,32 +76,38 @@ export async function POST(req: Request) {
             })
             .filter(Boolean) as SelectedWeek[];
 
-        const halfDayCount = selectedWeeks.filter((week: SelectedWeek) => week.type === 'halfday').length;
-        const fullDayCount = selectedWeeks.filter((week: SelectedWeek) => week.type === 'fullday').length;
+        // Aug 4-7 (week2) is a 4-day week (no Monday), so it's priced lower than the standard 5-day weeks.
+        const SHORT_SUMMER_CAMP_WEEK_IDS = ['week2'];
+        const getWeekRateCents = (weekId: string, type: 'halfday' | 'fullday') => {
+            const isShortWeek = SHORT_SUMMER_CAMP_WEEK_IDS.includes(weekId);
+            if (type === 'halfday') return isShortWeek ? 16000 : 20000;
+            return isShortWeek ? 28000 : 35000;
+        };
 
         if (programs?.summerCamp?.selected && selectedWeeks.length > 0) {
-            if (halfDayCount > 0) {
-                lineItems.push({
-                    price_data: {
-                        currency: 'cad',
-                        product_data: {
-                            name: `Summer Camp Half Day (${halfDayCount} week${halfDayCount > 1 ? 's' : ''})`,
-                        },
-                        unit_amount: 20000,
-                    },
-                    quantity: halfDayCount,
-                });
+            const groups = new Map<string, { type: SelectedWeek['type']; unitAmount: number; count: number }>();
+            for (const week of selectedWeeks) {
+                const unitAmount = getWeekRateCents(week.id, week.type);
+                const key = `${week.type}-${unitAmount}`;
+                const existing = groups.get(key);
+                if (existing) {
+                    existing.count += 1;
+                } else {
+                    groups.set(key, { type: week.type, unitAmount, count: 1 });
+                }
             }
-            if (fullDayCount > 0) {
+
+            for (const { type, unitAmount, count } of groups.values()) {
+                const dayLabel = type === 'halfday' ? 'Half Day' : 'Full Day';
                 lineItems.push({
                     price_data: {
                         currency: 'cad',
                         product_data: {
-                            name: `Summer Camp Full Day (${fullDayCount} week${fullDayCount > 1 ? 's' : ''})`,
+                            name: `Summer Camp ${dayLabel} (${count} week${count > 1 ? 's' : ''})`,
                         },
-                        unit_amount: 35000,
+                        unit_amount: unitAmount,
                     },
-                    quantity: fullDayCount,
+                    quantity: count,
                 });
             }
         }
