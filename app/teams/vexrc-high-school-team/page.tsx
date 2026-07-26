@@ -6,8 +6,8 @@ const members = [
   { name: "Kevin", role: "Builder Lead & Driver", image: "/images/teams/kevin.png" },
   { name: "Justin", role: "Program Lead", image: "/images/teams/justin.png" },
   { name: "Thomas", role: "Build Lead", image: "/images/teams/thomas.png" },
-  { name: "Ethon Si", role: "Programmer", image: "/images/teams/ethans.png" },
-  { name: "Ethon Wang", role: "Programmer", image: "/images/teams/ethanw.png" },
+  { name: "Ethan Si", role: "Programmer", image: "/images/teams/ethans.png" },
+  { name: "Ethan Wang", role: "Programmer", image: "/images/teams/ethanw.png" },
   { name: "Jasper", role: "Builder", image: "/images/teams/jasper.png" },
   
 ];

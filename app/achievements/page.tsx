@@ -44,7 +44,7 @@ const teams = [
       "Innovate Award @ St. Catharines Qualifier",
     ],
     achievements25: [
-      "Ontario MS Provincial Championship",
+      "Inspire Award @ VRC Worlds 2026",
       "Innovate Award & World Qualifier",
       "Waterloo Showdown - A V5RC Push Back Qualifier: Tournament Champions",
       "White Oak V5RC Qualifier: Innovate Award",
