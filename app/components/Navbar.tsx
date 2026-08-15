@@ -9,6 +9,7 @@ const programLinks = [
   { path: "/course-list/robotics", name: "Robotics Course" },
   { path: "/course-list/aerialdrone", name: "Aerial Drone Course" },
   { path: "/course-list/summercamp2026", name: "Summer Camp" },
+  { path: "/programs/full-vrc-guide", name: "Full VRC Guide" },
 ];
 
 const teamLinks = [
@@ -409,7 +410,7 @@ export default function Navbar() {
               </svg>
             </button>
             <div
-              className={`overflow-hidden transition-all duration-200 ${mobileExpanded["programs"] ? "max-h-40" : "max-h-0"
+              className={`overflow-hidden transition-all duration-200 ${mobileExpanded["programs"] ? "max-h-60" : "max-h-0"
                 }`}
             >
               <div className="pl-4 mt-0.5 space-y-0.5">
