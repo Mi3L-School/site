@@ -1,8 +1,8 @@
 "use client";
 
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 const imageMap: Record<string, string> = {
   a: "/images/a.webp",
@@ -38,6 +38,14 @@ type TimelineItem = {
 
 const items: TimelineItem[] = [
   {
+    title: "VEX Robotics MS World Championship",
+    location: "St. Louis MO",
+    date: "April 2026 - St. Louis MO",
+    description: "Awards:",
+    award1: "   - Inspire Award (2055X)",
+    navigatePath: "/achievements",
+  },
+  {
     title: "Ontario HS Provincial Championship",
     location: "Ontario",
     date: "February 2026 - Ontario",
@@ -57,20 +65,20 @@ const items: TimelineItem[] = [
     navigatePath: "/achievements",
   },
   {
+    title: "iDESIGN Central Toronto VEX Robotics Competition",
+    location: "Toronto ON",
+    date: "January 2025 - Toronto ON",
+    description: "Awards:",
+    award1: "   - Innovate Award (2055C)",
+    navigatePath: "/achievements",
+  },
+  {
     title: "University of Waterloo Qualifier",
     location: "Waterloo ON",
     date: "January 2026 - Waterloo ON",
     description: "Awards:",
     award1: "   - Tournament Champion (2055A & 2055X)",
     award2: "   - Think Award (2055A & 2055X)",
-    navigatePath: "/achievements",
-  },
-  {
-    title: "White Oaks VRC Qualifier",
-    location: "Oakville ON",
-    date: "January 2026 - Oakville ON",
-    description: "Awards:",
-    award1: "   - Qualified to World (2055X)",
     navigatePath: "/achievements",
   },
   {
@@ -91,11 +99,11 @@ const items: TimelineItem[] = [
     navigatePath: "/achievements",
   },
   {
-    title: "iDESIGN Central Toronto VEX Robotics Competition",
-    location: "Toronto ON",
-    date: "November 2025 - Toronto ON",
+    title: "White Oaks VRC Qualifier",
+    location: "Oakville ON",
+    date: "November 2025 - Oakville ON",
     description: "Awards:",
-    award1: "   - Innovate Award (2055C)",
+    award1: "   - Innovate Award (2055X)",
     navigatePath: "/achievements",
   },
   {
@@ -138,8 +146,8 @@ const items: TimelineItem[] = [
   },
   {
     title: "Glenforest iDESIGN 365 VEX V5 Robotics Competition",
-    location: "Missisauga ON",
-    date: "November 23, 2024 - Missisauga ON",
+    location: "Mississauga ON",
+    date: "November 23, 2024 - Mississauga ON",
     imgKey: "j",
     description: "Awards:",
     award1: "   - Design Award (2055A)",
@@ -176,7 +184,7 @@ const items: TimelineItem[] = [
   {
     title: "Ontario VRC Over/Under Provincial Championships",
     location: "Markham ON",
-    date: "Febuary 23-24th, 2024 - Markham ON",
+    date: "February 23-24th, 2024 - Markham ON",
     imgKey: "c",
     description: "Awards:",
     award1: "   - Tournament Champions (2055X)",
@@ -186,7 +194,7 @@ const items: TimelineItem[] = [
   {
     title: "iDESIGN Central Toronto VEX VRC Robotics Competition",
     location: "Toronto ON",
-    date: "Febuary 10th, 2024 - Toronto ON",
+    date: "February 10th, 2024 - Toronto ON",
     imgKey: "d",
     description: "Awards:",
     award1: "   - Build Award (2055X)",
@@ -196,7 +204,7 @@ const items: TimelineItem[] = [
   {
     title: "Battle of the Bots VRC Signature Event",
     location: "Bristol TN",
-    date: "Febuary 9-10th, 2024 - Bristol TN",
+    date: "February 9-10th, 2024 - Bristol TN",
     imgKey: "f",
     description: "Awards:",
     award1: "   - Robot Skills Champion (2055A)",
@@ -273,7 +281,7 @@ const items: TimelineItem[] = [
   {
     title: "iDESIGN Central Toronto VEX Robotics Competition",
     location: "Toronto ON",
-    date: "Febuary 25th, 2023 - Toronto ON",
+    date: "February 25th, 2023 - Toronto ON",
     imgKey: "",
     description: "Awards:",
     award1: "   - Robot Skills Champion (2055B)",
@@ -284,7 +292,7 @@ const items: TimelineItem[] = [
   {
     title: "Brampton Robotics VRC Qualifier and Skills, Judging",
     location: "Brampton ON",
-    date: "Febuary 18th, 2023 - Brampton ON",
+    date: "February 18th, 2023 - Brampton ON",
     imgKey: "logo1",
     description: "Awards:",
     award1: "   - Tournament Semifinalists (2055B)",
@@ -294,7 +302,7 @@ const items: TimelineItem[] = [
   {
     title: "Canadian Open VRC Signature Event",
     location: "Markham ON",
-    date: "Febuary 12th, 2023 - Markham ON",
+    date: "February 12th, 2023 - Markham ON",
     imgKey: "",
     description: "Awards:",
     award1: "   - Design Award (2055A)",
