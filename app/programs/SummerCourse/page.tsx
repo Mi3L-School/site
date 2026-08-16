@@ -1,155 +1,86 @@
 "use client";
 
+import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 
-export default function SummerCourse() {
-  const handleYTClick = () => {
-    window.open(
-      "https://youtu.be/nitDt76IX3k",
-      "_blank",
-      "noopener,noreferrer"
-    );
-  };
-
-  const handleImgClick = () => {
-    window.open(
-      "https://forms.gle/SwSXMds9dLMcsFZj7",
-      "_blank",
-      "noopener,noreferrer"
-    );
-  };
-
-  const paymentClick = () => {
-    window.open(
-      "https://www.zeffy.com/en-CA/ticketing/v5rc-summer-course--2025",
-      "_blank",
-      "noopener,noreferrer"
-    );
-  };
-
+export default function SummerCoursePage() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            2025 Summer Course
-          </h1>
-          <div className="w-24 h-1 bg-orange-500 mx-auto mb-6"></div>
+    <div className="min-h-screen bg-white text-gray-900 font-sans">
+      <section className="relative bg-gradient-to-br from-green-700 to-teal-700 pt-24 pb-20 text-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Summer Course — Aug 17 &ndash; Aug 28</h1>
+          <p className="text-lg text-white/90 max-w-2xl mx-auto mb-6">
+            Afternoons only: 1pm &ndash; 5pm. Each afternoon contains 2 hours of Robotics followed by 2 hours of Science Fair workshops.
+          </p>
+          <div className="flex justify-center gap-4">
+            <a
+              href="https://www.zeffy.com/en-CA/ticketing/science-fair-summer-course--2026"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-orange-500 text-white font-semibold rounded-full hover:bg-orange-600"
+            >
+              Register on Zeffy
+            </a>
+            <Link
+              href="/programs"
+              className="px-6 py-3 bg-white text-teal-700 font-semibold rounded-full hover:bg-gray-100"
+            >
+              View Programs
+            </Link>
+          </div>
         </div>
+      </section>
 
-        <div className="bg-white rounded-lg shadow-lg p-8 md:p-12 mb-8">
-          <div className="text-center space-y-4 mb-8">
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              Mi3L School is offering summer courses for middle and high schoolers
-              to learn V5 robotics and enjoy STEM in a practical and hands on
-              experience. We'd also like to recruit a few new members to join our
-              high school and middle school teams. Small classes, groups are
-              seperated by age, and all supplies and parts are provided. Suitable
-              for{" "}
-              <span className="font-semibold text-gray-900">Grades 5-11</span>, no
-              experience required.
-            </p>
+      <section className="py-12 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Afternoon Structure</h2>
+            <div className="space-y-4 text-lg text-gray-700">
+              <p><strong>Time:</strong> 1:00pm &ndash; 5:00pm (Mon &ndash; Fri)</p>
+              <p><strong>Format:</strong> 2 hours Robotics (1:00pm &ndash; 3:00pm) + 2 hours Science Fair (3:00pm &ndash; 5:00pm)</p>
+              <p><strong>Dates:</strong> Aug 17 &ndash; Aug 21, Aug 24 &ndash; Aug 28</p>
+              <p className="mt-4">This course focuses on hands-on robotics practice followed by scientific project development and presentation skills. Ideal for students who want both engineering and research experience.</p>
+            </div>
 
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-gray-700 mt-6">
-              <div className="flex items-center gap-2">
-                <svg
-                  className="w-5 h-5 text-orange-500 shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-                <span className="font-medium">
-                  2A-1453 Cornwall Rd, Oakville
-                </span>
-              </div>
+            <div className="mt-8">
+              <h3 className="text-xl font-semibold mb-2">What to Bring</h3>
+              <ul className="list-disc pl-6 space-y-2 text-gray-700">
+                <li>Water bottle</li>
+                <li>Comfortable clothes and closed-toe shoes</li>
+                <li>Laptop or tablet (optional for robotics programming)</li>
+              </ul>
             </div>
           </div>
 
-          <div className="flex justify-center mb-8">
-            <div
-              onClick={handleImgClick}
-              className="cursor-pointer rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow border-2 border-transparent hover:border-orange-500"
-            >
+          <div>
+            <div className="rounded-xl overflow-hidden shadow-lg bg-gray-100">
+              {/* Add the flyer image file at: public/images/summer_course/science_fair_flyer.png */}
               <Image
-                src="/images/summercourse.jpeg"
-                alt="2025 Summer Course"
-                width={600}
-                height={400}
-                className="w-full h-auto max-w-md"
+                src="/images/summer_course/science_fair_flyer.png"
+                alt="Summer Course Flyer"
+                width={1200}
+                height={1600}
+                className="object-cover w-full h-auto"
+                priority
               />
             </div>
           </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button
-              onClick={handleYTClick}
-              className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium shadow-md hover:shadow-lg"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-              </svg>
-              Watch Video
-            </button>
-
-            <button
-              onClick={handleImgClick}
-              className="flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors font-medium shadow-md hover:shadow-lg"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-              Reserve a Spot
-            </button>
-
-            <button
-              onClick={paymentClick}
-              className="flex items-center gap-2 px-6 py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors font-medium shadow-md hover:shadow-lg"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                />
-              </svg>
-              Make a Payment
-            </button>
-          </div>
         </div>
-      </div>
+      </section>
+
+      <section className="py-20 bg-blue-900 text-white text-center">
+        <h2 className="text-3xl font-bold mb-4">Ready to join?</h2>
+        <p className="mb-6 text-blue-200">Registration will use our Zeffy link — please provide it and I will update the button.</p>
+        <a
+          href="https://www.zeffy.com/en-CA/ticketing/science-fair-summer-course--2026"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block px-8 py-3 bg-orange-500 rounded-full font-semibold text-white"
+        >
+          Register on Zeffy
+        </a>
+      </section>
     </div>
   );
 }

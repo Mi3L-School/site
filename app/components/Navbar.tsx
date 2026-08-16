@@ -10,6 +10,7 @@ const programLinks = [
   { path: "/course-list/aerialdrone", name: "Aerial Drone Course" },
   { path: "/course-list/summercamp2026", name: "Summer Camp" },
   { path: "/programs/full-vrc-guide", name: "Full VRC Guide" },
+  { path: "/programs/SummerCourse", name: "Summer Course" },
 ];
 
 const teamLinks = [
