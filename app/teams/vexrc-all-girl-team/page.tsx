@@ -74,7 +74,7 @@ export default function VexrcAllGirlTeamPage() {
               Back to Teams Home
             </Link>
             <Link href="/teams/arialdrone-team" className="rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white hover:bg-orange-600">
-              View ArialDrone Team
+              View Aerial Drone Team
             </Link>
           </div>
         </div>

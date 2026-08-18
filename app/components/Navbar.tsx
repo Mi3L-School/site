@@ -18,12 +18,11 @@ const teamLinks = [
   { path: "/teams/vexrc-high-school-team", name: "VEXRC High School Team" },
   { path: "/teams/vexrc-middle-school-team", name: "VEXRC Middle School Team" },
   { path: "/teams/vexrc-all-girl-team", name: "VEXRC All Girl Team" },
-  { path: "/teams/arialdrone-team", name: "ArialDrone Team" },
+  { path: "/teams/arialdrone-team", name: "Aerial Drone Team" },
 ];
 
 const aboutLinks = [
   { path: "/about", name: "About Us" },
-  { path: "/history", name: "History" },
   { path: "/achievements", name: "Achievements" },
 ];
 

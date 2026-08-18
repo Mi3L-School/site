@@ -16,10 +16,10 @@ export default function ArialDroneTeamPage() {
     <div className="min-h-screen bg-white text-gray-900 selection:bg-orange-100">
       <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-sm uppercase tracking-[0.35em] text-orange-400 font-semibold">2025-2026 ArialDrone</p>
-          <h1 className="mt-6 text-5xl md:text-6xl font-bold tracking-tight">2025-2026 ArialDrone Team</h1>
+          <p className="text-sm uppercase tracking-[0.35em] text-orange-400 font-semibold">2025-2026 Aerial Drone</p>
+          <h1 className="mt-6 text-5xl md:text-6xl font-bold tracking-tight">2025-2026 Aerial Drone Team</h1>
           <p className="mt-6 text-lg text-slate-300 max-w-3xl mx-auto">
-            The ArialDrone team trains students in aerial robotics, drone control, and mission planning for precision flight challenges.
+            The Aerial Drone team trains students in aerial robotics, drone control, and mission planning for precision flight challenges.
           </p>
         </div>
       </section>
@@ -31,7 +31,7 @@ export default function ArialDroneTeamPage() {
               <div className="rounded-3xl bg-white p-10 shadow-lg border border-gray-200">
                 <h2 className="text-3xl font-bold text-gray-900">Team Introduction</h2>
                 <p className="mt-5 text-gray-600 leading-8">
-                  Our ArielDrone team focuses on drone aerodynamics, flight controls, and the safe operation of aerial robotics. Students learn mission planning, stability tuning, and real-time decision making.
+                  Our Aerial Drone team focuses on drone aerodynamics, flight controls, and the safe operation of aerial robotics. Students learn mission planning, stability tuning, and real-time decision making.
                 </p>
               </div>
 

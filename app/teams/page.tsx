@@ -18,7 +18,7 @@ const teamCards = [
   },
   {
     path: "/teams/arialdrone-team",
-    title: "ArialDrone Team",
+    title: "Aerial Drone Team",
     description: "Aerial robotics experts training in drone flight, navigation, and sensor-based missions.",
   },
 ];

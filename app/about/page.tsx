@@ -46,7 +46,6 @@ export default function About() {
 
         <div className="flex flex-wrap justify-center gap-4 mb-16">
           <Link href="/achievements" className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-all font-medium">Achievements</Link>
-          <Link href="/history" className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-all font-medium">History</Link>
           <Link href="/about" className="px-6 py-2 bg-orange-500 text-white rounded-lg shadow-lg font-medium">About Us</Link>
         </div>
 
