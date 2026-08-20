@@ -19,7 +19,7 @@ export default function SummerCoursePage() {
               href="https://www.zeffy.com/en-CA/ticketing/science-fair-summer-course--2026"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 bg-white text-teal-700 font-semibold rounded-full hover:bg-gray-100"
+              className="px-6 py-3 bg-orange-500 text-white font-semibold rounded-full hover:bg-orange-600"
             >
               Register — Science Fair
             </a>
@@ -104,7 +104,7 @@ export default function SummerCoursePage() {
             href="https://www.zeffy.com/en-CA/ticketing/science-fair-summer-course--2026"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-8 py-3 bg-white text-blue-900 rounded-full font-semibold"
+            className="inline-block px-8 py-3 bg-orange-500 rounded-full font-semibold text-white"
           >
             Register — Science Fair
           </a>
