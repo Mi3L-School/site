@@ -24,7 +24,6 @@ const teamLinks = [
 const aboutLinks = [
   { path: "/about", name: "About Us" },
   { path: "/achievements", name: "Achievements" },
-  { path: "/policy", name: "Policy" },
 ];
 
 const communityOutreachLinks = [
