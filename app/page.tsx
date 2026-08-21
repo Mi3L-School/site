@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Users, BookOpen, Calendar, Bot, Code, Box, Calculator, Type, Globe, Trophy, Map, Library, GraduationCap, Building2, ArrowRight } from "lucide-react";
+import { Users, BookOpen, Calendar, Box, Calculator, Type, Globe, Trophy, Map, Library, GraduationCap, Building2, ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (
@@ -242,9 +242,10 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { title: "Robotics", icon: Bot, img: "/images/program/robotics.png", href: "/course-list/robotics" },
-              { title: "Aerial Drone", icon: Code, img: "/images/program/code.jpg", href: "/course-list/aerialdrone" },
               { title: "Competition", icon: Trophy, img: "/images/vex1.png", href: "/teams/vex-v5" },
+              { title: "Summer Camp", icon: Calendar, img: "/images/workshop/SummerCamp.png", href: "/course-list/summercamp2026" },
+              { title: "Full VRC Guide", icon: BookOpen, img: "/images/program/full-vrc-guide.png", href: "/programs/full-vrc-guide" },
+              { title: "Summer Course", icon: GraduationCap, img: "/images/program/summer-course.jpg", href: "/programs/SummerCourse" },
             ].map((course, idx) => (
               <Link
                 key={idx}

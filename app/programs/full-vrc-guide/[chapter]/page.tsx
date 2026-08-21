@@ -1,6 +1,6 @@
 "use client";
 
-import { use, JSX } from "react";
+import { FormEvent, JSX, use, useEffect, useState } from "react";
 import ProgressBar from "../components/ProgressBar";
 import NextChapter from "../components/NextChapter";
 import CodeBlock from "../components/CodeBlock";
@@ -8,6 +8,9 @@ import FillBlank from "../components/FillBlank";
 import Mcq from "../components/Mcq";
 import Activity from "../components/Activity";
 import chaptersData from "../chapters.json";
+
+const PASSWORD = "2055Anow";
+const PASSWORD_STORAGE_KEY = "full-vrc-guide-unlocked";
 
 type ChapterContent = {
   [key: number]: {
@@ -24,6 +27,27 @@ export default function ChapterPage({
   const chapterNum = parseInt(chapter.replace("chapter", ""));
   const chapters = chaptersData.chapters;
   const descriptions = chaptersData.descriptions;
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const savedPassword = window.localStorage.getItem(PASSWORD_STORAGE_KEY);
+    setIsUnlocked(savedPassword === PASSWORD);
+  }, []);
+
+  const handleUnlock = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (password === PASSWORD) {
+      window.localStorage.setItem(PASSWORD_STORAGE_KEY, PASSWORD);
+      setIsUnlocked(true);
+      setError("");
+      return;
+    }
+
+    setError("Incorrect password. Please try again.");
+  };
 
   if (isNaN(chapterNum) || chapterNum < 1 || chapterNum > chapters.length) {
     return (
@@ -37,6 +61,48 @@ export default function ChapterPage({
             className="text-orange-500 hover:text-orange-600"
           >
             Return to Course
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  if (chapterNum > 2 && !isUnlocked) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
+        <div className="w-full max-w-lg rounded-2xl bg-white p-8 shadow-lg border border-gray-200">
+          <p className="text-sm font-semibold uppercase tracking-wide text-orange-500">
+            Restricted chapter
+          </p>
+          <h1 className="mt-3 text-3xl font-bold text-gray-900">
+            Chapter {chapterNum} is password protected
+          </h1>
+          <p className="mt-3 text-gray-600">
+            Enter the password to unlock the rest of the course chapters.
+          </p>
+
+          <form onSubmit={handleUnlock} className="mt-6 space-y-4">
+            <input
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              placeholder="Password"
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-orange-500 focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="w-full rounded-lg bg-orange-500 px-4 py-3 font-semibold text-white hover:bg-orange-600"
+            >
+              Unlock Chapter
+            </button>
+            {error && <p className="text-sm text-red-600">{error}</p>}
+          </form>
+
+          <a
+            href="/programs/full-vrc-guide"
+            className="mt-6 inline-block text-sm font-medium text-orange-500 hover:text-orange-600"
+          >
+            Back to chapters
           </a>
         </div>
       </div>

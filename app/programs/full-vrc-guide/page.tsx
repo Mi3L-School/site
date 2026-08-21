@@ -1,9 +1,38 @@
+"use client";
+
 import Link from "next/link";
+import { FormEvent, useEffect, useState } from "react";
 import chaptersData from "./chapters.json";
+
+const PASSWORD = "2055Anow";
+const PASSWORD_STORAGE_KEY = "full-vrc-guide-unlocked";
 
 export default function FullVRCGuide() {
   const chapters = chaptersData.chapters;
   const descriptions = chaptersData.descriptions;
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const savedPassword = window.localStorage.getItem(PASSWORD_STORAGE_KEY);
+    setIsUnlocked(savedPassword === PASSWORD);
+  }, []);
+
+  const handleUnlock = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (password === PASSWORD) {
+      window.localStorage.setItem(PASSWORD_STORAGE_KEY, PASSWORD);
+      setIsUnlocked(true);
+      setError("");
+      return;
+    }
+
+    setError("Incorrect password. Please try again.");
+  };
+
+  const visibleChapters = isUnlocked ? chapters : chapters.slice(0, 2);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -117,7 +146,7 @@ export default function FullVRCGuide() {
           <div className="border-t border-gray-200 pt-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Course Chapters</h2>
             <div className="space-y-3">
-              {chapters.map((chapter, index) => (
+              {visibleChapters.map((chapter, index) => (
                 <Link
                   key={index}
                   href={`/programs/full-vrc-guide/chapter${index + 1}`}
@@ -151,6 +180,33 @@ export default function FullVRCGuide() {
                 </Link>
               ))}
             </div>
+
+            {!isUnlocked && (
+              <form
+                onSubmit={handleUnlock}
+                className="mt-8 rounded-xl border border-orange-200 bg-orange-50 p-5"
+              >
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  Enter password to unlock the remaining chapters
+                </label>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    placeholder="Password"
+                    className="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 focus:border-orange-500 focus:outline-none"
+                  />
+                  <button
+                    type="submit"
+                    className="rounded-lg bg-orange-500 px-5 py-3 font-semibold text-white hover:bg-orange-600"
+                  >
+                    Unlock
+                  </button>
+                </div>
+                {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
+              </form>
+            )}
           </div>
         </div>
       </div>

@@ -6,8 +6,6 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const programLinks = [
-  { path: "/course-list/robotics", name: "Robotics Course" },
-  { path: "/course-list/aerialdrone", name: "Aerial Drone Course" },
   { path: "/course-list/summercamp2026", name: "Summer Camp" },
   { path: "/programs/full-vrc-guide", name: "Full VRC Guide" },
   { path: "/programs/SummerCourse", name: "Summer Course" },

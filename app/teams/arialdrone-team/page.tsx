@@ -9,7 +9,7 @@ const members = [
  { name: "Lucas", role: "Pilot", image: "/images/teams/lucas.jpg" },
  { name: "William", role: "Captain & Programmer", image: "/images/teams/william.jpg" },
  
-];
+];  
 
 export default function ArialDroneTeamPage() {
   return (
