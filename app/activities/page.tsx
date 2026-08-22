@@ -3,57 +3,51 @@
 import React from "react";
 import Link from "next/link";
 
-const events = [
+const competitionGroups = [
   {
-    id: 1,
-    tag: "ADC",
-    date: "Apr 19, 2026",
-    title: "Aerial Drone Competition",
-    description: "Aerial Drone Competition at Mi3L School club location Oakville.",
-    location: "Oakville, ON",
-    link: null,
-    color: "bg-blue-100 text-blue-600"
+    team: "2055A",
+    label: "High School Team",
+    items: [
+      "Aug 6-8, 2026 — Mall of America, Bloomington, MN (Sig)",
+      "Oct 15-17, 2026 — Harbor Havoc Sig, South Portland, Maine (Sig)",
+      "Oct 31, 2026 — Caution Tape Halloween, Markham",
+      "Dec 12, 2026 — Brampton",
+      "Jan 3-4, 2027 — Sugar Rush, Hershey, PA (Sig)",
+      "Feb 20, 2027 — Brampton",
+      "End of Feb — Provincial HS, Markham",
+      "End of Apr — World HS, TBD",
+    ],
+    color: "bg-blue-100 text-blue-700",
   },
   {
-    id: 2,
-    tag: "Worlds",
-    date: "Apr 21-24, 2026",
-    title: "2026 VEX Robotics World Championship (High School)",
-    description: "2055A V5RC HS team will compete in 2026 VEX Robotics World Championship High School in St. Louis, Missouri.",
-    location: "America's Center Convention Complex, St. Louis, MO",
-    link: "https://www.robotevents.com/robot-competitions/vex-robotics-competition/RE-V5RC-26-4025.html#general-info",
-    color: "bg-orange-100 text-orange-600"
+    team: "2055X MS",
+    label: "Middle School Team",
+    items: [
+      "Sep 18-20, 2026 — Speedway, Indianapolis, IN (Sig)",
+      "Oct 31, 2026 — Caution Tape Halloween, Markham",
+      "Dec 12, 2026 — Brampton",
+      "Jan 20-21, 2027 — Kalahari (MS Sig), Sandusky, OH",
+      "Feb 11-12, 2027 — Bots @ Bristol (MS Sig), TN (opt)",
+      "Feb 20, 2027 — Brampton",
+      "End of Feb — Provincial HS, Markham",
+      "End of Apr — World MS, TBD",
+    ],
+    color: "bg-orange-100 text-orange-700",
   },
   {
-    id: 3,
-    tag: "Worlds",
-    date: "Apr 25-27, 2026",
-    title: "2026 VEX Robotics World Championship (Middle School)",
-    description: "2055X V5RC MS team will compete in 2026 VEX Robotics World Championship Middle School in St. Louis, Missouri.",
-    location: "America's Center Convention Complex, St. Louis, MO",
-    link: "https://www.robotevents.com/robot-competitions/vex-robotics-competition/RE-V5RC-26-4026.html#general-info",
-    color: "bg-orange-100 text-orange-600"
+    team: "2055C MS",
+    label: "Middle School Team",
+    items: [
+      "Oct 31, 2026 — Caution Tape Halloween, Markham",
+      "Dec 12, 2026 — Brampton",
+      "Jan 15-16, 2027 — Cambrian College, Sudbury",
+      "Feb 11-12, 2027 — Bots @ Bristol (MS Sig), TN (opt)",
+      "Feb 20, 2027 — Brampton",
+      "End of Feb — Provincial HS, Markham",
+      "End of Apr — World MS, TBD",
+    ],
+    color: "bg-green-100 text-green-700",
   },
-  {
-    id: 4,
-    tag: "Championship",
-    date: "May 15-16, 2026",
-    title: "North Central Aerial Drone Championship",
-    description: "2055X and 2055A ADC HS and MS will compete at North Central Aerial Drone Championship in Flint, Michigan.",
-    location: "Kettering University, Flint, MI",
-    link: null,
-    color: "bg-purple-100 text-purple-600"
-  },
-  {
-    id: 5,
-    tag: "Competition",
-    date: "Jun 12-14, 2026",
-    title: "2026 VEX AI Robotics Competition Championship",
-    description: "2055C is continuing participation in VEX AI with 2055A V5RC HS team at UC Berkeley.",
-    location: "UC Berkeley, CA",
-    link: null,
-    color: "bg-green-100 text-green-600"
-  }
 ];
 
 export default function ActivitiesPage() {
@@ -64,11 +58,8 @@ export default function ActivitiesPage() {
       <section className="relative bg-gray-900 pt-32 pb-48 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight">
-            Upcoming Activities
+            2026-2027 V5RC Competition
           </h1>
-          <p className="text-gray-400 text-xl max-w-2xl mx-auto">
-            Stay updated with our latest competitions, events, and championships.
-          </p>
         </div>
 
         {/* Mountain Shape Divider */}
@@ -92,56 +83,38 @@ export default function ActivitiesPage() {
               </svg>
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-gray-900">Upcoming Events</h2>
-              <p className="text-gray-500 uppercase tracking-widest text-xs font-bold mt-1">Special events and competitions</p>
+              <h2 className="text-3xl font-bold text-gray-900">V5RC Upcoming Competitions</h2>
+              <p className="text-gray-500 uppercase tracking-widest text-xs font-bold mt-1">2026-2027 season</p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {events.map((event) => (
-              <div 
-                key={event.id}
-                className="group p-8 rounded-3xl border border-gray-100 bg-white shadow-sm hover:shadow-xl hover:border-orange-200 transition-all duration-300 flex flex-col h-full"
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {competitionGroups.map((group) => (
+              <div
+                key={group.team}
+                className="rounded-3xl border border-gray-100 bg-white shadow-sm hover:shadow-lg transition-shadow duration-300 p-6"
               >
                 <div className="flex items-center justify-between mb-6">
-                  <span className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${event.color}`}>
-                    {event.tag}
-                  </span>
-                  <span className="text-gray-400 text-sm font-medium">
-                    {event.date}
+                  <div>
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">Team</p>
+                    <h3 className="text-2xl font-bold text-gray-900">{group.team}</h3>
+                  </div>
+                  <span className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${group.color}`}>
+                    {group.label}
                   </span>
                 </div>
-                
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-orange-600 transition-colors">
-                  {event.title}
-                </h3>
-                
-                <p className="text-gray-600 leading-relaxed mb-6 flex-grow">
-                  {event.description}
-                </p>
 
-                <div className="flex items-center gap-2 text-gray-400 text-sm mb-6 pb-6 border-b border-gray-50">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  {event.location}
-                </div>
-
-                {event.link ? (
-                  <Link 
-                    href={event.link} 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-blue-600 font-bold hover:gap-3 transition-all"
-                  >
-                    Learn More <span className="text-lg">→</span>
-                  </Link>
-                ) : (
-                  <span className="text-gray-300 font-bold cursor-not-allowed">
-                    Details Coming Soon
-                  </span>
-                )}
+                <ul className="space-y-3">
+                  {group.items.map((item, index) => (
+                    <li
+                      key={`${group.team}-${index}`}
+                      className="flex items-start gap-3 rounded-xl bg-gray-50 p-3 text-gray-700"
+                    >
+                      <span className="mt-1 h-2.5 w-2.5 rounded-full bg-orange-500 flex-shrink-0" />
+                      <span className="text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>

@@ -294,7 +294,7 @@ export default function Navbar() {
 
             {/* Direct Links */}
             {[
-              { href: "/activities", label: "Activities" },
+              { href: "/activities", label: "Upcoming Event" },
               { href: "/donation", label: "Donate" },
               { href: "/blog", label: "Blog" },
               { href: "/jobs", label: "Jobs" },
@@ -495,7 +495,7 @@ export default function Navbar() {
 
           {/* Direct Links */}
           {[
-            { href: "/activities", label: "Activities" },
+            { href: "/activities", label: "Upcoming Event" },
             { href: "/donation", label: "Donate" },
             { href: "/blog", label: "Blog" },
             { href: "/jobs", label: "Jobs" },

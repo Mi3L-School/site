@@ -3,17 +3,17 @@ import Link from "next/link";
 const teamCards = [
   {
     path: "/teams/vexrc-high-school-team",
-    title: "VEXRC High School Team",
+    title: "V5RC High School Team",
     description: "A competitive high school robotics squad focused on advanced design, programming, and tournament success.",
   },
   {
     path: "/teams/vexrc-middle-school-team",
-    title: "VEXRC Middle School Team",
+    title: "V5RC Middle School Team",
     description: "A rising middle school team learning fundamentals of engineering, strategy, and collaboration.",
   },
   {
     path: "/teams/vexrc-all-girl-team",
-    title: "VEXRC All Girl Team",
+    title: "V5RC All Girl Team",
     description: "An empowering all-girl robotics team driving creative solutions and peer mentorship.",
   },
   {
