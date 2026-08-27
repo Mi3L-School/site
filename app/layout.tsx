@@ -16,9 +16,30 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = "https://www.mi3lschool.org";
+const defaultTitle = "Mi3L School - My Life Long Learning";
+const defaultDescription = "Join our World Class VEX Robotics Team Today!";
+
 export const metadata: Metadata = {
-  title: "Mi3L School - My Life Long Learning",
-  description: "Join our World Class VEX Robotics Team Today!",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: defaultTitle,
+    template: "%s | Mi3L School",
+  },
+  description: defaultDescription,
+  openGraph: {
+    title: defaultTitle,
+    description: defaultDescription,
+    url: siteUrl,
+    siteName: "Mi3L School",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDescription,
+  },
 };
 
 export default function RootLayout({

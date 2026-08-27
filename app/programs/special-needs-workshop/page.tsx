@@ -1,5 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Special Needs STEM & Robotics Workshop",
+  description:
+    "In partnership with the Northstar Special Needs Society, MI3L School hosted an inclusive STEM and robotics workshop for children with special needs.",
+};
 
 export default function SpecialNeedsWorkshopPage() {
   return (

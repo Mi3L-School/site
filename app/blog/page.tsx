@@ -1,9 +1,21 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { posts, searchPosts } from "./posts";
 
-export default function BlogPage({ searchParams }: { searchParams?: { q?: string } }) {
-  const q = (searchParams && searchParams.q) || "";
+export const metadata: Metadata = {
+  title: "Community & Blog",
+  description:
+    "Stories, guides and updates from MI3L School — student achievements, program highlights, and technical how-tos.",
+};
+
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ q?: string }>;
+}) {
+  const resolvedSearchParams = await searchParams;
+  const q = (resolvedSearchParams && resolvedSearchParams.q) || "";
   const filtered = q ? searchPosts(q) : posts;
 
   return (

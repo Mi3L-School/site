@@ -1,4 +1,11 @@
 import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Team Achievements — VEX Robotics Awards",
+  description:
+    "Browse season-by-season awards for MI3L School's VEX VRC teams 2055A, 2055X, 2055C, and our Aerial Drone competition team.",
+};
 
 const teams = [
   {

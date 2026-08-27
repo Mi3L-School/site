@@ -1,5 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Careers & Volunteer Opportunities",
+  description:
+    "Explore volunteer and team openings at MI3L School and help shape the future of robotics education for students ages 9-18.",
+};
 
 const jobs = [
   {

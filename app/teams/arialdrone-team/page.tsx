@@ -1,5 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "2025-2026 Aerial Drone Team",
+  description:
+    "Meet MI3L School's Aerial Drone team, training in flight controls, mission planning, and aerial robotics for precision drone competition.",
+};
 
 const members = [
   { name: "Kayra", role: "Captain & Lead Programmer", image: "/images/teams/kayra.jpg" },

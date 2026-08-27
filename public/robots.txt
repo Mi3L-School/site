@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://mi3lschool.org/sitemap.xml

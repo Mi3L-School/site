@@ -1,4 +1,11 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Volunteer With MI3L School",
+  description:
+    "Learn how to volunteer with MI3L School and help inspire the next generation of engineers through our robotics programs.",
+};
 
 export default function Volunteer() {
   return (

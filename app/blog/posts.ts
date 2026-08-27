@@ -10,51 +10,19 @@ export type Post = {
 
 export const posts: Post[] = [
   {
-    slug: "News",
-    title: "All Girls Team: Win Innovate Award in iDesign Robotics Event",
-    date: "2026-01-31",
+    slug: "vex-worlds-2026-2055a-2055x",
+    title: "Congratulations to Teams 2055A and 2055X at VEX Worlds Championship!",
+    date: "2026-04-27",
     excerpt:
-      "A new all-girls team of just two members clinched the prestigious Innovate Award at iDesign. With a standout engineering solution, they beat larger teams, challenging STEM stereotypes and showcasing the power of skill and determination",
-    cover: "/images/blog/iDesign/IDesign.jpg",
-    tags: ["Robotics", "Competitions", "Coaching"],
+      "Teams 2055A and 2055X represented MI3L School on the world stage at the VEX Robotics World Championship, with 2055X taking home the Inspire Award in their division.",
+    cover: "/images/achievement/world_championship.webp",
+    tags: ["Robotics", "Competitions", "VEX Worlds", "Awards"],
     content: `
-      <p>Robotics is more than building machines — it's systems thinking, teamwork, and iterative design. In this article we explore a development roadmap for students aged 9–18.</p>
-      <h3>Start with fundamentals</h3>
-      <p>We recommend beginning with logic, sensors, and basic control. Short, focused exercises teach debugging and measurement.</p>
-      <h3>Progress to mechanisms</h3>
-      <p>Once fundamentals are stable, students can learn to design drivetrains, manipulators, and optimize for weight and reliability.</p>
+      <p>We are incredibly proud to congratulate Teams 2055A and 2055X on an outstanding performance at the VEX Robotics World Championship! Competing against the best teams from around the globe, both squads showcased months of hard work, sharp engineering, and true sportsmanship on one of the biggest stages in robotics. Qualifying for Worlds is itself a remarkable achievement, and our students represented MI3L School with skill, poise, and passion throughout the event.</p>
+      <p>Team 2055X capped off the experience by earning the prestigious <strong>Inspire Award</strong> in their division, recognizing their passion, enthusiasm, positivity, and spirit present at the event. Congratulations to both teams on a Worlds run to remember — we can't wait to see what you build next!</p>
     `,
   },
-  {
-    slug: "ai-in-education",
-    title: "AI in Education: Teaching the Next Generation",
-    date: "2025-02-02",
-    excerpt:
-      "Why AI literacy matters and simple classroom projects to introduce it safely.",
-    cover: "/images/im3.png",
-    tags: ["AI", "Curriculum", "Workshops"],
-    content: `
-      <p>Teaching AI begins with concepts of data, models, and ethics. Practical projects can use small datasets and visualizations.</p>
-      <h3>Projects to try</h3>
-      <ul>
-        <li>Image classification with tiny datasets</li>
-        <li>Sensor-based behavior prediction</li>
-      </ul>
-    `,
-  },
-  {
-    slug: "summer-camp-highlights",
-    title: "Summer Camp Highlights: Creativity & Competition",
-    date: "2024-12-20",
-    excerpt: "Snapshots from our summer program: challenges, builds, and student wins.",
-    cover: "/images/home1.png",
-    tags: ["Camp", "Projects"],
-    content: `
-      <p>Our summer camp blends guided lessons with open-ended projects. Students leave with working prototypes and improved problem-solving skills.</p>
-      <h3>Outcomes</h3>
-      <p>Increased confidence, teamwork, and tangible projects for portfolios.</p>
-    `,
-  },
+
 ];
 
 export function getPostBySlug(slug: string) {

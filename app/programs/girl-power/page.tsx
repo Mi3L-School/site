@@ -1,4 +1,11 @@
 import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Girl Power STEM & Robotics Workshop",
+  description:
+    "See highlights from MI3L School's Girl Powered STEM workshop, featuring a VEX Speedbot building challenge designed to inspire young learners.",
+};
 
 export default function GirlPowerPage() {
   return (

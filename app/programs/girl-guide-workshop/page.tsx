@@ -1,5 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Girl Guide STEM Workshop",
+  description:
+    "MI3L School's Girl Guide Workshop sparks confidence and leadership in young girls through hands-on STEM and robotics activities and teamwork challenges.",
+};
 
 export default function GirlGuideWorkshopPage() {
   return (

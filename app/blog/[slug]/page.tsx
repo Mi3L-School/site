@@ -1,13 +1,48 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getPostBySlug } from "../posts";
+import type { Metadata } from "next";
+import { getPostBySlug, posts } from "../posts";
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
-export default function PostPage({ params }: Props) {
-  const post = getPostBySlug(params.slug);
+export function generateStaticParams() {
+  return posts.map((post) => ({ slug: post.slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
+  if (!post) {
+    return { title: "Post not found" };
+  }
+  const url = `/blog/${post.slug}`;
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: url },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url,
+      type: "article",
+      publishedTime: post.date,
+      tags: post.tags,
+      images: [{ url: post.cover }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [post.cover],
+    },
+  };
+}
+
+export default async function PostPage({ params }: Props) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
   if (!post) {
     return (
       <div className="container mx-auto px-4 py-12">

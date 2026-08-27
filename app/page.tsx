@@ -1,6 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Users, BookOpen, Calendar, Box, Calculator, Type, Globe, Trophy, Map, Library, GraduationCap, Building2, ArrowRight } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "VEX Robotics & STEM Education for Ages 9-18",
+  description:
+    "MI3L School offers award-winning VEX V5, VEX IQ, and Aerial Drone programs in Oakville, with 13 years of experience and 13 world titles.",
+};
 
 export default function Home() {
   return (
@@ -10,9 +17,6 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-purple-900/60" />
         <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-start pt-32 md:pt-40 items-center text-center text-white">
           {/* Top Text */}
-          <p className="text-xs md:text-sm font-medium mb-4 tracking-wide">
-            Excelling Since 2017
-          </p>
 
           {/* Main Headline */}
           <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2 leading-tight max-w-4xl">
@@ -24,7 +28,7 @@ export default function Home() {
 
           {/* Subtitle */}
           <p className="text-xs md:text-sm mb-12 max-w-3xl opacity-90">
-            Discover Life Long Learning with MI3L School: Where Young Innovators (Ages 9-18) Excel in Robotics, Coding, and STEM Education, Winning Globally Since 2017. Join Us to Ignite Your Child's Potential and Shape Future Leaders in an Automated World.
+            Discover Life Long Learning with MI3L School: Where Young Innovators (Ages 9-18) Excel in Robotics, Coding, and STEM Education. Join Us to Ignite Your Child's Potential and Shape Future Leaders in an Automated World.
           </p>
 
           {/* Stats with Icons */}

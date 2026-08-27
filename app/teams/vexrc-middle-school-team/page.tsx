@@ -1,5 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "VEXRC Middle School Robotics Team",
+  description:
+    "Meet MI3L School's middle school VEX Robotics team, building skills in robot design, programming logic, and teamwork for competition-ready growth.",
+};
 
 const members = [
   { name: "Mark", role: "Captain", image: "/images/teams/Mark.png" },

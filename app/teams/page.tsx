@@ -1,4 +1,11 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Our Competitive Robotics Teams",
+  description:
+    "Meet MI3L School's competitive teams: V5RC High School, V5RC Middle School, our All-Girl team, and the Aerial Drone team.",
+};
 
 const teamCards = [
   {

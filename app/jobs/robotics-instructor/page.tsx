@@ -1,4 +1,11 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Robotics Instructor Job Opening",
+  description:
+    "MI3L School is hiring a part-time Robotics Instructor to teach VEX V5RC, IQ, and Aerial Drone courses in Oakville. $20-$30/hr; CAD and coding experience preferred.",
+};
 
 export default function RoboticsInstructorJob() {
   return (

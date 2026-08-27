@@ -1,7 +1,8 @@
 import React from 'react'
 
 export const metadata = {
-  title: 'Mi3L School — Membership Agreement & Policy',
+  title: 'Membership Agreement & Policy',
+  description: 'Read MI3L School\'s membership agreement and policy for the 2026-2027 season, covering registration terms and program participation.',
 }
 
 export default function PolicyPage() {
