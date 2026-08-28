@@ -4,9 +4,9 @@ import type { Metadata } from "next";
 import { Users, BookOpen, Calendar, Box, Calculator, Type, Globe, Trophy, Map, Library, GraduationCap, Building2, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "VEX Robotics & STEM Education for Ages 9-18",
+  title: "Mi3L School - VEX Robotics & STEM Education | Oakville",
   description:
-    "MI3L School offers award-winning VEX V5, VEX IQ, and Aerial Drone programs in Oakville, with 13 years of experience and 13 world titles.",
+    "Mi3L School offers award-winning VEX V5, VEX IQ, and Aerial Drone programs in Oakville, providing hands-on learning to prepare students (ages 9-18) for global robotics competitions and STEM excellence.",
 };
 
 export default function Home() {
@@ -28,7 +28,7 @@ export default function Home() {
 
           {/* Subtitle */}
           <p className="text-xs md:text-sm mb-12 max-w-3xl opacity-90">
-            Discover Life Long Learning with MI3L School: Where Young Innovators (Ages 9-18) Excel in Robotics, Coding, and STEM Education. Join Us to Ignite Your Child's Potential and Shape Future Leaders in an Automated World.
+            Discover Life Long Learning with Mi3L School: Where Young Innovators (Ages 9-18) Excel in Robotics, Coding, and STEM Education. Join Us to Ignite Your Child's Potential and Shape Future Leaders in an Automated World.
           </p>
 
           {/* Stats with Icons */}
@@ -79,7 +79,7 @@ export default function Home() {
                 Where Innovation Takes Flight
               </h2>
               <p className="text-base text-gray-700 leading-relaxed">
-                At MI3L School, we equip the next generation with the skills to lead in an automated world. Our specialized programs in VEX IQ, VEX V5, and Aerial Drone provide a hands-on roadmap for students (ages 9–18) to move from basic logic to advanced mechanical design. We don’t just teach; we prepare students for the podium, fostering the teamwork and technical aspects required for global robotics excellence. Join MI3L School and watch your child’s potential reach new heights.
+                At Mi3L School, we equip the next generation with the skills to lead in an automated world. Our specialized programs in VEX IQ, VEX V5, and Aerial Drone provide a hands-on roadmap for students (ages 9–18) to move from basic logic to advanced mechanical design. We don’t just teach; we prepare students for the podium, fostering the teamwork and technical aspects required for global robotics excellence. Join Mi3L School and watch your child’s potential reach new heights.
               </p>
             </div>
 

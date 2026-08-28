@@ -2,9 +2,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Robotics & STEM Programs, Camps, and Courses",
+  title: "Robotics & STEM Programs, Camps, and Courses | Oakville",
   description:
-    "Explore MI3L School's full list of robotics camps, workshops, and courses, including the Full VRC Guide and Science Fair Preparation.",
+    "Explore Mi3L School's full list of robotics camps, workshops, and courses, including the Full VRC Guide and Science Fair Preparation.",
 };
 
 const programs = {
