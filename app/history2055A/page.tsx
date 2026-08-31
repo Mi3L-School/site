@@ -22,6 +22,10 @@ const imageMap: Record<string, string> = {
   l: "/images/l.jpg",
   m: "/images/m.webp",
   n: "/images/teams/2055x_team.webp",
+  q: "/images/q.JPG",
+  t: "/images/t.jpeg",
+  u: "/images/u.JPG",
+
 };
 
 type TimelineItem = {
@@ -41,6 +45,7 @@ const items: TimelineItem[] = [
     title: "Ontario HS Provincial Championship",
     location: "Ontario",
     date: "February 2026 ",
+    imgKey: "u",
     description: "Awards:",
     award1: "   - Design Award",
     award2: "   - World Qualifier",
@@ -57,6 +62,7 @@ const items: TimelineItem[] = [
     title: "Waterloo Showdown - A V5RC Push Back Qualifier",
     location: "Waterloo ON",
     date: "January 2026 ",
+    imgKey: "q",
     description: "Awards:",
     award1: "   - Tournament Champions ",
     award2: "   - Think Award",
@@ -71,8 +77,9 @@ const items: TimelineItem[] = [
   },
   {
     title: "LAUNCH at EATON V5 Robotics Competition Signature Event",
-    location: "Ohio",
-    date: "November 2025 ",
+    location: "Beachwood OH",
+    date: "November 14th-15th, 2025 ",
+    imgKey: "t",
     description: "Awards:",
     award1: "   - Think Award",
   },
@@ -83,7 +90,7 @@ const items: TimelineItem[] = [
     date: "January 29-30th, 2025 - Triadelphia WV",
     imgKey: "m",
     description: "Awards:",
-    award1: "   - Think Award (2055A)",
+    award1: "   - Think Award",
   },
   {
     title: "The RiverBots III VEX V5 Robotics Competition Signature Event",
@@ -91,7 +98,7 @@ const items: TimelineItem[] = [
     date: "December 13-14th & 15-16th, 2024 - Monroe MI",
     imgKey: "l",
     description: "Awards:",
-    award1: "   - Think Award (2055A)",
+    award1: "   - Think Award",
     navigatePath: "/achievements",
   },
   {
@@ -158,7 +165,7 @@ const items: TimelineItem[] = [
     date: "December 16th, 2023 - Brampton ON",
     imgKey: "logo2",
     description: "Awards:",
-    award1: "   - Excellence Award (2055A)",
+    award1: "   - Excellence Award",
   },
   {
     title: "VRC Over/Under Qualifier + Remote Judging and Notebooks",
@@ -177,7 +184,7 @@ const items: TimelineItem[] = [
     date: "March 5th, 2023 - Niagara Falls ON",
     imgKey: "",
     description: "Awards:",
-    award1: "   - Innovate Award (2055A)",
+    award1: "   - Innovate Award",
   },
 
   {
@@ -186,7 +193,7 @@ const items: TimelineItem[] = [
     date: "Febuary 12th, 2023 - Markham ON",
     imgKey: "",
     description: "Awards:",
-    award1: "   - Design Award (2055A)",
+    award1: "   - Design Award",
   },
   {
     title: "Brampton Robotics VRC Qualifier and Skills",
@@ -206,7 +213,7 @@ export default function History() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            2055A (Capybara) Award History
+            2055A Capybaras Award History
           </h1>
           <div className="w-24 h-1 bg-orange-500 mx-auto"></div>
         </div>

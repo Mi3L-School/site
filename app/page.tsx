@@ -4,9 +4,9 @@ import type { Metadata } from "next";
 import { Users, BookOpen, Calendar, Box, Calculator, Type, Globe, Trophy, Map, Library, GraduationCap, Building2, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Mi3L School - VEX Robotics & STEM Education | Oakville",
+  title: "Mi3L School | Oakville Robotics Club | VEX Robotics & STEM Programs",
   description:
-    "Mi3L School offers award-winning VEX V5, VEX IQ, and Aerial Drone programs in Oakville, providing hands-on learning to prepare students (ages 9-18) for global robotics competitions and STEM excellence.",
+    "Mi3L School is a robotics club offering VEX robotics, STEM camps, workshops, and after-school programs for kids ages 9–18 in Oakville, Ontario.",
 };
 
 export default function Home() {
@@ -248,8 +248,8 @@ export default function Home() {
             {[
               { title: "Competition", icon: Trophy, img: "/images/vex1.png", href: "/teams/vex-v5" },
               { title: "Summer Camp", icon: Calendar, img: "/images/workshop/SummerCamp.png", href: "/course-list/summercamp2026" },
-              { title: "Full VRC Guide", icon: BookOpen, img: "/images/program/full-vrc-guide.png", href: "/programs/full-vrc-guide" },
-              { title: "Summer Course", icon: GraduationCap, img: "/images/program/summer-course.jpg", href: "/programs/SummerCourse" },
+              { title: "Full VRC Guide", icon: BookOpen, img: "/images/pros-logo.png", href: "/programs/full-vrc-guide" },
+              { title: "Summer Course", icon: GraduationCap, img: "/images/summercourse.jpeg", href: "/programs/SummerCourse" },
             ].map((course, idx) => (
               <Link
                 key={idx}
@@ -293,7 +293,7 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 { title: "2026 Summer Camp", subtitle: "Year 8-14",img: "/images/workshop/SummerCamp.png", href: "/course-list/summercamp2026" },
-                { title: "Girl Power", subtitle: "Year 7-10", img: "/images/workshop/GirlPower.png",href: "/course-list/girlpower" },
+                { title: "Girl Power", subtitle: "Year 7-10", img: "/images/workshop/girlpower.jpeg",href: "/programs/girl-power" },
               ].map((program, idx) => (
                 <Link
                   key={idx}
@@ -361,6 +361,54 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+              {/* VISIT US SECTION */}
+        <section className="mb-16">
+          <div className="grid lg:grid-cols-2 gap-10 items-start bg-white rounded-[2.5rem] border border-gray-200 shadow-sm overflow-hidden">
+            <div className="p-8 md:p-10">
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-600 mb-3">Visit us</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Oakville Robotics Club Location</h2>
+              <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                Mi3L School is based in Oakville, Ontario, and serves students passionate about robotics, coding, engineering, and STEM learning.
+              </p>
+
+              <div className="space-y-4 text-gray-700">
+                <div>
+                  <p className="font-semibold text-gray-900">Address</p>
+                  <p>1453 Cornwall Rd #2A</p>
+                  <p>Oakville, ON</p>
+                </div>
+
+                <div>
+                  <p className="font-semibold text-gray-900">Email</p>
+                  <a href="mailto:admin@mi3lschool.org" className="text-orange-600 hover:text-orange-700 transition-colors">
+                    admin@mi3lschool.org
+                  </a>
+                </div>
+
+                <div>
+                  <p className="font-semibold text-gray-900">Phone</p>
+                  <a href="tel:+14165235965" className="text-orange-600 hover:text-orange-700 transition-colors">
+                    (416) 523-5965
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="h-[420px] w-full">
+              <iframe
+                title="MI3L School Oakville location"
+                src="https://www.google.com/maps?q=1453%20Cornwall%20Rd%20%232A%2C%20Oakville%20ON&z=15&output=embed"
+                width="100%"
+                height="100%"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="border-0 w-full h-full"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-gray-50 border-y border-gray-100">

@@ -22,6 +22,11 @@ const imageMap: Record<string, string> = {
   l: "/images/l.jpg",
   m: "/images/m.webp",
   n: "/images/teams/2055x_team.webp",
+  o: "/images/o.jpg",
+  p: "/images/p.JPG",
+  q: "/images/q.JPG",
+  r: "/images/r.jpeg",
+  s: "/images/s.jpeg",
 };
 
 type TimelineItem = {
@@ -38,9 +43,19 @@ type TimelineItem = {
 
 const items: TimelineItem[] = [
   {
-    title: "Ontario HS Provincial Championship",
+    title: "VEX Robotics World Championship",
+    location: "Ontario",
+    date: "Apr 25th-27th, 2026 - Ontario",
+    imgKey: "s",  
+    description: "Awards:",
+    award1: "   - Inspire Award ",
+    navigatePath: "/achievements",
+  },
+  {
+    title: "Ontario MS Provincial Championship",
     location: "Ontario",
     date: "Mar 1st 2026 - Ontario",
+    imgKey: "r",
     description: "Awards:",
     award1: "   - Innovate Award ",
     award2: "   - World Qualifier",
@@ -50,6 +65,7 @@ const items: TimelineItem[] = [
     title: "Waterloo Showdown - A V5RC Push Back Qualifier",
     location: "Ontario",
     date: "Jan 2026 - Ontario",
+    imgKey: "q",
     description: "Awards:",
     award1: "   - Tournament Champions",
     navigatePath: "/achievements",
@@ -58,6 +74,7 @@ const items: TimelineItem[] = [
     title: "White Oaks V5RC Qualifier",
     location: "Oakville ON",
     date: "November 2025 - Oakville ON",
+    imgKey: "p",
     description: "Awards:",
     award1: "   - Innovate Award ",
     navigatePath: "/achievements",
@@ -66,6 +83,7 @@ const items: TimelineItem[] = [
     title: "Waterloo Throwdown - A V5RC Push Back Qualifier",
     location: "Waterloo ON",
     date: "November 2025 - Waterloo ON",
+    imgKey: "o",
     description: "Awards:",
     award1: "   - Tournament Finalists ",
     award2: "   - Think Award ",
@@ -77,7 +95,7 @@ const items: TimelineItem[] = [
     date: "May 9-11th, 2025 - Dallas TX",
     imgKey: "n",
     description: "Awards:",
-    award1: "   - Design Award (2055X)",
+    award1: "   - Design Award",
     navigatePath: "/achievements",
   },
   {
@@ -86,7 +104,6 @@ const items: TimelineItem[] = [
     date: "January 29-30th, 2025 - Triadelphia WV",
     imgKey: "m",
     description: "Awards:",
-    award1: "   - Think Award (2055A)",
     award2: "   - Judges Award (2055X)",
     navigatePath: "/achievements",
   },
@@ -96,8 +113,7 @@ const items: TimelineItem[] = [
     date: "December 13-14th & 15-16th, 2024 - Monroe MI",
     imgKey: "l",
     description: "Awards:",
-    award1: "   - Design Award (2055X)",
-    award2: "   - Think Award (2055A)",
+    award1: "   - Design Award",
     navigatePath: "/achievements",
   },
   {
@@ -106,16 +122,7 @@ const items: TimelineItem[] = [
     date: "December 7, 2024 - St. Catharines ON",
     imgKey: "k",
     description: "Awards:",
-    award1: "   - Innovate Award (2055X)",
-    navigatePath: "/achievements",
-  },
-  {
-    title: "Glenforest iDESIGN 365 VEX V5 Robotics Competition",
-    location: "Missisauga ON",
-    date: "November 23, 2024 - Missisauga ON",
-    imgKey: "j",
-    description: "Awards:",
-    award1: "   - Design Award (2055A)",
+    award1: "   - Innovate Award",
     navigatePath: "/achievements",
   },
   {
@@ -125,7 +132,7 @@ const items: TimelineItem[] = [
     imgKey: "c",
     description: "Awards:",
     award1: "   - Tournament Champions",
-    award2: "   - Qualified to World",
+    award2: "   - World Qualifier",
     navigatePath: "/achievements",
   },
   {
@@ -149,16 +156,6 @@ const items: TimelineItem[] = [
     award2: "   - Think Award ",
     navigatePath: "/achievements",
   },
-  {
-    title: "VRC Over/Under Qualifier + Remote Judging and Notebooks",
-    location: "Brampton ON",
-    date: "November 23rd, 2023 - Brampton ON",
-    imgKey: "h",
-    description: "Awards:",
-    award1: "   - Tournament Champions",
-    award2: "   - Think Award",
-    navigatePath: "/achievements",
-  },
 ];
 
 export default function History() {
@@ -169,7 +166,7 @@ export default function History() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            2055X Red Panda Award History
+            2055X Red Pandas Award History
           </h1>
           <div className="w-24 h-1 bg-orange-500 mx-auto"></div>
         </div>

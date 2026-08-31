@@ -83,6 +83,7 @@ export default function About() {
           </div>
         </section>
 
+
         {/* CONTACT SECTION */}
         <section className="bg-gray-900 text-white p-10 md:p-16 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
            <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500 rounded-full blur-[120px] opacity-20 -mr-32 -mt-32"></div>

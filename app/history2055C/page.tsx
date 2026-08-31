@@ -5,23 +5,8 @@ import Link from "next/link";
 import { useState } from "react";
 
 const imageMap: Record<string, string> = {
-  a: "/images/a.webp",
-  logo1: "/images/logo1.png",
-  logo2: "/images/logo2.png",
-  logo3: "/images/logo3.jpg",
-  e: "/images/e.webp",
-  b: "/images/b.webp",
-  c: "/images/c.webp",
-  d: "/images/d.webp",
-  f: "/images/f.webp",
-  g: "/images/g.webp",
-  h: "/images/h.webp",
-  i: "/images/i.png",
-  j: "/images/j.png",
-  k: "/images/k.webp",
-  l: "/images/l.jpg",
-  m: "/images/m.webp",
-  n: "/images/teams/2055x_team.webp",
+  prov: "/images/cxprov6.jpg",
+  toronto: "/images/ctoronto.jpg",
 };
 
 type TimelineItem = {
@@ -41,6 +26,7 @@ const items: TimelineItem[] = [
     title: "Ontario MS Provincial Championship",
     location: "Ontario",
     date: "February 2026 - Ontario",
+    imgKey: "prov",
     description: "Awards:",
     award2: "   - Judge Award ",
   },
@@ -48,6 +34,7 @@ const items: TimelineItem[] = [
     title: "iDESIGN Central Toronto VEX Robotics Competition",
     location: "Toronto ON",
     date: "November 2025 - Toronto ON",
+    imgKey: "toronto",
     description: "Awards:",
     award1: "   - Innovate Award",
   },
@@ -61,7 +48,7 @@ export default function History() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            2055C Award History
+            2055C The Orcas Award History
           </h1>
           <div className="w-24 h-1 bg-orange-500 mx-auto"></div>
         </div>
