@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "add-events": "bun scripts/add-events.ts"
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^5.6.1",
